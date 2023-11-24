@@ -282,7 +282,9 @@ namespace OnionSAT
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            string path2 = Path.Combine(specificFolder, "map");
             //GMap.NET.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.CacheOnly;
             gMapControl1.Dock = DockStyle.Fill;
             gMapControl1.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
             gMapControl1.Position = new GMap.NET.PointLatLng(47.5265409, 19.0574471);
@@ -294,6 +296,7 @@ namespace OnionSAT
             gMapControl1.CanDragMap = true;                                                                      // lets the user drag the map       
             gMapControl1.DragButton = MouseButtons.Left;                                                          // lets the user drag the map with the left mouse button
             gMapControl1.IgnoreMarkerOnMouseWheel = true;
+            gMapControl1.CacheLocation = path2;
             Size siz = new System.Drawing.Size(gMapControl1.Width, gMapControl1.Height);
             gMapControl1.ClientSize = siz;
         }
@@ -326,7 +329,6 @@ namespace OnionSAT
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.ToString());
                     }
 
                     if (Filepath != "")
@@ -397,47 +399,52 @@ namespace OnionSAT
                     string lat_str = args[0];
                     string lon_str = args[1];
 
-                    double latitude = Double.Parse(lat_str, CultureInfo.InvariantCulture);
-                    double longitude = Double.Parse(lon_str, CultureInfo.InvariantCulture);
-                    if (lat_last == 0)
+                    if (!lat_str.Contains("0.00000"))
                     {
+                        double latitude = Double.Parse(lat_str, CultureInfo.InvariantCulture);
+                        double longitude = Double.Parse(lon_str, CultureInfo.InvariantCulture);
+                        if (lat_last == 0)
+                        {
+                            lat_last = latitude;
+                            first = true;
+                        }
+                        if (lon_last == 0)
+                        {
+                            lon_last = longitude;
+                            first = true;
+                        }
+                        GMapOverlay polyOverlay = new GMapOverlay("polygons");
+                        IList<PointLatLng> points = new List<PointLatLng>();
+                        points.Add(new PointLatLng(lat_last, lon_last));
+                        points.Add(new PointLatLng(latitude, longitude));
+                        GMapPolygon polygon = new GMapPolygon((List<PointLatLng>)points, "mypolygon");
+                        polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
+                        polygon.Stroke = new Pen(Color.Red, 1);
+                        polyOverlay.Polygons.Add(polygon);
+                        gMapControl1.Overlays.Add(polyOverlay);
+
                         lat_last = latitude;
-                        first = true;
-                    }
-                    if (lon_last == 0)
-                    {
                         lon_last = longitude;
-                        first = true;
-                    }
-                    GMapOverlay polyOverlay = new GMapOverlay("polygons");
-                    IList<PointLatLng> points = new List<PointLatLng>();
-                    points.Add(new PointLatLng(lat_last, lon_last));
-                    points.Add(new PointLatLng(latitude, longitude));
-                    GMapPolygon polygon = new GMapPolygon((List<PointLatLng>)points, "mypolygon");
-                    polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
-                    polygon.Stroke = new Pen(Color.Red, 1);
-                    polyOverlay.Polygons.Add(polygon);
-                    gMapControl1.Overlays.Add(polyOverlay);
-
-                    lat_last = latitude;
-                    lon_last = longitude;
 
 
 
-                    gMapControl1.Position = new PointLatLng(latitude, longitude);
-                    GMapMarker marker = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(new GMap.NET.PointLatLng(latitude, longitude), GMap.NET.WindowsForms.Markers.GMarkerGoogleType.black_small);
-                    if (first == false)
-                    {
-                        o.Markers.RemoveAt(0);
-                    }
-                    else
-                    {
-                        gMapControl1.Overlays.Add(o);
+                        gMapControl1.Position = new PointLatLng(latitude, longitude);
+                        GMapMarker marker = new GMap.NET.WindowsForms.Markers.GMarkerGoogle(new GMap.NET.PointLatLng(latitude, longitude), GMap.NET.WindowsForms.Markers.GMarkerGoogleType.black_small);
+                        if (first == false)
+                        {
+                            o.Markers.RemoveAt(0);
+                        }
+                        else
+                        {
+                            gMapControl1.Overlays.Add(o);
+                        }
+
+                        o.Markers.Add(marker);
+                        gMapControl1.Invalidate();
+                        gMapControl1.Update();
                     }
 
-                    o.Markers.Add(marker);
-                    gMapControl1.Invalidate();
-                    gMapControl1.Update();
+
                 }
             }
 
@@ -681,6 +688,22 @@ namespace OnionSAT
             string datafile = Path.Join(folder2, timeStamp + ".png");
             var pngExporter = new PngExporter { Width = 5000, Height = 3000 };
             pngExporter.ExportToFile(plotModel5, datafile);
+        }
+
+        private void térképToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String timeStamp = GetTimestamp(DateTime.Now);
+
+            Directory.CreateDirectory(specificFolder);
+            string folder = Path.Join(specificFolder, "exports");
+            Directory.CreateDirectory(folder);
+            string folder2 = Path.Join(folder, "terkep");
+            Directory.CreateDirectory(folder2);
+            string datafile = Path.Join(folder2, timeStamp + ".png");
+
+            System.Drawing.Image tmpImage = gMapControl1.ToImage();
+            if (tmpImage == null) return;
+            tmpImage.Save(datafile);
         }
     }
 }

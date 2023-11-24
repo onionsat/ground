@@ -58,6 +58,7 @@
             pictureBox2 = new PictureBox();
             plotView4 = new OxyPlot.WindowsForms.PlotView();
             plotView8 = new OxyPlot.WindowsForms.PlotView();
+            térképToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -74,7 +75,6 @@
             gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             gMapControl1.LevelsKeepInMemory = 5;
             gMapControl1.Location = new Point(-1, 0);
-            gMapControl1.Margin = new Padding(4, 5, 4, 5);
             gMapControl1.MarkersEnabled = true;
             gMapControl1.MaxZoom = 2;
             gMapControl1.MinZoom = 2;
@@ -88,27 +88,25 @@
             gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             gMapControl1.SelectedAreaFillColor = Color.FromArgb(33, 65, 105, 225);
             gMapControl1.ShowTileGridLines = false;
-            gMapControl1.Size = new Size(977, 698);
+            gMapControl1.Size = new Size(684, 419);
             gMapControl1.TabIndex = 0;
             gMapControl1.Zoom = 0D;
             // 
             // panel1
             // 
             panel1.Controls.Add(gMapControl1);
-            panel1.Location = new Point(883, 53);
-            panel1.Margin = new Padding(4, 5, 4, 5);
+            panel1.Location = new Point(618, 32);
             panel1.Name = "panel1";
-            panel1.Size = new Size(976, 698);
+            panel1.Size = new Size(683, 419);
             panel1.TabIndex = 2;
             // 
             // plotView1
             // 
             plotView1.BackColor = Color.White;
-            plotView1.Location = new Point(17, 53);
-            plotView1.Margin = new Padding(4, 5, 4, 5);
+            plotView1.Location = new Point(12, 32);
             plotView1.Name = "plotView1";
             plotView1.PanCursor = Cursors.Hand;
-            plotView1.Size = new Size(857, 508);
+            plotView1.Size = new Size(600, 305);
             plotView1.TabIndex = 6;
             plotView1.Text = "plotView1";
             plotView1.ZoomHorizontalCursor = Cursors.SizeWE;
@@ -122,7 +120,8 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { fájlToolStripMenuItem, adattárolásToolStripMenuItem, exportálásToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(2743, 33);
+            menuStrip1.Padding = new Padding(4, 1, 0, 1);
+            menuStrip1.Size = new Size(1920, 24);
             menuStrip1.TabIndex = 7;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -130,34 +129,34 @@
             // 
             fájlToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kapcsolódásToolStripMenuItem, beállításokToolStripMenuItem });
             fájlToolStripMenuItem.Name = "fájlToolStripMenuItem";
-            fájlToolStripMenuItem.Size = new Size(104, 29);
+            fájlToolStripMenuItem.Size = new Size(70, 22);
             fájlToolStripMenuItem.Text = "Kapcsolat";
             // 
             // kapcsolódásToolStripMenuItem
             // 
             kapcsolódásToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kapcsolatLétrehozásaToolStripMenuItem, kapcsolatBontásaToolStripMenuItem });
             kapcsolódásToolStripMenuItem.Name = "kapcsolódásToolStripMenuItem";
-            kapcsolódásToolStripMenuItem.Size = new Size(214, 34);
+            kapcsolódásToolStripMenuItem.Size = new Size(140, 22);
             kapcsolódásToolStripMenuItem.Text = "Kapcsolódás";
             // 
             // kapcsolatLétrehozásaToolStripMenuItem
             // 
             kapcsolatLétrehozásaToolStripMenuItem.Name = "kapcsolatLétrehozásaToolStripMenuItem";
-            kapcsolatLétrehozásaToolStripMenuItem.Size = new Size(284, 34);
+            kapcsolatLétrehozásaToolStripMenuItem.Size = new Size(187, 22);
             kapcsolatLétrehozásaToolStripMenuItem.Text = "Kapcsolat létrehozása";
             kapcsolatLétrehozásaToolStripMenuItem.Click += kapcsolódásToolStripMenuItem_Click;
             // 
             // kapcsolatBontásaToolStripMenuItem
             // 
             kapcsolatBontásaToolStripMenuItem.Name = "kapcsolatBontásaToolStripMenuItem";
-            kapcsolatBontásaToolStripMenuItem.Size = new Size(284, 34);
+            kapcsolatBontásaToolStripMenuItem.Size = new Size(187, 22);
             kapcsolatBontásaToolStripMenuItem.Text = "Kapcsolat bontása";
             kapcsolatBontásaToolStripMenuItem.Click += kapcsolatBontásaToolStripMenuItem_Click;
             // 
             // beállításokToolStripMenuItem
             // 
             beállításokToolStripMenuItem.Name = "beállításokToolStripMenuItem";
-            beállításokToolStripMenuItem.Size = new Size(214, 34);
+            beállításokToolStripMenuItem.Size = new Size(140, 22);
             beállításokToolStripMenuItem.Text = "Beállítások";
             beállításokToolStripMenuItem.Click += beállításokToolStripMenuItem_Click;
             // 
@@ -165,20 +164,20 @@
             // 
             adattárolásToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { újAdatfájlLétrehozásaToolStripMenuItem, fájlKiválasztásaToolStripMenuItem });
             adattárolásToolStripMenuItem.Name = "adattárolásToolStripMenuItem";
-            adattárolásToolStripMenuItem.Size = new Size(119, 29);
+            adattárolásToolStripMenuItem.Size = new Size(79, 22);
             adattárolásToolStripMenuItem.Text = "Adattárolás";
             // 
             // újAdatfájlLétrehozásaToolStripMenuItem
             // 
             újAdatfájlLétrehozásaToolStripMenuItem.Name = "újAdatfájlLétrehozásaToolStripMenuItem";
-            újAdatfájlLétrehozásaToolStripMenuItem.Size = new Size(287, 34);
+            újAdatfájlLétrehozásaToolStripMenuItem.Size = new Size(189, 22);
             újAdatfájlLétrehozásaToolStripMenuItem.Text = "Új adatfájl létrehozása";
             újAdatfájlLétrehozásaToolStripMenuItem.Click += újAdatfájlLétrehozásaToolStripMenuItem_Click;
             // 
             // fájlKiválasztásaToolStripMenuItem
             // 
             fájlKiválasztásaToolStripMenuItem.Name = "fájlKiválasztásaToolStripMenuItem";
-            fájlKiválasztásaToolStripMenuItem.Size = new Size(287, 34);
+            fájlKiválasztásaToolStripMenuItem.Size = new Size(189, 22);
             fájlKiválasztásaToolStripMenuItem.Text = "Fájl kiválasztása";
             fájlKiválasztásaToolStripMenuItem.Click += fájlKiválasztásaToolStripMenuItem_Click;
             // 
@@ -186,67 +185,66 @@
             // 
             exportálásToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pNGToolStripMenuItem });
             exportálásToolStripMenuItem.Name = "exportálásToolStripMenuItem";
-            exportálásToolStripMenuItem.Size = new Size(109, 29);
+            exportálásToolStripMenuItem.Size = new Size(73, 22);
             exportálásToolStripMenuItem.Text = "Exportálás";
             exportálásToolStripMenuItem.Click += exportálásToolStripMenuItem_Click;
             // 
             // pNGToolStripMenuItem
             // 
-            pNGToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { hőmérsékletGrafikonToolStripMenuItem, relatívPáratartalomGrafikonToolStripMenuItem, légnyomásGrafikonToolStripMenuItem, magasságGrafikonToolStripMenuItem, tengelyesGyorsulásmértGrafikonToolStripMenuItem, tengelyesGyorsulásGrafikonToolStripMenuItem });
+            pNGToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { térképToolStripMenuItem, hőmérsékletGrafikonToolStripMenuItem, relatívPáratartalomGrafikonToolStripMenuItem, légnyomásGrafikonToolStripMenuItem, magasságGrafikonToolStripMenuItem, tengelyesGyorsulásmértGrafikonToolStripMenuItem, tengelyesGyorsulásGrafikonToolStripMenuItem });
             pNGToolStripMenuItem.Name = "pNGToolStripMenuItem";
-            pNGToolStripMenuItem.Size = new Size(270, 34);
+            pNGToolStripMenuItem.Size = new Size(180, 22);
             pNGToolStripMenuItem.Text = "PNG";
             // 
             // hőmérsékletGrafikonToolStripMenuItem
             // 
             hőmérsékletGrafikonToolStripMenuItem.Name = "hőmérsékletGrafikonToolStripMenuItem";
-            hőmérsékletGrafikonToolStripMenuItem.Size = new Size(410, 34);
+            hőmérsékletGrafikonToolStripMenuItem.Size = new Size(271, 22);
             hőmérsékletGrafikonToolStripMenuItem.Text = "Hőmérséklet grafikon";
             hőmérsékletGrafikonToolStripMenuItem.Click += hőmérsékletGrafikonToolStripMenuItem_Click;
             // 
             // relatívPáratartalomGrafikonToolStripMenuItem
             // 
             relatívPáratartalomGrafikonToolStripMenuItem.Name = "relatívPáratartalomGrafikonToolStripMenuItem";
-            relatívPáratartalomGrafikonToolStripMenuItem.Size = new Size(410, 34);
+            relatívPáratartalomGrafikonToolStripMenuItem.Size = new Size(271, 22);
             relatívPáratartalomGrafikonToolStripMenuItem.Text = "Relatív páratartalom grafikon";
             relatívPáratartalomGrafikonToolStripMenuItem.Click += relatívPáratartalomGrafikonToolStripMenuItem_Click;
             // 
             // légnyomásGrafikonToolStripMenuItem
             // 
             légnyomásGrafikonToolStripMenuItem.Name = "légnyomásGrafikonToolStripMenuItem";
-            légnyomásGrafikonToolStripMenuItem.Size = new Size(410, 34);
+            légnyomásGrafikonToolStripMenuItem.Size = new Size(271, 22);
             légnyomásGrafikonToolStripMenuItem.Text = "Légnyomás grafikon";
             légnyomásGrafikonToolStripMenuItem.Click += légnyomásGrafikonToolStripMenuItem_Click;
             // 
             // magasságGrafikonToolStripMenuItem
             // 
             magasságGrafikonToolStripMenuItem.Name = "magasságGrafikonToolStripMenuItem";
-            magasságGrafikonToolStripMenuItem.Size = new Size(410, 34);
+            magasságGrafikonToolStripMenuItem.Size = new Size(271, 22);
             magasságGrafikonToolStripMenuItem.Text = "Magasság grafikon";
             magasságGrafikonToolStripMenuItem.Click += magasságGrafikonToolStripMenuItem_Click;
             // 
             // tengelyesGyorsulásmértGrafikonToolStripMenuItem
             // 
             tengelyesGyorsulásmértGrafikonToolStripMenuItem.Name = "tengelyesGyorsulásmértGrafikonToolStripMenuItem";
-            tengelyesGyorsulásmértGrafikonToolStripMenuItem.Size = new Size(410, 34);
+            tengelyesGyorsulásmértGrafikonToolStripMenuItem.Size = new Size(271, 22);
             tengelyesGyorsulásmértGrafikonToolStripMenuItem.Text = "3-tengelyes gyorsulás (mért) grafikon";
             tengelyesGyorsulásmértGrafikonToolStripMenuItem.Click += tengelyesGyorsulásmértGrafikonToolStripMenuItem_Click;
             // 
             // tengelyesGyorsulásGrafikonToolStripMenuItem
             // 
             tengelyesGyorsulásGrafikonToolStripMenuItem.Name = "tengelyesGyorsulásGrafikonToolStripMenuItem";
-            tengelyesGyorsulásGrafikonToolStripMenuItem.Size = new Size(410, 34);
+            tengelyesGyorsulásGrafikonToolStripMenuItem.Size = new Size(271, 22);
             tengelyesGyorsulásGrafikonToolStripMenuItem.Text = "3-tengelyes gyorsulás grafikon";
             tengelyesGyorsulásGrafikonToolStripMenuItem.Click += tengelyesGyorsulásGrafikonToolStripMenuItem_Click;
             // 
             // plotView2
             // 
             plotView2.BackColor = Color.White;
-            plotView2.Location = new Point(17, 567);
-            plotView2.Margin = new Padding(4, 5, 4, 5);
+            plotView2.Location = new Point(12, 340);
             plotView2.Name = "plotView2";
             plotView2.PanCursor = Cursors.Hand;
-            plotView2.Size = new Size(857, 508);
+            plotView2.Size = new Size(600, 305);
             plotView2.TabIndex = 8;
             plotView2.Text = "plotView2";
             plotView2.ZoomHorizontalCursor = Cursors.SizeWE;
@@ -256,11 +254,10 @@
             // plotView3
             // 
             plotView3.BackColor = Color.White;
-            plotView3.Location = new Point(16, 1082);
-            plotView3.Margin = new Padding(4, 5, 4, 5);
+            plotView3.Location = new Point(11, 649);
             plotView3.Name = "plotView3";
             plotView3.PanCursor = Cursors.Hand;
-            plotView3.Size = new Size(857, 508);
+            plotView3.Size = new Size(600, 305);
             plotView3.TabIndex = 9;
             plotView3.Text = "plotView3";
             plotView3.ZoomHorizontalCursor = Cursors.SizeWE;
@@ -270,11 +267,10 @@
             // plotView7
             // 
             plotView7.BackColor = Color.White;
-            plotView7.Location = new Point(1869, 53);
-            plotView7.Margin = new Padding(4, 5, 4, 5);
+            plotView7.Location = new Point(1308, 32);
             plotView7.Name = "plotView7";
             plotView7.PanCursor = Cursors.Hand;
-            plotView7.Size = new Size(857, 508);
+            plotView7.Size = new Size(600, 305);
             plotView7.TabIndex = 10;
             plotView7.Text = "plotView4";
             plotView7.ZoomHorizontalCursor = Cursors.SizeWE;
@@ -284,11 +280,10 @@
             // plotView5
             // 
             plotView5.BackColor = Color.White;
-            plotView5.Location = new Point(883, 762);
-            plotView5.Margin = new Padding(4, 5, 4, 5);
+            plotView5.Location = new Point(618, 457);
             plotView5.Name = "plotView5";
             plotView5.PanCursor = Cursors.Hand;
-            plotView5.Size = new Size(977, 408);
+            plotView5.Size = new Size(684, 245);
             plotView5.TabIndex = 11;
             plotView5.Text = "plotView5";
             plotView5.ZoomHorizontalCursor = Cursors.SizeWE;
@@ -298,11 +293,10 @@
             // plotView61
             // 
             plotView61.BackColor = Color.White;
-            plotView61.Location = new Point(1869, 572);
-            plotView61.Margin = new Padding(4, 5, 4, 5);
+            plotView61.Location = new Point(1308, 343);
             plotView61.Name = "plotView61";
             plotView61.PanCursor = Cursors.Hand;
-            plotView61.Size = new Size(857, 508);
+            plotView61.Size = new Size(600, 305);
             plotView61.TabIndex = 12;
             plotView61.Text = "plotView6";
             plotView61.ZoomHorizontalCursor = Cursors.SizeWE;
@@ -312,10 +306,9 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.rackforest_logo01;
-            pictureBox1.Location = new Point(23, 0);
-            pictureBox1.Margin = new Padding(4, 5, 4, 5);
+            pictureBox1.Location = new Point(16, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(197, 80);
+            pictureBox1.Size = new Size(138, 48);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 13;
             pictureBox1.TabStop = false;
@@ -325,10 +318,9 @@
             panel2.BackColor = SystemColors.ControlText;
             panel2.Controls.Add(pictureBox2);
             panel2.Controls.Add(pictureBox1);
-            panel2.Location = new Point(0, 1600);
-            panel2.Margin = new Padding(4, 5, 4, 5);
+            panel2.Location = new Point(0, 960);
             panel2.Name = "panel2";
-            panel2.Size = new Size(2743, 82);
+            panel2.Size = new Size(1920, 49);
             panel2.TabIndex = 14;
             panel2.Paint += panel2_Paint;
             // 
@@ -336,10 +328,9 @@
             // 
             pictureBox2.BackColor = Color.Transparent;
             pictureBox2.Image = Properties.Resources.bdg;
-            pictureBox2.Location = new Point(237, -5);
-            pictureBox2.Margin = new Padding(4, 5, 4, 5);
+            pictureBox2.Location = new Point(166, -3);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(87, 103);
+            pictureBox2.Size = new Size(61, 62);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 14;
             pictureBox2.TabStop = false;
@@ -347,11 +338,10 @@
             // plotView4
             // 
             plotView4.BackColor = Color.White;
-            plotView4.Location = new Point(881, 1180);
-            plotView4.Margin = new Padding(4, 5, 4, 5);
+            plotView4.Location = new Point(617, 708);
             plotView4.Name = "plotView4";
             plotView4.PanCursor = Cursors.Hand;
-            plotView4.Size = new Size(979, 408);
+            plotView4.Size = new Size(685, 245);
             plotView4.TabIndex = 15;
             plotView4.Text = "plotView7";
             plotView4.ZoomHorizontalCursor = Cursors.SizeWE;
@@ -361,24 +351,30 @@
             // plotView8
             // 
             plotView8.BackColor = Color.White;
-            plotView8.Location = new Point(1869, 1090);
-            plotView8.Margin = new Padding(4, 5, 4, 5);
+            plotView8.Location = new Point(1308, 654);
             plotView8.Name = "plotView8";
             plotView8.PanCursor = Cursors.Hand;
-            plotView8.Size = new Size(857, 508);
+            plotView8.Size = new Size(600, 305);
             plotView8.TabIndex = 16;
             plotView8.Text = "plotView8";
             plotView8.ZoomHorizontalCursor = Cursors.SizeWE;
             plotView8.ZoomRectangleCursor = Cursors.SizeNWSE;
             plotView8.ZoomVerticalCursor = Cursors.SizeNS;
             // 
+            // térképToolStripMenuItem
+            // 
+            térképToolStripMenuItem.Name = "térképToolStripMenuItem";
+            térképToolStripMenuItem.Size = new Size(271, 22);
+            térképToolStripMenuItem.Text = "Térkép";
+            térképToolStripMenuItem.Click += térképToolStripMenuItem_Click;
+            // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = Color.White;
-            ClientSize = new Size(1924, 1250);
+            ClientSize = new Size(1347, 637);
             Controls.Add(plotView8);
             Controls.Add(plotView4);
             Controls.Add(panel2);
@@ -390,7 +386,6 @@
             Controls.Add(plotView1);
             Controls.Add(panel1);
             Controls.Add(menuStrip1);
-            Margin = new Padding(4, 5, 4, 5);
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
@@ -439,5 +434,6 @@
         private ToolStripMenuItem magasságGrafikonToolStripMenuItem;
         private ToolStripMenuItem tengelyesGyorsulásmértGrafikonToolStripMenuItem;
         private ToolStripMenuItem tengelyesGyorsulásGrafikonToolStripMenuItem;
+        private ToolStripMenuItem térképToolStripMenuItem;
     }
 }
