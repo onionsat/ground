@@ -27,8 +27,11 @@ namespace OnionSAT
         static string specificFolder = Path.Combine(folder, ".onionsat");
         static string path = Path.Combine(specificFolder, "settings.txt");
         String Filepath = "";
+        String Apikey, Apiendpoint;
         private LineSeries temperatureSeries, humiditySeries, pressureSeries, accelerationSeries, accelerationRealSeries, accelerationRealSeries2, accelerationRealSeries3, altitudeSeries, accelerationSeries2, accelerationSeries3;
         private int currentTime = 0;
+        private static readonly HttpClient client = new HttpClient();
+
         public Form1()
         {
             InitializeComponent();
@@ -306,6 +309,25 @@ namespace OnionSAT
                 if (args.Length == 14)
                 {
 
+                    var values = new Dictionary<string, string>
+                    {
+                        { "key", Apikey },
+                        { "data", data }
+                    };
+
+                    var content = new FormUrlEncodedContent(values);
+
+                    try
+                    {
+                        var response = await client.PostAsync(Apiendpoint, content);
+                        var responseString = await response.Content.ReadAsStringAsync();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString());
+                    }
+
                     if (Filepath != "")
                     {
                         var Timestamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
@@ -324,6 +346,7 @@ namespace OnionSAT
             string[] args = data.Split("|");
             if (args.Length == 14)
             {
+                
                 string tempreture = args[4];
                 updateTempGraph(tempreture, Timestamp);
 
@@ -442,10 +465,12 @@ namespace OnionSAT
                 else if (lineRead.Contains("api_key="))
                 {
                     api_key = lineRead.Replace("api_key=", "");
+                    Apikey = api_key;
                 }
                 else if (lineRead.Contains("api_endpoint="))
                 {
                     api_endpoint = lineRead.Replace("api_endpoint=", "");
+                    Apiendpoint = api_endpoint;
 
                 }
             }
