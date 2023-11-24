@@ -31,6 +31,7 @@ namespace OnionSAT
         private LineSeries temperatureSeries, humiditySeries, pressureSeries, accelerationSeries, accelerationRealSeries, accelerationRealSeries2, accelerationRealSeries3, altitudeSeries, accelerationSeries2, accelerationSeries3;
         private int currentTime = 0;
         private static readonly HttpClient client = new HttpClient();
+        PlotModel plotModel, plotModel2, plotModel3, plotModel4, plotModel5, plotModel6;
 
         public Form1()
         {
@@ -41,7 +42,7 @@ namespace OnionSAT
             };
 
             // Hozz létre egy PlotModel-t
-            var plotModel = new PlotModel
+            plotModel = new PlotModel
             {
                 Title = "Hõmérséklet",
                 Axes = { new DateTimeAxis { Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot }, new LinearAxis { Position = AxisPosition.Left, Title = "Hõmérséklet (Celsius)" } },
@@ -59,7 +60,7 @@ namespace OnionSAT
             };
 
             // Hozz létre egy PlotModel-t
-            var plotModel2 = new PlotModel
+            plotModel2 = new PlotModel
             {
                 Title = "Páratartalom",
                 Axes = { new DateTimeAxis { Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot }, new LinearAxis { Position = AxisPosition.Left, Title = "Relatív páratartalom (%)" } },
@@ -77,7 +78,7 @@ namespace OnionSAT
             };
 
             // Hozz létre egy PlotModel-t
-            var plotModel3 = new PlotModel
+            plotModel3 = new PlotModel
             {
                 Title = "Légnyomás",
                 Axes = { new DateTimeAxis { Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot }, new LinearAxis { Position = AxisPosition.Left, Title = "Légnyomás (hPa)" } },
@@ -110,7 +111,7 @@ namespace OnionSAT
             };
 
             // Hozz létre egy PlotModel-t
-            var plotModel4 = new PlotModel
+            plotModel4 = new PlotModel
             {
                 Title = "3-tengelyes gyorsulás (mért)",
                 Axes = { new DateTimeAxis { Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot }, new LinearAxis { Position = AxisPosition.Left, Title = "m/s^2" } },
@@ -144,7 +145,7 @@ namespace OnionSAT
             };
 
             // Hozz létre egy PlotModel-t
-            var plotModel5 = new PlotModel
+            plotModel5 = new PlotModel
             {
                 Title = "3-tengelyes gyorsulás",
                 Axes = { new DateTimeAxis { Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot }, new LinearAxis { Position = AxisPosition.Left, Title = "m/s^2" } },
@@ -167,7 +168,7 @@ namespace OnionSAT
             };
 
             // Hozz létre egy PlotModel-t
-            var plotModel6 = new PlotModel
+            plotModel6 = new PlotModel
             {
                 Title = "Magasság",
                 Axes = { new DateTimeAxis { Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot }, new LinearAxis { Position = AxisPosition.Left, Title = "m" } },
@@ -346,7 +347,7 @@ namespace OnionSAT
             string[] args = data.Split("|");
             if (args.Length == 14)
             {
-                
+
                 string tempreture = args[4];
                 updateTempGraph(tempreture, Timestamp);
 
@@ -591,6 +592,95 @@ namespace OnionSAT
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void exportálásToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void hõmérsékletGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String timeStamp = GetTimestamp(DateTime.Now);
+
+            Directory.CreateDirectory(specificFolder);
+            string folder = Path.Join(specificFolder, "exports");
+            Directory.CreateDirectory(folder);
+            string folder2 = Path.Join(folder, "homerseklet");
+            Directory.CreateDirectory(folder2);
+            string datafile = Path.Join(folder2, timeStamp + ".png");
+            var pngExporter = new PngExporter { Width = 5000, Height = 3000 };
+            pngExporter.ExportToFile(plotModel, datafile);
+        }
+
+        private void relatívPáratartalomGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String timeStamp = GetTimestamp(DateTime.Now);
+
+            Directory.CreateDirectory(specificFolder);
+            string folder = Path.Join(specificFolder, "exports");
+            Directory.CreateDirectory(folder);
+            string folder2 = Path.Join(folder, "paratartalom");
+            Directory.CreateDirectory(folder2);
+            string datafile = Path.Join(folder2, timeStamp + ".png");
+            var pngExporter = new PngExporter { Width = 5000, Height = 3000 };
+            pngExporter.ExportToFile(plotModel2, datafile);
+        }
+
+        private void légnyomásGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String timeStamp = GetTimestamp(DateTime.Now);
+
+            Directory.CreateDirectory(specificFolder);
+            string folder = Path.Join(specificFolder, "exports");
+            Directory.CreateDirectory(folder);
+            string folder2 = Path.Join(folder, "legnyomas");
+            Directory.CreateDirectory(folder2);
+            string datafile = Path.Join(folder2, timeStamp + ".png");
+            var pngExporter = new PngExporter { Width = 5000, Height = 3000 };
+            pngExporter.ExportToFile(plotModel3, datafile);
+        }
+
+        private void magasságGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String timeStamp = GetTimestamp(DateTime.Now);
+
+            Directory.CreateDirectory(specificFolder);
+            string folder = Path.Join(specificFolder, "exports");
+            Directory.CreateDirectory(folder);
+            string folder2 = Path.Join(folder, "magassag");
+            Directory.CreateDirectory(folder2);
+            string datafile = Path.Join(folder2, timeStamp + ".png");
+            var pngExporter = new PngExporter { Width = 5000, Height = 3000 };
+            pngExporter.ExportToFile(plotModel6, datafile);
+        }
+
+        private void tengelyesGyorsulásmértGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String timeStamp = GetTimestamp(DateTime.Now);
+
+            Directory.CreateDirectory(specificFolder);
+            string folder = Path.Join(specificFolder, "exports");
+            Directory.CreateDirectory(folder);
+            string folder2 = Path.Join(folder, "gyorsulas_mert");
+            Directory.CreateDirectory(folder2);
+            string datafile = Path.Join(folder2, timeStamp + ".png");
+            var pngExporter = new PngExporter { Width = 5000, Height = 3000 };
+            pngExporter.ExportToFile(plotModel4, datafile);
+        }
+
+        private void tengelyesGyorsulásGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String timeStamp = GetTimestamp(DateTime.Now);
+
+            Directory.CreateDirectory(specificFolder);
+            string folder = Path.Join(specificFolder, "exports");
+            Directory.CreateDirectory(folder);
+            string folder2 = Path.Join(folder, "gyorsulas");
+            Directory.CreateDirectory(folder2);
+            string datafile = Path.Join(folder2, timeStamp + ".png");
+            var pngExporter = new PngExporter { Width = 5000, Height = 3000 };
+            pngExporter.ExportToFile(plotModel5, datafile);
         }
     }
 }
