@@ -14,9 +14,9 @@ namespace OnionSAT
 {
     public partial class Settings : Form
     {
-        static string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        static string specificFolder = Path.Combine(folder, ".onionsat");
-        static string path = Path.Combine(specificFolder, "settings.txt");
+        static readonly string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        static readonly string specificFolder = Path.Combine(folder, ".onionsat");
+        static readonly string path = Path.Combine(specificFolder, "settings.txt");
         public Settings()
         {
             InitializeComponent();
@@ -60,12 +60,7 @@ namespace OnionSAT
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
 
             Directory.CreateDirectory(specificFolder);

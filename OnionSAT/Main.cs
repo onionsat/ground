@@ -27,15 +27,14 @@ namespace OnionSAT
 {
     public partial class Main : Form
     {
-        static string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        static string specificFolder = Path.Combine(folder, ".onionsat");
-        static string path = Path.Combine(specificFolder, "settings.txt");
+        static readonly string folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        static readonly string specificFolder = Path.Combine(folder, ".onionsat");
+        static readonly string path = Path.Combine(specificFolder, "settings.txt");
         String Filepath = "";
-        String Errorpath = Path.Combine(specificFolder, "error.txt");
+        static readonly String Errorpath = Path.Combine(specificFolder, "error.txt");
         String Apikey = "", Apiendpoint = "";
         private LineSeries temperatureSeries, humiditySeries, pressureSeries, accelerationSeries, accelerationRealSeries, accelerationRealSeries2, accelerationRealSeries3, altitudeSeries, accelerationSeries2, accelerationSeries3;
-        private int currentTime = 0;
-        private static readonly HttpClient client = new HttpClient();
+        private static readonly HttpClient client = new();
         PlotModel plotModel, plotModel2, plotModel3, plotModel4, plotModel5, plotModel6;
 
         public Main()
@@ -219,15 +218,13 @@ namespace OnionSAT
         public static DateTime JavaTimeStampToDateTime(double javaTimeStamp)
         {
             // Java timestamp is milliseconds past epoch
-            DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            DateTime dateTime = new(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             dateTime = dateTime.AddMilliseconds(javaTimeStamp).ToLocalTime();
             return dateTime;
         }
 
-        private void updateTempGraph(string Temp, long Timestamp)
+        private void UpdateTempGraph(string Temp, long Timestamp)
         {
-            currentTime++;
-
             float homerseklet = float.Parse(Temp, CultureInfo.InvariantCulture.NumberFormat);
             // Hozzáadás az élõ adatokhoz
             temperatureSeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), homerseklet));
@@ -236,11 +233,8 @@ namespace OnionSAT
             plotView1.InvalidatePlot(true);
         }
 
-        private int currentTime2 = 0;
-        private void updateHumidityGraph(string Temp, long Timestamp)
+        private void UpdateHumidityGraph(string Temp, long Timestamp)
         {
-            currentTime2++;
-
             float paratartalom = float.Parse(Temp, CultureInfo.InvariantCulture.NumberFormat);
             // Hozzáadás az élõ adatokhoz
             humiditySeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), paratartalom));
@@ -249,11 +243,8 @@ namespace OnionSAT
             plotView2.InvalidatePlot(true);
         }
 
-        private int currentTime3 = 0;
-        private void updatePressureGraph(string Temp, long Timestamp)
+        private void UpdatePressureGraph(string Temp, long Timestamp)
         {
-            currentTime3++;
-
             float paratartalom = float.Parse(Temp, CultureInfo.InvariantCulture.NumberFormat);
             // Hozzáadás az élõ adatokhoz
             pressureSeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), paratartalom));
@@ -262,11 +253,8 @@ namespace OnionSAT
             plotView3.InvalidatePlot(true);
         }
 
-        private int currentTime4 = 0;
-        private void updateAltitudeGraph(string Temp, long Timestamp)
+        private void UpdateAltitudeGraph(string Temp, long Timestamp)
         {
-            currentTime4++;
-
             float magassag = float.Parse(Temp, CultureInfo.InvariantCulture.NumberFormat);
             // Hozzáadás az élõ adatokhoz
             altitudeSeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), magassag));
@@ -275,11 +263,8 @@ namespace OnionSAT
             plotView7.InvalidatePlot(true);
         }
 
-        private int currentTime5 = 0;
-        private void updateAccelRealGraph(string gx, string gy, string gz, long Timestamp)
+        private void UpdateAccelRealGraph(string gx, string gy, string gz, long Timestamp)
         {
-            currentTime5++;
-
             float x = float.Parse(gx, CultureInfo.InvariantCulture.NumberFormat);
             float y = float.Parse(gy, CultureInfo.InvariantCulture.NumberFormat);
             float z = float.Parse(gz, CultureInfo.InvariantCulture.NumberFormat);
@@ -292,11 +277,8 @@ namespace OnionSAT
             plotView4.InvalidatePlot(true);
         }
 
-        private int currentTime6 = 0;
-        private void updateAccelGraph(string gx, string gy, string gz, long Timestamp)
+        private void UpdateAccelGraph(string gx, string gy, string gz, long Timestamp)
         {
-            currentTime6++;
-
             float x = float.Parse(gx, CultureInfo.InvariantCulture.NumberFormat);
             float y = float.Parse(gy, CultureInfo.InvariantCulture.NumberFormat);
             float z = float.Parse(gz, CultureInfo.InvariantCulture.NumberFormat);
@@ -309,11 +291,10 @@ namespace OnionSAT
             plotView5.InvalidatePlot(true);
         }
 
-        GMapOverlay o = new GMapOverlay("o");
-        GMapOverlay polyOverlay = new GMapOverlay("polygons");
-        SerialPort serialPort = new SerialPort("COM1");
-        System.Timers.Timer timer = new System.Timers.Timer(), globtimer = new System.Timers.Timer(), netchecktimer = new System.Timers.Timer();
-        Stopwatch stopWatch = new Stopwatch(), globstopwatch = new Stopwatch();
+        GMapOverlay o = new("o");
+        SerialPort serialPort = new("COM1");
+        System.Timers.Timer timer = new(), globtimer = new(), netchecktimer = new();
+        Stopwatch stopWatch = new(), globstopwatch = new();
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -332,7 +313,7 @@ namespace OnionSAT
             gMapControl1.DragButton = MouseButtons.Left;
             gMapControl1.IgnoreMarkerOnMouseWheel = true;
             gMapControl1.CacheLocation = path2;
-            Size siz = new System.Drawing.Size(gMapControl1.Width, gMapControl1.Height);
+            Size siz = new(gMapControl1.Width, gMapControl1.Height);
             gMapControl1.ClientSize = siz;
 
             timer.Interval = 2;
@@ -402,6 +383,7 @@ namespace OnionSAT
             }
         }
 
+        bool userClosed = false;
         private void OnTimeEvent(object? sender, System.Timers.ElapsedEventArgs e)
         {
             try
@@ -420,7 +402,10 @@ namespace OnionSAT
 
                     if (!serialPort.IsOpen)
                     {
-                        port_ErrorReceived(null, null);
+                        if (!userClosed)
+                        {
+                            Port_ErrorReceived(null, null);
+                        }
                     }
                 }));
 
@@ -495,10 +480,10 @@ namespace OnionSAT
                 {
                     data = comm.ReadLine().Replace("\r\n", "");
 
-                    if (data.Contains("|"))
+                    if (data.Contains('|'))
                     {
                         var Tstamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
-                        buildFromData(data, Tstamp);
+                        BuildFromData(data, Tstamp);
                         string[] args = data.Split("|");
                         if (args.Length == 14)
                         {
@@ -559,7 +544,7 @@ namespace OnionSAT
             {
                 try
                 {
-                    port_ErrorReceived(null, null);
+                    Port_ErrorReceived(null, null);
                     var Tstamp = GetTimestamp(DateTime.Now);
                     if (Errorpath != "")
                     {
@@ -573,7 +558,7 @@ namespace OnionSAT
             }
         }
 
-        void port_ErrorReceived(object? sender, SerialErrorReceivedEventArgs? e)
+        void Port_ErrorReceived(object? sender, SerialErrorReceivedEventArgs? e)
         {
             try
             {
@@ -638,7 +623,7 @@ namespace OnionSAT
             }
         }
 
-        private void buildFromData(string data, long Timestamp)
+        private void BuildFromData(string data, long Timestamp)
         {
             string[] args = data.Split("|");
             if (args.Length == 14)
@@ -650,41 +635,40 @@ namespace OnionSAT
                 }));
 
                 string tempreture = args[4];
-                updateTempGraph(tempreture, Timestamp);
+                UpdateTempGraph(tempreture, Timestamp);
 
                 string coordinates = args[0];
-                updateMap(coordinates);
+                UpdateMap(coordinates);
 
                 string humidity = args[6];
-                updateHumidityGraph(humidity, Timestamp);
+                UpdateHumidityGraph(humidity, Timestamp);
 
                 string pressure = args[5];
-                updatePressureGraph(pressure, Timestamp);
+                UpdatePressureGraph(pressure, Timestamp);
 
                 string altitude = args[7];
-                updateAltitudeGraph(altitude, Timestamp);
+                UpdateAltitudeGraph(altitude, Timestamp);
 
                 string x1 = args[8];
                 string y1 = args[9];
                 string z1 = args[10];
-                updateAccelRealGraph(x1, y1, z1, Timestamp);
+                UpdateAccelRealGraph(x1, y1, z1, Timestamp);
 
                 string x2 = args[11];
                 string y2 = args[12];
                 string z2 = args[13];
-                updateAccelGraph(x2, y2, z2, Timestamp);
+                UpdateAccelGraph(x2, y2, z2, Timestamp);
             }
         }
 
         double lat_last;
         double lon_last;
 
-        private void updateMap(string coordinates)
+        private void UpdateMap(string coordinates)
         {
             if (gMapControl1.InvokeRequired)
             {
-                // If Invoke is required, call the method recursively using Invoke
-                MethodInvoker AssignMethodToControl = new MethodInvoker(() => updateMap(coordinates));
+                MethodInvoker AssignMethodToControl = new(() => UpdateMap(coordinates));
                 gMapControl1.BeginInvoke(AssignMethodToControl);
             }
             else
@@ -698,7 +682,7 @@ namespace OnionSAT
                     string lat_str = args[0];
                     string lon_str = args[1];
 
-                    if (!lat_str.Contains("0.00000") && lat_str.Contains(".") && !lon_str.Contains("0.00000") && lon_str.Contains("."))
+                    if (!lat_str.Contains("0.00000") && lat_str.Contains('.') && !lon_str.Contains("0.00000") && lon_str.Contains('.'))
                     {
                         try
                         {
@@ -714,13 +698,17 @@ namespace OnionSAT
                                 lon_last = longitude;
                                 first = true;
                             }
-                            GMapOverlay polyOverlay = new GMapOverlay("polygons");
-                            IList<PointLatLng> points = new List<PointLatLng>();
-                            points.Add(new PointLatLng(lat_last, lon_last));
-                            points.Add(new PointLatLng(latitude, longitude));
-                            GMapPolygon polygon = new GMapPolygon((List<PointLatLng>)points, "mypolygon");
-                            polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));
-                            polygon.Stroke = new Pen(Color.Red, 1);
+                            GMapOverlay polyOverlay = new("polygons");
+                            IList<PointLatLng> points = new List<PointLatLng>
+                            {
+                                new PointLatLng(lat_last, lon_last),
+                                new PointLatLng(latitude, longitude)
+                            };
+                            GMapPolygon polygon = new((List<PointLatLng>)points, "mypolygon")
+                            {
+                                Fill = new SolidBrush(Color.FromArgb(50, Color.Red)),
+                                Stroke = new Pen(Color.Red, 1)
+                            };
                             polyOverlay.Polygons.Add(polygon);
                             gMapControl1.Overlays.Add(polyOverlay);
 
@@ -764,16 +752,17 @@ namespace OnionSAT
 
         }
 
-        private void beállításokToolStripMenuItem_Click(object sender, EventArgs e)
+        private void BeállításokToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Settings s2 = new Settings();
+            Settings s2 = new();
             s2.ShowDialog();
         }
 
-        private void kapcsolódásToolStripMenuItem_Click(object sender, EventArgs e)
+        private void KapcsolódásToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
+                userClosed = false;
                 string serial = "COM8";
                 string api_key;
                 string api_endpoint;
@@ -799,12 +788,14 @@ namespace OnionSAT
                     }
                 }
 
-                serialPort = new SerialPort(serial, 115200);
-                serialPort.DtrEnable = true;
+                serialPort = new(serial, 115200)
+                {
+                    DtrEnable = true
+                };
 
                 serialPort.Open();
                 serialPort.DataReceived += new SerialDataReceivedEventHandler(Port_DataReceived);
-                serialPort.ErrorReceived += new SerialErrorReceivedEventHandler(port_ErrorReceived);
+                serialPort.ErrorReceived += new SerialErrorReceivedEventHandler(Port_ErrorReceived);
 
                 new ToastContentBuilder()
                   .AddText("Kapcsolat")
@@ -821,12 +812,13 @@ namespace OnionSAT
             }
         }
 
-        private void kapcsolatBontásaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void KapcsolatBontásaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                serialPort.Close();
                 CloseGUIUpdate();
+                userClosed = true;
+                serialPort.Close();
 
                 new ToastContentBuilder()
                   .AddText("Kapcsolat")
@@ -839,12 +831,14 @@ namespace OnionSAT
             }
         }
 
-        private void fájlKiválasztásaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FájlKiválasztásaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                OpenFileDialog ofd = new OpenFileDialog();
-                ofd.Filter = "Szöveges állomány (*.txt)|*.TXT";
+                OpenFileDialog ofd = new()
+                {
+                    Filter = "Szöveges állomány (*.txt)|*.TXT"
+                };
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     foreach (String file in ofd.FileNames)
@@ -853,19 +847,19 @@ namespace OnionSAT
                         if (File.Exists(file))
                         {
                             label7.Text = Path.GetFileName(file);
-                            deleteGraphs();
+                            DeleteGraphs();
 
                             Filepath = file;
                             string[] lines = File.ReadAllLines(file);
                             foreach (string line in lines)
                             {
-                                if (line.Contains("|"))
+                                if (line.Contains('|'))
                                 {
                                     string[] args = line.Split("@#");
                                     if (args.Length == 2)
                                     {
                                         long l1 = (long)Convert.ToDouble(args[0]);
-                                        buildFromData(args[1], l1);
+                                        BuildFromData(args[1], l1);
                                     }
                                 }
                             }
@@ -879,7 +873,7 @@ namespace OnionSAT
             }
         }
 
-        private void újAdatfájlLétrehozásaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ÚjAdatfájlLétrehozásaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -896,7 +890,7 @@ namespace OnionSAT
                 if (File.Exists(datafile))
                 {
 
-                    deleteGraphs();
+                    DeleteGraphs();
                     Filepath = datafile;
                     label7.Text = Path.GetFileName(datafile);
 
@@ -919,7 +913,7 @@ namespace OnionSAT
             return value.ToString("yyyy-MM-dd HH-mm-ss.ffff");
         }
 
-        private void deleteGraphs()
+        private void DeleteGraphs()
         {
             temperatureSeries.Points.Clear();
             accelerationRealSeries.Points.Clear();
@@ -940,7 +934,7 @@ namespace OnionSAT
             plotView1.InvalidatePlot(true);
         }
 
-        private void hõmérsékletGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
+        private void HõmérsékletGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             try
@@ -972,7 +966,7 @@ namespace OnionSAT
             }
         }
 
-        private void relatívPáratartalomGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RelatívPáratartalomGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             try
@@ -1004,7 +998,7 @@ namespace OnionSAT
             }
         }
 
-        private void légnyomásGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LégnyomásGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             try
@@ -1036,7 +1030,7 @@ namespace OnionSAT
             }
         }
 
-        private void magasságGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
+        private void MagasságGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             try
@@ -1068,7 +1062,7 @@ namespace OnionSAT
             }
         }
 
-        private void tengelyesGyorsulásmértGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TengelyesGyorsulásmértGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -1099,7 +1093,7 @@ namespace OnionSAT
             }
         }
 
-        private void tengelyesGyorsulásGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TengelyesGyorsulásGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
@@ -1129,7 +1123,7 @@ namespace OnionSAT
             }
         }
 
-        private void térképToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TérképToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
             try
@@ -1169,9 +1163,9 @@ namespace OnionSAT
             }));
         }
 
-        private void névjegyToolStripMenuItem_Click(object sender, EventArgs e)
+        private void NévjegyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            About about = new About();
+            About about = new();
             about.ShowDialog();
         }
     }

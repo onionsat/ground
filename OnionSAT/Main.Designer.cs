@@ -175,21 +175,21 @@
             kapcsolatLétrehozásaToolStripMenuItem.Name = "kapcsolatLétrehozásaToolStripMenuItem";
             kapcsolatLétrehozásaToolStripMenuItem.Size = new Size(187, 22);
             kapcsolatLétrehozásaToolStripMenuItem.Text = "Kapcsolat létrehozása";
-            kapcsolatLétrehozásaToolStripMenuItem.Click += kapcsolódásToolStripMenuItem_Click;
+            kapcsolatLétrehozásaToolStripMenuItem.Click += KapcsolódásToolStripMenuItem_Click;
             // 
             // kapcsolatBontásaToolStripMenuItem
             // 
             kapcsolatBontásaToolStripMenuItem.Name = "kapcsolatBontásaToolStripMenuItem";
             kapcsolatBontásaToolStripMenuItem.Size = new Size(187, 22);
             kapcsolatBontásaToolStripMenuItem.Text = "Kapcsolat bontása";
-            kapcsolatBontásaToolStripMenuItem.Click += kapcsolatBontásaToolStripMenuItem_Click;
+            kapcsolatBontásaToolStripMenuItem.Click += KapcsolatBontásaToolStripMenuItem_Click;
             // 
             // beállításokToolStripMenuItem
             // 
             beállításokToolStripMenuItem.Name = "beállításokToolStripMenuItem";
             beállításokToolStripMenuItem.Size = new Size(140, 22);
             beállításokToolStripMenuItem.Text = "Beállítások";
-            beállításokToolStripMenuItem.Click += beállításokToolStripMenuItem_Click;
+            beállításokToolStripMenuItem.Click += BeállításokToolStripMenuItem_Click;
             // 
             // adattárolásToolStripMenuItem
             // 
@@ -203,14 +203,14 @@
             újAdatfájlLétrehozásaToolStripMenuItem.Name = "újAdatfájlLétrehozásaToolStripMenuItem";
             újAdatfájlLétrehozásaToolStripMenuItem.Size = new Size(189, 22);
             újAdatfájlLétrehozásaToolStripMenuItem.Text = "Új adatfájl létrehozása";
-            újAdatfájlLétrehozásaToolStripMenuItem.Click += újAdatfájlLétrehozásaToolStripMenuItem_Click;
+            újAdatfájlLétrehozásaToolStripMenuItem.Click += ÚjAdatfájlLétrehozásaToolStripMenuItem_Click;
             // 
             // fájlKiválasztásaToolStripMenuItem
             // 
             fájlKiválasztásaToolStripMenuItem.Name = "fájlKiválasztásaToolStripMenuItem";
             fájlKiválasztásaToolStripMenuItem.Size = new Size(189, 22);
             fájlKiválasztásaToolStripMenuItem.Text = "Fájl kiválasztása";
-            fájlKiválasztásaToolStripMenuItem.Click += fájlKiválasztásaToolStripMenuItem_Click;
+            fájlKiválasztásaToolStripMenuItem.Click += FájlKiválasztásaToolStripMenuItem_Click;
             // 
             // exportálásToolStripMenuItem
             // 
@@ -231,49 +231,49 @@
             térképToolStripMenuItem.Name = "térképToolStripMenuItem";
             térképToolStripMenuItem.Size = new Size(271, 22);
             térképToolStripMenuItem.Text = "Térkép";
-            térképToolStripMenuItem.Click += térképToolStripMenuItem_Click;
+            térképToolStripMenuItem.Click += TérképToolStripMenuItem_Click;
             // 
             // hőmérsékletGrafikonToolStripMenuItem
             // 
             hőmérsékletGrafikonToolStripMenuItem.Name = "hőmérsékletGrafikonToolStripMenuItem";
             hőmérsékletGrafikonToolStripMenuItem.Size = new Size(271, 22);
             hőmérsékletGrafikonToolStripMenuItem.Text = "Hőmérséklet grafikon";
-            hőmérsékletGrafikonToolStripMenuItem.Click += hőmérsékletGrafikonToolStripMenuItem_Click;
+            hőmérsékletGrafikonToolStripMenuItem.Click += HőmérsékletGrafikonToolStripMenuItem_Click;
             // 
             // relatívPáratartalomGrafikonToolStripMenuItem
             // 
             relatívPáratartalomGrafikonToolStripMenuItem.Name = "relatívPáratartalomGrafikonToolStripMenuItem";
             relatívPáratartalomGrafikonToolStripMenuItem.Size = new Size(271, 22);
             relatívPáratartalomGrafikonToolStripMenuItem.Text = "Relatív páratartalom grafikon";
-            relatívPáratartalomGrafikonToolStripMenuItem.Click += relatívPáratartalomGrafikonToolStripMenuItem_Click;
+            relatívPáratartalomGrafikonToolStripMenuItem.Click += RelatívPáratartalomGrafikonToolStripMenuItem_Click;
             // 
             // légnyomásGrafikonToolStripMenuItem
             // 
             légnyomásGrafikonToolStripMenuItem.Name = "légnyomásGrafikonToolStripMenuItem";
             légnyomásGrafikonToolStripMenuItem.Size = new Size(271, 22);
             légnyomásGrafikonToolStripMenuItem.Text = "Légnyomás grafikon";
-            légnyomásGrafikonToolStripMenuItem.Click += légnyomásGrafikonToolStripMenuItem_Click;
+            légnyomásGrafikonToolStripMenuItem.Click += LégnyomásGrafikonToolStripMenuItem_Click;
             // 
             // magasságGrafikonToolStripMenuItem
             // 
             magasságGrafikonToolStripMenuItem.Name = "magasságGrafikonToolStripMenuItem";
             magasságGrafikonToolStripMenuItem.Size = new Size(271, 22);
             magasságGrafikonToolStripMenuItem.Text = "Magasság grafikon";
-            magasságGrafikonToolStripMenuItem.Click += magasságGrafikonToolStripMenuItem_Click;
+            magasságGrafikonToolStripMenuItem.Click += MagasságGrafikonToolStripMenuItem_Click;
             // 
             // tengelyesGyorsulásmértGrafikonToolStripMenuItem
             // 
             tengelyesGyorsulásmértGrafikonToolStripMenuItem.Name = "tengelyesGyorsulásmértGrafikonToolStripMenuItem";
             tengelyesGyorsulásmértGrafikonToolStripMenuItem.Size = new Size(271, 22);
             tengelyesGyorsulásmértGrafikonToolStripMenuItem.Text = "3-tengelyes gyorsulás (mért) grafikon";
-            tengelyesGyorsulásmértGrafikonToolStripMenuItem.Click += tengelyesGyorsulásmértGrafikonToolStripMenuItem_Click;
+            tengelyesGyorsulásmértGrafikonToolStripMenuItem.Click += TengelyesGyorsulásmértGrafikonToolStripMenuItem_Click;
             // 
             // tengelyesGyorsulásGrafikonToolStripMenuItem
             // 
             tengelyesGyorsulásGrafikonToolStripMenuItem.Name = "tengelyesGyorsulásGrafikonToolStripMenuItem";
             tengelyesGyorsulásGrafikonToolStripMenuItem.Size = new Size(271, 22);
             tengelyesGyorsulásGrafikonToolStripMenuItem.Text = "3-tengelyes gyorsulás grafikon";
-            tengelyesGyorsulásGrafikonToolStripMenuItem.Click += tengelyesGyorsulásGrafikonToolStripMenuItem_Click;
+            tengelyesGyorsulásGrafikonToolStripMenuItem.Click += TengelyesGyorsulásGrafikonToolStripMenuItem_Click;
             // 
             // plotView2
             // 
@@ -623,7 +623,7 @@
             névjegyToolStripMenuItem.Name = "névjegyToolStripMenuItem";
             névjegyToolStripMenuItem.Size = new Size(180, 22);
             névjegyToolStripMenuItem.Text = "Névjegy";
-            névjegyToolStripMenuItem.Click += névjegyToolStripMenuItem_Click;
+            névjegyToolStripMenuItem.Click += NévjegyToolStripMenuItem_Click;
             // 
             // Main
             // 

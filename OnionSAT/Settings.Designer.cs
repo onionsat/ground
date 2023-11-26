@@ -46,7 +46,6 @@
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(274, 23);
             comboBox1.TabIndex = 0;
-            comboBox1.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
             // button1
             // 
@@ -57,7 +56,7 @@
             button1.TabIndex = 1;
             button1.Text = "Mentés";
             button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            button1.Click += Button1_Click;
             // 
             // textBox1
             // 
