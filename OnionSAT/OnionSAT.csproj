@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>onionsat_logo.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="onionsat_logo.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="GMap.NET.Core" Version="2.1.7" />

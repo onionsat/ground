@@ -324,7 +324,7 @@ namespace OnionSAT
 
             NetworkCheck(null, null);
             netchecktimer.Start();
-            netchecktimer.Interval = 2000;
+            netchecktimer.Interval = 5000;
             netchecktimer.Elapsed += NetworkCheck;
 
         }
