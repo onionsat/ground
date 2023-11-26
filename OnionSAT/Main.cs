@@ -299,8 +299,7 @@ namespace OnionSAT
         private void Form1_Load(object sender, EventArgs e)
         {
             string path2 = Path.Combine(specificFolder, "map");
-            //GMap.NET.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
-            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.CacheOnly;
+            GMap.NET.GMaps.Instance.Mode = GMap.NET.AccessMode.ServerAndCache;
             gMapControl1.Dock = DockStyle.Fill;
             gMapControl1.MapProvider = GMap.NET.MapProviders.GoogleMapProvider.Instance;
             gMapControl1.Position = new GMap.NET.PointLatLng(47.5265409, 19.0574471);
