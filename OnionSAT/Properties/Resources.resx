@@ -118,16 +118,58 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="wifi" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\wifi.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="rackforest_felirat_dark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rackforest_felirat_dark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="rackforest-logo01" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\rackforest-logo01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="chipcad" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chipcad.jfif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="satellite-solid" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\satellite-solid.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pnlkft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pnlkft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pnlkft_verylight" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pnlkft_verylight.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="adatbazis" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\adatbazis.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="rackforest_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rackforest_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ethernet" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ethernet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chart-magnify" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\chart-magnify.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="serial" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\serial.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pnlkft_lighter" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pnlkft_lighter.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="bdg" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\bdg.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mappafa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mappafa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rackforest-logo01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\rackforest-logo01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="muhold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\muhold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="felkialtojel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\felkialtojel.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="onionsat_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\onionsat_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

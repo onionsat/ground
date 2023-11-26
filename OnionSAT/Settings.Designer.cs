@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             comboBox1 = new ComboBox();
             button1 = new Button();
             textBox1 = new TextBox();
@@ -41,7 +42,7 @@
             // 
             comboBox1.FormattingEnabled = true;
             comboBox1.Location = new Point(5, 26);
-            comboBox1.Margin = new Padding(2, 2, 2, 2);
+            comboBox1.Margin = new Padding(2);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(274, 23);
             comboBox1.TabIndex = 0;
@@ -50,7 +51,7 @@
             // button1
             // 
             button1.Location = new Point(201, 137);
-            button1.Margin = new Padding(2, 2, 2, 2);
+            button1.Margin = new Padding(2);
             button1.Name = "button1";
             button1.Size = new Size(78, 25);
             button1.TabIndex = 1;
@@ -61,7 +62,7 @@
             // textBox1
             // 
             textBox1.Location = new Point(8, 68);
-            textBox1.Margin = new Padding(2, 2, 2, 2);
+            textBox1.Margin = new Padding(2);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(274, 23);
             textBox1.TabIndex = 2;
@@ -69,7 +70,7 @@
             // textBox2
             // 
             textBox2.Location = new Point(8, 110);
-            textBox2.Margin = new Padding(2, 2, 2, 2);
+            textBox2.Margin = new Padding(2);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(274, 23);
             textBox2.TabIndex = 3;
@@ -116,9 +117,11 @@
             Controls.Add(textBox1);
             Controls.Add(button1);
             Controls.Add(comboBox1);
-            Margin = new Padding(2, 2, 2, 2);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(2);
             Name = "Settings";
-            Text = "Settings";
+            StartPosition = FormStartPosition.Manual;
+            Text = "Beállítások";
             ResumeLayout(false);
             PerformLayout();
         }

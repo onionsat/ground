@@ -56,8 +56,8 @@ namespace OnionSAT
                     }
                 }
             }
-             
-            
+
+
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -67,12 +67,12 @@ namespace OnionSAT
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
             Directory.CreateDirectory(specificFolder);
 
             using (StreamWriter sw = File.CreateText(path))
             {
-                sw.Write("serial=" +comboBox1.Text+ "\napi_endpoint="+textBox1.Text+"\napi_key="+textBox2.Text+"");
+                sw.Write("serial=" + comboBox1.Text + "\napi_endpoint=" + textBox1.Text + "\napi_key=" + textBox2.Text + "");
                 sw.Close();
             }
 
