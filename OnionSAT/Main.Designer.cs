@@ -50,6 +50,8 @@
             magasságGrafikonToolStripMenuItem = new ToolStripMenuItem();
             tengelyesGyorsulásmértGrafikonToolStripMenuItem = new ToolStripMenuItem();
             tengelyesGyorsulásGrafikonToolStripMenuItem = new ToolStripMenuItem();
+            információkToolStripMenuItem = new ToolStripMenuItem();
+            névjegyToolStripMenuItem = new ToolStripMenuItem();
             plotView2 = new OxyPlot.WindowsForms.PlotView();
             plotView3 = new OxyPlot.WindowsForms.PlotView();
             plotView7 = new OxyPlot.WindowsForms.PlotView();
@@ -78,8 +80,6 @@
             pictureBox2 = new PictureBox();
             plotView4 = new OxyPlot.WindowsForms.PlotView();
             plotView8 = new OxyPlot.WindowsForms.PlotView();
-            információkToolStripMenuItem = new ToolStripMenuItem();
-            névjegyToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -152,7 +152,7 @@
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(4, 1, 0, 1);
-            menuStrip1.Size = new Size(1920, 24);
+            menuStrip1.Size = new Size(1952, 24);
             menuStrip1.TabIndex = 7;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -167,7 +167,7 @@
             // 
             kapcsolódásToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kapcsolatLétrehozásaToolStripMenuItem, kapcsolatBontásaToolStripMenuItem });
             kapcsolódásToolStripMenuItem.Name = "kapcsolódásToolStripMenuItem";
-            kapcsolódásToolStripMenuItem.Size = new Size(140, 22);
+            kapcsolódásToolStripMenuItem.Size = new Size(180, 22);
             kapcsolódásToolStripMenuItem.Text = "Kapcsolódás";
             // 
             // kapcsolatLétrehozásaToolStripMenuItem
@@ -187,7 +187,7 @@
             // beállításokToolStripMenuItem
             // 
             beállításokToolStripMenuItem.Name = "beállításokToolStripMenuItem";
-            beállításokToolStripMenuItem.Size = new Size(140, 22);
+            beállításokToolStripMenuItem.Size = new Size(180, 22);
             beállításokToolStripMenuItem.Text = "Beállítások";
             beállításokToolStripMenuItem.Click += BeállításokToolStripMenuItem_Click;
             // 
@@ -223,7 +223,7 @@
             // 
             pNGToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { térképToolStripMenuItem, hőmérsékletGrafikonToolStripMenuItem, relatívPáratartalomGrafikonToolStripMenuItem, légnyomásGrafikonToolStripMenuItem, magasságGrafikonToolStripMenuItem, tengelyesGyorsulásmértGrafikonToolStripMenuItem, tengelyesGyorsulásGrafikonToolStripMenuItem });
             pNGToolStripMenuItem.Name = "pNGToolStripMenuItem";
-            pNGToolStripMenuItem.Size = new Size(98, 22);
+            pNGToolStripMenuItem.Size = new Size(180, 22);
             pNGToolStripMenuItem.Text = "PNG";
             // 
             // térképToolStripMenuItem
@@ -274,6 +274,20 @@
             tengelyesGyorsulásGrafikonToolStripMenuItem.Size = new Size(271, 22);
             tengelyesGyorsulásGrafikonToolStripMenuItem.Text = "3-tengelyes gyorsulás grafikon";
             tengelyesGyorsulásGrafikonToolStripMenuItem.Click += TengelyesGyorsulásGrafikonToolStripMenuItem_Click;
+            // 
+            // információkToolStripMenuItem
+            // 
+            információkToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { névjegyToolStripMenuItem });
+            információkToolStripMenuItem.Name = "információkToolStripMenuItem";
+            információkToolStripMenuItem.Size = new Size(83, 22);
+            információkToolStripMenuItem.Text = "Információk";
+            // 
+            // névjegyToolStripMenuItem
+            // 
+            névjegyToolStripMenuItem.Name = "névjegyToolStripMenuItem";
+            névjegyToolStripMenuItem.Size = new Size(180, 22);
+            névjegyToolStripMenuItem.Text = "Névjegy";
+            névjegyToolStripMenuItem.Click += NévjegyToolStripMenuItem_Click;
             // 
             // plotView2
             // 
@@ -376,7 +390,7 @@
             panel2.Controls.Add(pictureBox1);
             panel2.Location = new Point(0, 960);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1920, 49);
+            panel2.Size = new Size(1952, 138);
             panel2.TabIndex = 14;
             // 
             // pictureBox12
@@ -610,20 +624,6 @@
             plotView8.ZoomHorizontalCursor = Cursors.SizeWE;
             plotView8.ZoomRectangleCursor = Cursors.SizeNWSE;
             plotView8.ZoomVerticalCursor = Cursors.SizeNS;
-            // 
-            // információkToolStripMenuItem
-            // 
-            információkToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { névjegyToolStripMenuItem });
-            információkToolStripMenuItem.Name = "információkToolStripMenuItem";
-            információkToolStripMenuItem.Size = new Size(83, 22);
-            információkToolStripMenuItem.Text = "Információk";
-            // 
-            // névjegyToolStripMenuItem
-            // 
-            névjegyToolStripMenuItem.Name = "névjegyToolStripMenuItem";
-            névjegyToolStripMenuItem.Size = new Size(180, 22);
-            névjegyToolStripMenuItem.Text = "Névjegy";
-            névjegyToolStripMenuItem.Click += NévjegyToolStripMenuItem_Click;
             // 
             // Main
             // 

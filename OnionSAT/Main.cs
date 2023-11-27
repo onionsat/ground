@@ -335,21 +335,23 @@ namespace OnionSAT
         {
             try
             {
-                var response = await client.GetAsync("http://ip-api.com/line/?fields=512");
-                var responseString = await response.Content.ReadAsStringAsync();
-
-                BeginInvoke(new Action(() =>
+                if (IsHandleCreated)
                 {
-                    if (label8.Text != responseString)
-                    {
-                        new ToastContentBuilder()
-                                .AddText("Internetkapcsolat")
-                                .AddText("Az internetkapcsolat létrejött a(z) " + responseString + " hálózatán.")
-                                .Show();
-                    }
-                    label8.Text = responseString;
-                }));
+                    var response = await client.GetAsync("http://ip-api.com/line/?fields=512");
+                    var responseString = await response.Content.ReadAsStringAsync();
 
+                    BeginInvoke(new Action(() =>
+                    {
+                        if (label8.Text != responseString)
+                        {
+                            new ToastContentBuilder()
+                                    .AddText("Internetkapcsolat")
+                                    .AddText("Az internetkapcsolat létrejött a(z) " + responseString + " hálózatán.")
+                                    .Show();
+                        }
+                        label8.Text = responseString;
+                    }));
+                }
             }
             catch (Exception ex)
             {
@@ -387,26 +389,29 @@ namespace OnionSAT
         {
             try
             {
-                BeginInvoke(new Action(() =>
+                if (IsHandleCreated)
                 {
-                    var ts = stopWatch.Elapsed;
-                    if (ts.TotalMilliseconds > 999 && errorcounter == false)
-                    {
-                        errors++;
-                        errorcounter = true;
-                        label3.Text = errors.ToString() + " kiesett csomag";
-                    }
+                    BeginInvoke(new Action(() =>
+                     {
+                         var ts = stopWatch.Elapsed;
+                         if (ts.TotalMilliseconds > 999 && errorcounter == false)
+                         {
+                             errors++;
+                             errorcounter = true;
+                             label3.Text = errors.ToString() + " kiesett csomag";
+                         }
 
-                    label1.Text = $"{Math.Round(ts.TotalMilliseconds)} ms";
+                         label1.Text = $"{Math.Round(ts.TotalMilliseconds)} ms";
 
-                    if (!serialPort.IsOpen)
-                    {
-                        if (!userClosed)
-                        {
-                            Port_ErrorReceived(null, null);
-                        }
-                    }
-                }));
+                         if (!serialPort.IsOpen)
+                         {
+                             if (!userClosed)
+                             {
+                                 Port_ErrorReceived(null, null);
+                             }
+                         }
+                     }));
+                }
 
             }
             catch (Exception ex)
@@ -428,7 +433,9 @@ namespace OnionSAT
 
         private void OnGlobTimeEvent(object? sender, System.Timers.ElapsedEventArgs e)
         {
-            BeginInvoke(new Action(() =>
+            if (IsHandleCreated)
+            {
+                BeginInvoke(new Action(() =>
             {
                 var ts = globstopwatch.Elapsed;
 
@@ -464,6 +471,7 @@ namespace OnionSAT
                 // Format and display the TimeSpan value.
                 label2.Text = $"Van kapcsolat ({kitoltoora}{ts.Hours}:{kitoltoperc}{ts.Minutes}:{kitoltomasodperc}{ts.Seconds})";
             }));
+            }
         }
 
         int receivedpackets = 0;
