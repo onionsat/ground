@@ -1175,5 +1175,10 @@ namespace OnionSAT
             About about = new();
             about.ShowDialog();
         }
+
+        private void Main_Resize(object sender, EventArgs e)
+        {
+            panel2.Width = this.Width;
+        }
     }
 }

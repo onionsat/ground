@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
-            panel1 = new Panel();
-            plotView1 = new OxyPlot.WindowsForms.PlotView();
             menuStrip1 = new MenuStrip();
             fájlToolStripMenuItem = new ToolStripMenuItem();
             kapcsolódásToolStripMenuItem = new ToolStripMenuItem();
@@ -52,11 +49,6 @@
             tengelyesGyorsulásGrafikonToolStripMenuItem = new ToolStripMenuItem();
             információkToolStripMenuItem = new ToolStripMenuItem();
             névjegyToolStripMenuItem = new ToolStripMenuItem();
-            plotView2 = new OxyPlot.WindowsForms.PlotView();
-            plotView3 = new OxyPlot.WindowsForms.PlotView();
-            plotView7 = new OxyPlot.WindowsForms.PlotView();
-            plotView5 = new OxyPlot.WindowsForms.PlotView();
-            plotView61 = new OxyPlot.WindowsForms.PlotView();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
             pictureBox12 = new PictureBox();
@@ -78,9 +70,17 @@
             label2 = new Label();
             label1 = new Label();
             pictureBox2 = new PictureBox();
-            plotView4 = new OxyPlot.WindowsForms.PlotView();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
+            plotView5 = new OxyPlot.WindowsForms.PlotView();
+            plotView1 = new OxyPlot.WindowsForms.PlotView();
+            plotView3 = new OxyPlot.WindowsForms.PlotView();
+            plotView7 = new OxyPlot.WindowsForms.PlotView();
             plotView8 = new OxyPlot.WindowsForms.PlotView();
-            panel1.SuspendLayout();
+            plotView4 = new OxyPlot.WindowsForms.PlotView();
+            plotView61 = new OxyPlot.WindowsForms.PlotView();
+            plotView2 = new OxyPlot.WindowsForms.PlotView();
+            tableLayoutPanel2 = new TableLayoutPanel();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -95,54 +95,9 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
-            // 
-            // gMapControl1
-            // 
-            gMapControl1.Bearing = 0F;
-            gMapControl1.CanDragMap = true;
-            gMapControl1.EmptyTileColor = Color.Navy;
-            gMapControl1.GrayScaleMode = false;
-            gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
-            gMapControl1.LevelsKeepInMemory = 5;
-            gMapControl1.Location = new Point(-1, 0);
-            gMapControl1.MarkersEnabled = true;
-            gMapControl1.MaxZoom = 2;
-            gMapControl1.MinZoom = 2;
-            gMapControl1.MouseWheelZoomEnabled = true;
-            gMapControl1.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
-            gMapControl1.Name = "gMapControl1";
-            gMapControl1.NegativeMode = false;
-            gMapControl1.PolygonsEnabled = true;
-            gMapControl1.RetryLoadTile = 0;
-            gMapControl1.RoutesEnabled = true;
-            gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
-            gMapControl1.SelectedAreaFillColor = Color.FromArgb(33, 65, 105, 225);
-            gMapControl1.ShowTileGridLines = false;
-            gMapControl1.Size = new Size(684, 419);
-            gMapControl1.TabIndex = 0;
-            gMapControl1.Zoom = 0D;
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(gMapControl1);
-            panel1.Location = new Point(618, 32);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(683, 419);
-            panel1.TabIndex = 2;
-            // 
-            // plotView1
-            // 
-            plotView1.BackColor = Color.White;
-            plotView1.Location = new Point(12, 32);
-            plotView1.Name = "plotView1";
-            plotView1.PanCursor = Cursors.Hand;
-            plotView1.Size = new Size(600, 305);
-            plotView1.TabIndex = 6;
-            plotView1.Text = "plotView1";
-            plotView1.ZoomHorizontalCursor = Cursors.SizeWE;
-            plotView1.ZoomRectangleCursor = Cursors.SizeNWSE;
-            plotView1.ZoomVerticalCursor = Cursors.SizeNS;
             // 
             // menuStrip1
             // 
@@ -152,7 +107,7 @@
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(4, 1, 0, 1);
-            menuStrip1.Size = new Size(1952, 24);
+            menuStrip1.Size = new Size(884, 24);
             menuStrip1.TabIndex = 7;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -167,7 +122,7 @@
             // 
             kapcsolódásToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kapcsolatLétrehozásaToolStripMenuItem, kapcsolatBontásaToolStripMenuItem });
             kapcsolódásToolStripMenuItem.Name = "kapcsolódásToolStripMenuItem";
-            kapcsolódásToolStripMenuItem.Size = new Size(180, 22);
+            kapcsolódásToolStripMenuItem.Size = new Size(140, 22);
             kapcsolódásToolStripMenuItem.Text = "Kapcsolódás";
             // 
             // kapcsolatLétrehozásaToolStripMenuItem
@@ -187,7 +142,7 @@
             // beállításokToolStripMenuItem
             // 
             beállításokToolStripMenuItem.Name = "beállításokToolStripMenuItem";
-            beállításokToolStripMenuItem.Size = new Size(180, 22);
+            beállításokToolStripMenuItem.Size = new Size(140, 22);
             beállításokToolStripMenuItem.Text = "Beállítások";
             beállításokToolStripMenuItem.Click += BeállításokToolStripMenuItem_Click;
             // 
@@ -223,7 +178,7 @@
             // 
             pNGToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { térképToolStripMenuItem, hőmérsékletGrafikonToolStripMenuItem, relatívPáratartalomGrafikonToolStripMenuItem, légnyomásGrafikonToolStripMenuItem, magasságGrafikonToolStripMenuItem, tengelyesGyorsulásmértGrafikonToolStripMenuItem, tengelyesGyorsulásGrafikonToolStripMenuItem });
             pNGToolStripMenuItem.Name = "pNGToolStripMenuItem";
-            pNGToolStripMenuItem.Size = new Size(180, 22);
+            pNGToolStripMenuItem.Size = new Size(98, 22);
             pNGToolStripMenuItem.Text = "PNG";
             // 
             // térképToolStripMenuItem
@@ -285,75 +240,9 @@
             // névjegyToolStripMenuItem
             // 
             névjegyToolStripMenuItem.Name = "névjegyToolStripMenuItem";
-            névjegyToolStripMenuItem.Size = new Size(180, 22);
+            névjegyToolStripMenuItem.Size = new Size(117, 22);
             névjegyToolStripMenuItem.Text = "Névjegy";
             névjegyToolStripMenuItem.Click += NévjegyToolStripMenuItem_Click;
-            // 
-            // plotView2
-            // 
-            plotView2.BackColor = Color.White;
-            plotView2.Location = new Point(12, 340);
-            plotView2.Name = "plotView2";
-            plotView2.PanCursor = Cursors.Hand;
-            plotView2.Size = new Size(600, 305);
-            plotView2.TabIndex = 8;
-            plotView2.Text = "plotView2";
-            plotView2.ZoomHorizontalCursor = Cursors.SizeWE;
-            plotView2.ZoomRectangleCursor = Cursors.SizeNWSE;
-            plotView2.ZoomVerticalCursor = Cursors.SizeNS;
-            // 
-            // plotView3
-            // 
-            plotView3.BackColor = Color.White;
-            plotView3.ForeColor = Color.Transparent;
-            plotView3.Location = new Point(11, 649);
-            plotView3.Name = "plotView3";
-            plotView3.PanCursor = Cursors.Hand;
-            plotView3.Size = new Size(600, 305);
-            plotView3.TabIndex = 9;
-            plotView3.Text = "plotView3";
-            plotView3.ZoomHorizontalCursor = Cursors.SizeWE;
-            plotView3.ZoomRectangleCursor = Cursors.SizeNWSE;
-            plotView3.ZoomVerticalCursor = Cursors.SizeNS;
-            // 
-            // plotView7
-            // 
-            plotView7.BackColor = Color.White;
-            plotView7.Location = new Point(1308, 32);
-            plotView7.Name = "plotView7";
-            plotView7.PanCursor = Cursors.Hand;
-            plotView7.Size = new Size(600, 305);
-            plotView7.TabIndex = 10;
-            plotView7.Text = "plotView4";
-            plotView7.ZoomHorizontalCursor = Cursors.SizeWE;
-            plotView7.ZoomRectangleCursor = Cursors.SizeNWSE;
-            plotView7.ZoomVerticalCursor = Cursors.SizeNS;
-            // 
-            // plotView5
-            // 
-            plotView5.BackColor = Color.White;
-            plotView5.Location = new Point(618, 457);
-            plotView5.Name = "plotView5";
-            plotView5.PanCursor = Cursors.Hand;
-            plotView5.Size = new Size(684, 245);
-            plotView5.TabIndex = 11;
-            plotView5.Text = "plotView5";
-            plotView5.ZoomHorizontalCursor = Cursors.SizeWE;
-            plotView5.ZoomRectangleCursor = Cursors.SizeNWSE;
-            plotView5.ZoomVerticalCursor = Cursors.SizeNS;
-            // 
-            // plotView61
-            // 
-            plotView61.BackColor = Color.White;
-            plotView61.Location = new Point(1308, 343);
-            plotView61.Name = "plotView61";
-            plotView61.PanCursor = Cursors.Hand;
-            plotView61.Size = new Size(600, 305);
-            plotView61.TabIndex = 12;
-            plotView61.Text = "plotView6";
-            plotView61.ZoomHorizontalCursor = Cursors.SizeWE;
-            plotView61.ZoomRectangleCursor = Cursors.SizeNWSE;
-            plotView61.ZoomVerticalCursor = Cursors.SizeNS;
             // 
             // pictureBox1
             // 
@@ -388,9 +277,11 @@
             panel2.Controls.Add(label1);
             panel2.Controls.Add(pictureBox2);
             panel2.Controls.Add(pictureBox1);
-            panel2.Location = new Point(0, 960);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(0, 0);
+            panel2.Margin = new Padding(0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1952, 138);
+            panel2.Size = new Size(900, 46);
             panel2.TabIndex = 14;
             // 
             // pictureBox12
@@ -599,49 +490,198 @@
             pictureBox2.TabIndex = 14;
             pictureBox2.TabStop = false;
             // 
-            // plotView4
+            // tableLayoutPanel1
             // 
-            plotView4.BackColor = Color.White;
-            plotView4.Location = new Point(617, 708);
-            plotView4.Name = "plotView4";
-            plotView4.PanCursor = Cursors.Hand;
-            plotView4.Size = new Size(685, 245);
-            plotView4.TabIndex = 15;
-            plotView4.Text = "plotView7";
-            plotView4.ZoomHorizontalCursor = Cursors.SizeWE;
-            plotView4.ZoomRectangleCursor = Cursors.SizeNWSE;
-            plotView4.ZoomVerticalCursor = Cursors.SizeNS;
+            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel1.AutoSize = true;
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.34F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
+            tableLayoutPanel1.Controls.Add(gMapControl1, 1, 0);
+            tableLayoutPanel1.Controls.Add(plotView5, 1, 1);
+            tableLayoutPanel1.Controls.Add(plotView1, 0, 0);
+            tableLayoutPanel1.Controls.Add(plotView3, 0, 1);
+            tableLayoutPanel1.Controls.Add(plotView7, 0, 2);
+            tableLayoutPanel1.Controls.Add(plotView8, 2, 1);
+            tableLayoutPanel1.Controls.Add(plotView4, 1, 2);
+            tableLayoutPanel1.Controls.Add(plotView61, 2, 2);
+            tableLayoutPanel1.Controls.Add(plotView2, 2, 0);
+            tableLayoutPanel1.Location = new Point(0, 27);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 3;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333359F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel1.Size = new Size(884, 389);
+            tableLayoutPanel1.TabIndex = 17;
+            // 
+            // gMapControl1
+            // 
+            gMapControl1.Bearing = 0F;
+            gMapControl1.CanDragMap = true;
+            gMapControl1.EmptyTileColor = Color.Navy;
+            gMapControl1.GrayScaleMode = false;
+            gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
+            gMapControl1.LevelsKeepInMemory = 5;
+            gMapControl1.Location = new Point(297, 3);
+            gMapControl1.MarkersEnabled = true;
+            gMapControl1.MaxZoom = 2;
+            gMapControl1.MinZoom = 2;
+            gMapControl1.MouseWheelZoomEnabled = true;
+            gMapControl1.MouseWheelZoomType = GMap.NET.MouseWheelZoomType.MousePositionAndCenter;
+            gMapControl1.Name = "gMapControl1";
+            gMapControl1.NegativeMode = false;
+            gMapControl1.PolygonsEnabled = true;
+            gMapControl1.RetryLoadTile = 0;
+            gMapControl1.RoutesEnabled = true;
+            gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
+            gMapControl1.SelectedAreaFillColor = Color.FromArgb(33, 65, 105, 225);
+            gMapControl1.ShowTileGridLines = false;
+            gMapControl1.Size = new Size(126, 94);
+            gMapControl1.TabIndex = 0;
+            gMapControl1.Zoom = 0D;
+            // 
+            // plotView5
+            // 
+            plotView5.BackColor = Color.White;
+            plotView5.Dock = DockStyle.Fill;
+            plotView5.Location = new Point(297, 132);
+            plotView5.Name = "plotView5";
+            plotView5.PanCursor = Cursors.Hand;
+            plotView5.Size = new Size(288, 123);
+            plotView5.TabIndex = 11;
+            plotView5.Text = "plotView5";
+            plotView5.ZoomHorizontalCursor = Cursors.SizeWE;
+            plotView5.ZoomRectangleCursor = Cursors.SizeNWSE;
+            plotView5.ZoomVerticalCursor = Cursors.SizeNS;
+            // 
+            // plotView1
+            // 
+            plotView1.BackColor = Color.White;
+            plotView1.Dock = DockStyle.Fill;
+            plotView1.Location = new Point(3, 3);
+            plotView1.Name = "plotView1";
+            plotView1.PanCursor = Cursors.Hand;
+            plotView1.Size = new Size(288, 123);
+            plotView1.TabIndex = 18;
+            plotView1.Text = "plotView7";
+            plotView1.ZoomHorizontalCursor = Cursors.SizeWE;
+            plotView1.ZoomRectangleCursor = Cursors.SizeNWSE;
+            plotView1.ZoomVerticalCursor = Cursors.SizeNS;
+            // 
+            // plotView3
+            // 
+            plotView3.BackColor = Color.White;
+            plotView3.Dock = DockStyle.Fill;
+            plotView3.ForeColor = Color.Transparent;
+            plotView3.Location = new Point(3, 132);
+            plotView3.Name = "plotView3";
+            plotView3.PanCursor = Cursors.Hand;
+            plotView3.Size = new Size(288, 123);
+            plotView3.TabIndex = 9;
+            plotView3.Text = "plotView3";
+            plotView3.ZoomHorizontalCursor = Cursors.SizeWE;
+            plotView3.ZoomRectangleCursor = Cursors.SizeNWSE;
+            plotView3.ZoomVerticalCursor = Cursors.SizeNS;
+            // 
+            // plotView7
+            // 
+            plotView7.BackColor = Color.White;
+            plotView7.Dock = DockStyle.Fill;
+            plotView7.Location = new Point(3, 261);
+            plotView7.Name = "plotView7";
+            plotView7.PanCursor = Cursors.Hand;
+            plotView7.Size = new Size(288, 125);
+            plotView7.TabIndex = 10;
+            plotView7.Text = "plotView4";
+            plotView7.ZoomHorizontalCursor = Cursors.SizeWE;
+            plotView7.ZoomRectangleCursor = Cursors.SizeNWSE;
+            plotView7.ZoomVerticalCursor = Cursors.SizeNS;
             // 
             // plotView8
             // 
             plotView8.BackColor = Color.White;
-            plotView8.Location = new Point(1308, 654);
+            plotView8.Dock = DockStyle.Fill;
+            plotView8.Location = new Point(591, 132);
             plotView8.Name = "plotView8";
             plotView8.PanCursor = Cursors.Hand;
-            plotView8.Size = new Size(600, 305);
+            plotView8.Size = new Size(290, 123);
             plotView8.TabIndex = 16;
             plotView8.Text = "plotView8";
             plotView8.ZoomHorizontalCursor = Cursors.SizeWE;
             plotView8.ZoomRectangleCursor = Cursors.SizeNWSE;
             plotView8.ZoomVerticalCursor = Cursors.SizeNS;
             // 
+            // plotView4
+            // 
+            plotView4.BackColor = Color.White;
+            plotView4.Dock = DockStyle.Fill;
+            plotView4.Location = new Point(297, 261);
+            plotView4.Name = "plotView4";
+            plotView4.PanCursor = Cursors.Hand;
+            plotView4.Size = new Size(288, 125);
+            plotView4.TabIndex = 15;
+            plotView4.Text = "plotView7";
+            plotView4.ZoomHorizontalCursor = Cursors.SizeWE;
+            plotView4.ZoomRectangleCursor = Cursors.SizeNWSE;
+            plotView4.ZoomVerticalCursor = Cursors.SizeNS;
+            // 
+            // plotView61
+            // 
+            plotView61.BackColor = Color.White;
+            plotView61.Dock = DockStyle.Fill;
+            plotView61.Location = new Point(591, 261);
+            plotView61.Name = "plotView61";
+            plotView61.PanCursor = Cursors.Hand;
+            plotView61.Size = new Size(290, 125);
+            plotView61.TabIndex = 12;
+            plotView61.Text = "plotView6";
+            plotView61.ZoomHorizontalCursor = Cursors.SizeWE;
+            plotView61.ZoomRectangleCursor = Cursors.SizeNWSE;
+            plotView61.ZoomVerticalCursor = Cursors.SizeNS;
+            // 
+            // plotView2
+            // 
+            plotView2.BackColor = Color.White;
+            plotView2.Dock = DockStyle.Fill;
+            plotView2.Location = new Point(591, 3);
+            plotView2.Name = "plotView2";
+            plotView2.PanCursor = Cursors.Hand;
+            plotView2.Size = new Size(290, 123);
+            plotView2.TabIndex = 8;
+            plotView2.Text = "plotView2";
+            plotView2.ZoomHorizontalCursor = Cursors.SizeWE;
+            plotView2.ZoomRectangleCursor = Cursors.SizeNWSE;
+            plotView2.ZoomVerticalCursor = Cursors.SizeNS;
+            // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            tableLayoutPanel2.AutoSize = true;
+            tableLayoutPanel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            tableLayoutPanel2.ColumnCount = 3;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 0F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 0F));
+            tableLayoutPanel2.Controls.Add(panel2, 0, 0);
+            tableLayoutPanel2.Location = new Point(0, 415);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 2;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 0F));
+            tableLayoutPanel2.Size = new Size(900, 46);
+            tableLayoutPanel2.TabIndex = 18;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoScroll = true;
             BackColor = Color.White;
-            ClientSize = new Size(1904, 1009);
-            Controls.Add(plotView8);
-            Controls.Add(plotView4);
-            Controls.Add(panel2);
-            Controls.Add(plotView61);
-            Controls.Add(plotView5);
-            Controls.Add(plotView7);
-            Controls.Add(plotView3);
-            Controls.Add(plotView2);
-            Controls.Add(plotView1);
-            Controls.Add(panel1);
+            ClientSize = new Size(884, 461);
+            Controls.Add(tableLayoutPanel2);
+            Controls.Add(tableLayoutPanel1);
             Controls.Add(menuStrip1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Main";
@@ -649,7 +689,7 @@
             Text = "OnionSAT Ground Station";
             FormClosing += Main_FormClosing;
             Load += Form1_Load;
-            panel1.ResumeLayout(false);
+            Resize += Main_Resize;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -666,23 +706,16 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private GMap.NET.WindowsForms.GMapControl gMapControl1;
-        private Panel panel1;
-        private OxyPlot.WindowsForms.PlotView plotView1;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem fájlToolStripMenuItem;
         private ToolStripMenuItem beállításokToolStripMenuItem;
-        private OxyPlot.WindowsForms.PlotView plotView2;
-        private OxyPlot.WindowsForms.PlotView plotView3;
-        private OxyPlot.WindowsForms.PlotView plotView4;
-        private OxyPlot.WindowsForms.PlotView plotView5;
-        private OxyPlot.WindowsForms.PlotView plotView61;
         private ToolStripMenuItem kapcsolódásToolStripMenuItem;
         private ToolStripMenuItem kapcsolatLétrehozásaToolStripMenuItem;
         private ToolStripMenuItem kapcsolatBontásaToolStripMenuItem;
@@ -692,8 +725,6 @@
         private PictureBox pictureBox1;
         private Panel panel2;
         private PictureBox pictureBox2;
-        private OxyPlot.WindowsForms.PlotView plotView7;
-        private OxyPlot.WindowsForms.PlotView plotView8;
         private ToolStripMenuItem exportálásToolStripMenuItem;
         private ToolStripMenuItem pNGToolStripMenuItem;
         private ToolStripMenuItem hőmérsékletGrafikonToolStripMenuItem;
@@ -723,5 +754,16 @@
         private PictureBox pictureBox12;
         private ToolStripMenuItem információkToolStripMenuItem;
         private ToolStripMenuItem névjegyToolStripMenuItem;
+        private TableLayoutPanel tableLayoutPanel1;
+        private GMap.NET.WindowsForms.GMapControl gMapControl1;
+        private OxyPlot.WindowsForms.PlotView plotView2;
+        private OxyPlot.WindowsForms.PlotView plotView3;
+        private OxyPlot.WindowsForms.PlotView plotView5;
+        private OxyPlot.WindowsForms.PlotView plotView4;
+        private OxyPlot.WindowsForms.PlotView plotView61;
+        private OxyPlot.WindowsForms.PlotView plotView8;
+        private OxyPlot.WindowsForms.PlotView plotView7;
+        private OxyPlot.WindowsForms.PlotView plotView1;
+        private TableLayoutPanel tableLayoutPanel2;
     }
 }
