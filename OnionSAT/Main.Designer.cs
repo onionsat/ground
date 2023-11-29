@@ -107,7 +107,7 @@
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(4, 1, 0, 1);
-            menuStrip1.Size = new Size(884, 24);
+            menuStrip1.Size = new Size(1264, 24);
             menuStrip1.TabIndex = 7;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -257,8 +257,6 @@
             // panel2
             // 
             panel2.BackColor = SystemColors.ControlText;
-            panel2.Controls.Add(pictureBox12);
-            panel2.Controls.Add(pictureBox10);
             panel2.Controls.Add(label8);
             panel2.Controls.Add(pictureBox11);
             panel2.Controls.Add(label7);
@@ -277,18 +275,20 @@
             panel2.Controls.Add(label1);
             panel2.Controls.Add(pictureBox2);
             panel2.Controls.Add(pictureBox1);
+            panel2.Controls.Add(pictureBox10);
+            panel2.Controls.Add(pictureBox12);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 0);
             panel2.Margin = new Padding(0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(900, 46);
+            panel2.Size = new Size(1878, 46);
             panel2.TabIndex = 14;
             // 
             // pictureBox12
             // 
             pictureBox12.BackColor = Color.Transparent;
             pictureBox12.Image = Properties.Resources.chipcad;
-            pictureBox12.Location = new Point(1814, 8);
+            pictureBox12.Location = new Point(1144, 7);
             pictureBox12.Name = "pictureBox12";
             pictureBox12.Size = new Size(96, 34);
             pictureBox12.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -297,9 +297,10 @@
             // 
             // pictureBox10
             // 
+            pictureBox10.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             pictureBox10.BackColor = Color.Transparent;
             pictureBox10.Image = Properties.Resources.pnlkft_verylight;
-            pictureBox10.Location = new Point(1603, -73);
+            pictureBox10.Location = new Point(938, -72);
             pictureBox10.Name = "pictureBox10";
             pictureBox10.Size = new Size(200, 200);
             pictureBox10.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -514,18 +515,19 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333359F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 33.3333321F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel1.Size = new Size(884, 389);
+            tableLayoutPanel1.Size = new Size(1264, 609);
             tableLayoutPanel1.TabIndex = 17;
             // 
             // gMapControl1
             // 
             gMapControl1.Bearing = 0F;
             gMapControl1.CanDragMap = true;
+            gMapControl1.Dock = DockStyle.Fill;
             gMapControl1.EmptyTileColor = Color.Navy;
             gMapControl1.GrayScaleMode = false;
             gMapControl1.HelperLineOption = GMap.NET.WindowsForms.HelperLineOptions.DontShow;
             gMapControl1.LevelsKeepInMemory = 5;
-            gMapControl1.Location = new Point(297, 3);
+            gMapControl1.Location = new Point(424, 3);
             gMapControl1.MarkersEnabled = true;
             gMapControl1.MaxZoom = 2;
             gMapControl1.MinZoom = 2;
@@ -539,7 +541,7 @@
             gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             gMapControl1.SelectedAreaFillColor = Color.FromArgb(33, 65, 105, 225);
             gMapControl1.ShowTileGridLines = false;
-            gMapControl1.Size = new Size(126, 94);
+            gMapControl1.Size = new Size(415, 197);
             gMapControl1.TabIndex = 0;
             gMapControl1.Zoom = 0D;
             // 
@@ -547,10 +549,10 @@
             // 
             plotView5.BackColor = Color.White;
             plotView5.Dock = DockStyle.Fill;
-            plotView5.Location = new Point(297, 132);
+            plotView5.Location = new Point(424, 206);
             plotView5.Name = "plotView5";
             plotView5.PanCursor = Cursors.Hand;
-            plotView5.Size = new Size(288, 123);
+            plotView5.Size = new Size(415, 197);
             plotView5.TabIndex = 11;
             plotView5.Text = "plotView5";
             plotView5.ZoomHorizontalCursor = Cursors.SizeWE;
@@ -564,7 +566,7 @@
             plotView1.Location = new Point(3, 3);
             plotView1.Name = "plotView1";
             plotView1.PanCursor = Cursors.Hand;
-            plotView1.Size = new Size(288, 123);
+            plotView1.Size = new Size(415, 197);
             plotView1.TabIndex = 18;
             plotView1.Text = "plotView7";
             plotView1.ZoomHorizontalCursor = Cursors.SizeWE;
@@ -576,10 +578,10 @@
             plotView3.BackColor = Color.White;
             plotView3.Dock = DockStyle.Fill;
             plotView3.ForeColor = Color.Transparent;
-            plotView3.Location = new Point(3, 132);
+            plotView3.Location = new Point(3, 206);
             plotView3.Name = "plotView3";
             plotView3.PanCursor = Cursors.Hand;
-            plotView3.Size = new Size(288, 123);
+            plotView3.Size = new Size(415, 197);
             plotView3.TabIndex = 9;
             plotView3.Text = "plotView3";
             plotView3.ZoomHorizontalCursor = Cursors.SizeWE;
@@ -590,10 +592,10 @@
             // 
             plotView7.BackColor = Color.White;
             plotView7.Dock = DockStyle.Fill;
-            plotView7.Location = new Point(3, 261);
+            plotView7.Location = new Point(3, 409);
             plotView7.Name = "plotView7";
             plotView7.PanCursor = Cursors.Hand;
-            plotView7.Size = new Size(288, 125);
+            plotView7.Size = new Size(415, 197);
             plotView7.TabIndex = 10;
             plotView7.Text = "plotView4";
             plotView7.ZoomHorizontalCursor = Cursors.SizeWE;
@@ -604,10 +606,10 @@
             // 
             plotView8.BackColor = Color.White;
             plotView8.Dock = DockStyle.Fill;
-            plotView8.Location = new Point(591, 132);
+            plotView8.Location = new Point(845, 206);
             plotView8.Name = "plotView8";
             plotView8.PanCursor = Cursors.Hand;
-            plotView8.Size = new Size(290, 123);
+            plotView8.Size = new Size(416, 197);
             plotView8.TabIndex = 16;
             plotView8.Text = "plotView8";
             plotView8.ZoomHorizontalCursor = Cursors.SizeWE;
@@ -618,10 +620,10 @@
             // 
             plotView4.BackColor = Color.White;
             plotView4.Dock = DockStyle.Fill;
-            plotView4.Location = new Point(297, 261);
+            plotView4.Location = new Point(424, 409);
             plotView4.Name = "plotView4";
             plotView4.PanCursor = Cursors.Hand;
-            plotView4.Size = new Size(288, 125);
+            plotView4.Size = new Size(415, 197);
             plotView4.TabIndex = 15;
             plotView4.Text = "plotView7";
             plotView4.ZoomHorizontalCursor = Cursors.SizeWE;
@@ -632,10 +634,10 @@
             // 
             plotView61.BackColor = Color.White;
             plotView61.Dock = DockStyle.Fill;
-            plotView61.Location = new Point(591, 261);
+            plotView61.Location = new Point(845, 409);
             plotView61.Name = "plotView61";
             plotView61.PanCursor = Cursors.Hand;
-            plotView61.Size = new Size(290, 125);
+            plotView61.Size = new Size(416, 197);
             plotView61.TabIndex = 12;
             plotView61.Text = "plotView6";
             plotView61.ZoomHorizontalCursor = Cursors.SizeWE;
@@ -646,10 +648,10 @@
             // 
             plotView2.BackColor = Color.White;
             plotView2.Dock = DockStyle.Fill;
-            plotView2.Location = new Point(591, 3);
+            plotView2.Location = new Point(845, 3);
             plotView2.Name = "plotView2";
             plotView2.PanCursor = Cursors.Hand;
-            plotView2.Size = new Size(290, 123);
+            plotView2.Size = new Size(416, 197);
             plotView2.TabIndex = 8;
             plotView2.Text = "plotView2";
             plotView2.ZoomHorizontalCursor = Cursors.SizeWE;
@@ -659,19 +661,18 @@
             // tableLayoutPanel2
             // 
             tableLayoutPanel2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            tableLayoutPanel2.AutoSize = true;
             tableLayoutPanel2.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             tableLayoutPanel2.ColumnCount = 3;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 0F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 0F));
             tableLayoutPanel2.Controls.Add(panel2, 0, 0);
-            tableLayoutPanel2.Location = new Point(0, 415);
+            tableLayoutPanel2.Location = new Point(0, 635);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 2;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 0F));
-            tableLayoutPanel2.Size = new Size(900, 46);
+            tableLayoutPanel2.Size = new Size(1878, 46);
             tableLayoutPanel2.TabIndex = 18;
             // 
             // Main
@@ -679,7 +680,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(884, 461);
+            ClientSize = new Size(1264, 681);
             Controls.Add(tableLayoutPanel2);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(menuStrip1);

@@ -326,6 +326,9 @@ namespace OnionSAT
             netchecktimer.Interval = 5000;
             netchecktimer.Elapsed += NetworkCheck;
 
+            panel2.Width = this.Width;
+            pictureBox10.Location = new Point(Convert.ToInt32(this.Width - 320), -72);
+            pictureBox12.Location = new Point(Convert.ToInt32(this.Width - 120), 7);
         }
 
         int errors = 0;
@@ -1179,6 +1182,8 @@ namespace OnionSAT
         private void Main_Resize(object sender, EventArgs e)
         {
             panel2.Width = this.Width;
+            pictureBox10.Location = new Point(Convert.ToInt32(this.Width - 320), -72);
+            pictureBox12.Location = new Point(Convert.ToInt32(this.Width - 120), 7);
         }
     }
 }
