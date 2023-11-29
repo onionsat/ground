@@ -51,8 +51,6 @@
             névjegyToolStripMenuItem = new ToolStripMenuItem();
             pictureBox1 = new PictureBox();
             panel2 = new Panel();
-            pictureBox12 = new PictureBox();
-            pictureBox10 = new PictureBox();
             label8 = new Label();
             pictureBox11 = new PictureBox();
             label7 = new Label();
@@ -70,6 +68,8 @@
             label2 = new Label();
             label1 = new Label();
             pictureBox2 = new PictureBox();
+            pictureBox10 = new PictureBox();
+            pictureBox12 = new PictureBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
             plotView5 = new OxyPlot.WindowsForms.PlotView();
@@ -84,8 +84,6 @@
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox12).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox11).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
@@ -95,6 +93,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox12).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
@@ -284,29 +284,6 @@
             panel2.Size = new Size(1878, 46);
             panel2.TabIndex = 14;
             // 
-            // pictureBox12
-            // 
-            pictureBox12.BackColor = Color.Transparent;
-            pictureBox12.Image = Properties.Resources.chipcad;
-            pictureBox12.Location = new Point(1144, 7);
-            pictureBox12.Name = "pictureBox12";
-            pictureBox12.Size = new Size(96, 34);
-            pictureBox12.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox12.TabIndex = 26;
-            pictureBox12.TabStop = false;
-            // 
-            // pictureBox10
-            // 
-            pictureBox10.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pictureBox10.BackColor = Color.Transparent;
-            pictureBox10.Image = Properties.Resources.pnlkft_verylight;
-            pictureBox10.Location = new Point(938, -72);
-            pictureBox10.Name = "pictureBox10";
-            pictureBox10.Size = new Size(200, 200);
-            pictureBox10.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox10.TabIndex = 17;
-            pictureBox10.TabStop = false;
-            // 
             // label8
             // 
             label8.AutoSize = true;
@@ -490,6 +467,29 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 14;
             pictureBox2.TabStop = false;
+            // 
+            // pictureBox10
+            // 
+            pictureBox10.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox10.BackColor = Color.Transparent;
+            pictureBox10.Image = Properties.Resources.pnlkft_verylight;
+            pictureBox10.Location = new Point(959, -75);
+            pictureBox10.Name = "pictureBox10";
+            pictureBox10.Size = new Size(200, 200);
+            pictureBox10.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox10.TabIndex = 17;
+            pictureBox10.TabStop = false;
+            // 
+            // pictureBox12
+            // 
+            pictureBox12.BackColor = Color.Transparent;
+            pictureBox12.Image = Properties.Resources.chipcad;
+            pictureBox12.Location = new Point(1165, 7);
+            pictureBox12.Name = "pictureBox12";
+            pictureBox12.Size = new Size(96, 34);
+            pictureBox12.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox12.TabIndex = 26;
+            pictureBox12.TabStop = false;
             // 
             // tableLayoutPanel1
             // 
@@ -696,8 +696,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox12).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox10).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox11).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox9).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
@@ -707,6 +705,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox10).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox12).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);

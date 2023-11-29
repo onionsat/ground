@@ -327,7 +327,7 @@ namespace OnionSAT
             netchecktimer.Elapsed += NetworkCheck;
 
             panel2.Width = this.Width;
-            pictureBox10.Location = new Point(Convert.ToInt32(this.Width - 320), -72);
+            pictureBox10.Location = new Point(Convert.ToInt32(this.Width - 320), -75);
             pictureBox12.Location = new Point(Convert.ToInt32(this.Width - 120), 7);
         }
 
@@ -1181,8 +1181,9 @@ namespace OnionSAT
 
         private void Main_Resize(object sender, EventArgs e)
         {
+            tableLayoutPanel2.Width = this.Width;
             panel2.Width = this.Width;
-            pictureBox10.Location = new Point(Convert.ToInt32(this.Width - 320), -72);
+            pictureBox10.Location = new Point(Convert.ToInt32(this.Width - 320), -75);
             pictureBox12.Location = new Point(Convert.ToInt32(this.Width - 120), 7);
         }
     }
