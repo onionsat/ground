@@ -72,14 +72,14 @@
             pictureBox12 = new PictureBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
-            plotView5 = new OxyPlot.WindowsForms.PlotView();
-            plotView1 = new OxyPlot.WindowsForms.PlotView();
-            plotView3 = new OxyPlot.WindowsForms.PlotView();
-            plotView7 = new OxyPlot.WindowsForms.PlotView();
-            plotView8 = new OxyPlot.WindowsForms.PlotView();
-            plotView4 = new OxyPlot.WindowsForms.PlotView();
-            plotView61 = new OxyPlot.WindowsForms.PlotView();
-            plotView2 = new OxyPlot.WindowsForms.PlotView();
+            gyorsulasMertGrafikon = new OxyPlot.WindowsForms.PlotView();
+            homersekletGrafikon = new OxyPlot.WindowsForms.PlotView();
+            legnyomasGrafikon = new OxyPlot.WindowsForms.PlotView();
+            magassagGrafikon = new OxyPlot.WindowsForms.PlotView();
+            metanGrafikon = new OxyPlot.WindowsForms.PlotView();
+            gyorsulasGrafikon = new OxyPlot.WindowsForms.PlotView();
+            szendioxidGrafikon = new OxyPlot.WindowsForms.PlotView();
+            paratartalomGrafikon = new OxyPlot.WindowsForms.PlotView();
             tableLayoutPanel2 = new TableLayoutPanel();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -500,14 +500,14 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.34F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
             tableLayoutPanel1.Controls.Add(gMapControl1, 1, 0);
-            tableLayoutPanel1.Controls.Add(plotView5, 1, 1);
-            tableLayoutPanel1.Controls.Add(plotView1, 0, 0);
-            tableLayoutPanel1.Controls.Add(plotView3, 0, 1);
-            tableLayoutPanel1.Controls.Add(plotView7, 0, 2);
-            tableLayoutPanel1.Controls.Add(plotView8, 2, 1);
-            tableLayoutPanel1.Controls.Add(plotView4, 1, 2);
-            tableLayoutPanel1.Controls.Add(plotView61, 2, 2);
-            tableLayoutPanel1.Controls.Add(plotView2, 2, 0);
+            tableLayoutPanel1.Controls.Add(gyorsulasMertGrafikon, 1, 1);
+            tableLayoutPanel1.Controls.Add(homersekletGrafikon, 0, 0);
+            tableLayoutPanel1.Controls.Add(legnyomasGrafikon, 0, 1);
+            tableLayoutPanel1.Controls.Add(magassagGrafikon, 0, 2);
+            tableLayoutPanel1.Controls.Add(metanGrafikon, 2, 1);
+            tableLayoutPanel1.Controls.Add(gyorsulasGrafikon, 1, 2);
+            tableLayoutPanel1.Controls.Add(szendioxidGrafikon, 2, 2);
+            tableLayoutPanel1.Controls.Add(paratartalomGrafikon, 2, 0);
             tableLayoutPanel1.Location = new Point(0, 27);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
@@ -545,118 +545,118 @@
             gMapControl1.TabIndex = 0;
             gMapControl1.Zoom = 0D;
             // 
-            // plotView5
+            // gyorsulasMertGrafikon
             // 
-            plotView5.BackColor = Color.White;
-            plotView5.Dock = DockStyle.Fill;
-            plotView5.Location = new Point(424, 206);
-            plotView5.Name = "plotView5";
-            plotView5.PanCursor = Cursors.Hand;
-            plotView5.Size = new Size(415, 197);
-            plotView5.TabIndex = 11;
-            plotView5.Text = "plotView5";
-            plotView5.ZoomHorizontalCursor = Cursors.SizeWE;
-            plotView5.ZoomRectangleCursor = Cursors.SizeNWSE;
-            plotView5.ZoomVerticalCursor = Cursors.SizeNS;
+            gyorsulasMertGrafikon.BackColor = Color.White;
+            gyorsulasMertGrafikon.Dock = DockStyle.Fill;
+            gyorsulasMertGrafikon.Location = new Point(424, 206);
+            gyorsulasMertGrafikon.Name = "gyorsulasMertGrafikon";
+            gyorsulasMertGrafikon.PanCursor = Cursors.Hand;
+            gyorsulasMertGrafikon.Size = new Size(415, 197);
+            gyorsulasMertGrafikon.TabIndex = 11;
+            gyorsulasMertGrafikon.Text = "plotView5";
+            gyorsulasMertGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
+            gyorsulasMertGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
+            gyorsulasMertGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
-            // plotView1
+            // homersekletGrafikon
             // 
-            plotView1.BackColor = Color.White;
-            plotView1.Dock = DockStyle.Fill;
-            plotView1.Location = new Point(3, 3);
-            plotView1.Name = "plotView1";
-            plotView1.PanCursor = Cursors.Hand;
-            plotView1.Size = new Size(415, 197);
-            plotView1.TabIndex = 18;
-            plotView1.Text = "plotView7";
-            plotView1.ZoomHorizontalCursor = Cursors.SizeWE;
-            plotView1.ZoomRectangleCursor = Cursors.SizeNWSE;
-            plotView1.ZoomVerticalCursor = Cursors.SizeNS;
+            homersekletGrafikon.BackColor = Color.White;
+            homersekletGrafikon.Dock = DockStyle.Fill;
+            homersekletGrafikon.Location = new Point(3, 3);
+            homersekletGrafikon.Name = "homersekletGrafikon";
+            homersekletGrafikon.PanCursor = Cursors.Hand;
+            homersekletGrafikon.Size = new Size(415, 197);
+            homersekletGrafikon.TabIndex = 18;
+            homersekletGrafikon.Text = "plotView7";
+            homersekletGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
+            homersekletGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
+            homersekletGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
-            // plotView3
+            // legnyomasGrafikon
             // 
-            plotView3.BackColor = Color.White;
-            plotView3.Dock = DockStyle.Fill;
-            plotView3.ForeColor = Color.Transparent;
-            plotView3.Location = new Point(3, 206);
-            plotView3.Name = "plotView3";
-            plotView3.PanCursor = Cursors.Hand;
-            plotView3.Size = new Size(415, 197);
-            plotView3.TabIndex = 9;
-            plotView3.Text = "plotView3";
-            plotView3.ZoomHorizontalCursor = Cursors.SizeWE;
-            plotView3.ZoomRectangleCursor = Cursors.SizeNWSE;
-            plotView3.ZoomVerticalCursor = Cursors.SizeNS;
+            legnyomasGrafikon.BackColor = Color.White;
+            legnyomasGrafikon.Dock = DockStyle.Fill;
+            legnyomasGrafikon.ForeColor = Color.Transparent;
+            legnyomasGrafikon.Location = new Point(3, 206);
+            legnyomasGrafikon.Name = "legnyomasGrafikon";
+            legnyomasGrafikon.PanCursor = Cursors.Hand;
+            legnyomasGrafikon.Size = new Size(415, 197);
+            legnyomasGrafikon.TabIndex = 9;
+            legnyomasGrafikon.Text = "plotView3";
+            legnyomasGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
+            legnyomasGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
+            legnyomasGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
-            // plotView7
+            // magassagGrafikon
             // 
-            plotView7.BackColor = Color.White;
-            plotView7.Dock = DockStyle.Fill;
-            plotView7.Location = new Point(3, 409);
-            plotView7.Name = "plotView7";
-            plotView7.PanCursor = Cursors.Hand;
-            plotView7.Size = new Size(415, 197);
-            plotView7.TabIndex = 10;
-            plotView7.Text = "plotView4";
-            plotView7.ZoomHorizontalCursor = Cursors.SizeWE;
-            plotView7.ZoomRectangleCursor = Cursors.SizeNWSE;
-            plotView7.ZoomVerticalCursor = Cursors.SizeNS;
+            magassagGrafikon.BackColor = Color.White;
+            magassagGrafikon.Dock = DockStyle.Fill;
+            magassagGrafikon.Location = new Point(3, 409);
+            magassagGrafikon.Name = "magassagGrafikon";
+            magassagGrafikon.PanCursor = Cursors.Hand;
+            magassagGrafikon.Size = new Size(415, 197);
+            magassagGrafikon.TabIndex = 10;
+            magassagGrafikon.Text = "plotView4";
+            magassagGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
+            magassagGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
+            magassagGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
-            // plotView8
+            // metanGrafikon
             // 
-            plotView8.BackColor = Color.White;
-            plotView8.Dock = DockStyle.Fill;
-            plotView8.Location = new Point(845, 206);
-            plotView8.Name = "plotView8";
-            plotView8.PanCursor = Cursors.Hand;
-            plotView8.Size = new Size(416, 197);
-            plotView8.TabIndex = 16;
-            plotView8.Text = "plotView8";
-            plotView8.ZoomHorizontalCursor = Cursors.SizeWE;
-            plotView8.ZoomRectangleCursor = Cursors.SizeNWSE;
-            plotView8.ZoomVerticalCursor = Cursors.SizeNS;
+            metanGrafikon.BackColor = Color.White;
+            metanGrafikon.Dock = DockStyle.Fill;
+            metanGrafikon.Location = new Point(845, 206);
+            metanGrafikon.Name = "metanGrafikon";
+            metanGrafikon.PanCursor = Cursors.Hand;
+            metanGrafikon.Size = new Size(416, 197);
+            metanGrafikon.TabIndex = 16;
+            metanGrafikon.Text = "plotView8";
+            metanGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
+            metanGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
+            metanGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
-            // plotView4
+            // gyorsulasGrafikon
             // 
-            plotView4.BackColor = Color.White;
-            plotView4.Dock = DockStyle.Fill;
-            plotView4.Location = new Point(424, 409);
-            plotView4.Name = "plotView4";
-            plotView4.PanCursor = Cursors.Hand;
-            plotView4.Size = new Size(415, 197);
-            plotView4.TabIndex = 15;
-            plotView4.Text = "plotView7";
-            plotView4.ZoomHorizontalCursor = Cursors.SizeWE;
-            plotView4.ZoomRectangleCursor = Cursors.SizeNWSE;
-            plotView4.ZoomVerticalCursor = Cursors.SizeNS;
+            gyorsulasGrafikon.BackColor = Color.White;
+            gyorsulasGrafikon.Dock = DockStyle.Fill;
+            gyorsulasGrafikon.Location = new Point(424, 409);
+            gyorsulasGrafikon.Name = "gyorsulasGrafikon";
+            gyorsulasGrafikon.PanCursor = Cursors.Hand;
+            gyorsulasGrafikon.Size = new Size(415, 197);
+            gyorsulasGrafikon.TabIndex = 15;
+            gyorsulasGrafikon.Text = "plotView7";
+            gyorsulasGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
+            gyorsulasGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
+            gyorsulasGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
-            // plotView61
+            // szendioxidGrafikon
             // 
-            plotView61.BackColor = Color.White;
-            plotView61.Dock = DockStyle.Fill;
-            plotView61.Location = new Point(845, 409);
-            plotView61.Name = "plotView61";
-            plotView61.PanCursor = Cursors.Hand;
-            plotView61.Size = new Size(416, 197);
-            plotView61.TabIndex = 12;
-            plotView61.Text = "plotView6";
-            plotView61.ZoomHorizontalCursor = Cursors.SizeWE;
-            plotView61.ZoomRectangleCursor = Cursors.SizeNWSE;
-            plotView61.ZoomVerticalCursor = Cursors.SizeNS;
+            szendioxidGrafikon.BackColor = Color.White;
+            szendioxidGrafikon.Dock = DockStyle.Fill;
+            szendioxidGrafikon.Location = new Point(845, 409);
+            szendioxidGrafikon.Name = "szendioxidGrafikon";
+            szendioxidGrafikon.PanCursor = Cursors.Hand;
+            szendioxidGrafikon.Size = new Size(416, 197);
+            szendioxidGrafikon.TabIndex = 12;
+            szendioxidGrafikon.Text = "plotView6";
+            szendioxidGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
+            szendioxidGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
+            szendioxidGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
-            // plotView2
+            // paratartalomGrafikon
             // 
-            plotView2.BackColor = Color.White;
-            plotView2.Dock = DockStyle.Fill;
-            plotView2.Location = new Point(845, 3);
-            plotView2.Name = "plotView2";
-            plotView2.PanCursor = Cursors.Hand;
-            plotView2.Size = new Size(416, 197);
-            plotView2.TabIndex = 8;
-            plotView2.Text = "plotView2";
-            plotView2.ZoomHorizontalCursor = Cursors.SizeWE;
-            plotView2.ZoomRectangleCursor = Cursors.SizeNWSE;
-            plotView2.ZoomVerticalCursor = Cursors.SizeNS;
+            paratartalomGrafikon.BackColor = Color.White;
+            paratartalomGrafikon.Dock = DockStyle.Fill;
+            paratartalomGrafikon.Location = new Point(845, 3);
+            paratartalomGrafikon.Name = "paratartalomGrafikon";
+            paratartalomGrafikon.PanCursor = Cursors.Hand;
+            paratartalomGrafikon.Size = new Size(416, 197);
+            paratartalomGrafikon.TabIndex = 8;
+            paratartalomGrafikon.Text = "plotView2";
+            paratartalomGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
+            paratartalomGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
+            paratartalomGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
             // tableLayoutPanel2
             // 
@@ -757,14 +757,14 @@
         private ToolStripMenuItem névjegyToolStripMenuItem;
         private TableLayoutPanel tableLayoutPanel1;
         private GMap.NET.WindowsForms.GMapControl gMapControl1;
-        private OxyPlot.WindowsForms.PlotView plotView2;
-        private OxyPlot.WindowsForms.PlotView plotView3;
-        private OxyPlot.WindowsForms.PlotView plotView5;
-        private OxyPlot.WindowsForms.PlotView plotView4;
-        private OxyPlot.WindowsForms.PlotView plotView61;
-        private OxyPlot.WindowsForms.PlotView plotView8;
-        private OxyPlot.WindowsForms.PlotView plotView7;
-        private OxyPlot.WindowsForms.PlotView plotView1;
+        private OxyPlot.WindowsForms.PlotView paratartalomGrafikon;
+        private OxyPlot.WindowsForms.PlotView legnyomasGrafikon;
+        private OxyPlot.WindowsForms.PlotView gyorsulasMertGrafikon;
+        private OxyPlot.WindowsForms.PlotView gyorsulasGrafikon;
+        private OxyPlot.WindowsForms.PlotView szendioxidGrafikon;
+        private OxyPlot.WindowsForms.PlotView metanGrafikon;
+        private OxyPlot.WindowsForms.PlotView magassagGrafikon;
+        private OxyPlot.WindowsForms.PlotView homersekletGrafikon;
         private TableLayoutPanel tableLayoutPanel2;
     }
 }

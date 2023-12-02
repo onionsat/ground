@@ -33,9 +33,9 @@ namespace OnionSAT
         String Filepath = "";
         static readonly String Errorpath = Path.Combine(specificFolder, "error.txt");
         String Apikey = "", Apiendpoint = "";
-        private LineSeries temperatureSeries, humiditySeries, pressureSeries, accelerationSeries, accelerationRealSeries, accelerationRealSeries2, accelerationRealSeries3, altitudeSeries, accelerationSeries2, accelerationSeries3;
+        private LineSeries temperatureSeries, humiditySeries, pressureSeries, accelerationSeries, accelerationRealSeries, accelerationRealSeries2, accelerationRealSeries3, altitudeSeries, accelerationSeries2, accelerationSeries3, metanSeries;
         private static readonly HttpClient client = new();
-        PlotModel plotModel, plotModel2, plotModel3, plotModel4, plotModel5, plotModel6;
+        PlotModel plotModel, plotModel2, plotModel3, plotModel4, plotModel5, plotModel6, metanModel;
 
         public Main()
         {
@@ -54,7 +54,7 @@ namespace OnionSAT
               Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
             },
             new LinearAxis {
-              Position = AxisPosition.Left, Title = "Hõmérséklet (Celsius)"
+              Position = AxisPosition.Left, Title = "°C"
             }
           },
             };
@@ -63,7 +63,7 @@ namespace OnionSAT
             plotModel.Series.Add(temperatureSeries);
 
             // Állítsuk be a PlotModel-t a PlotView-ban
-            plotView1.Model = plotModel;
+            homersekletGrafikon.Model = plotModel;
 
             pressureSeries = new LineSeries
             {
@@ -79,7 +79,7 @@ namespace OnionSAT
               Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
             },
             new LinearAxis {
-              Position = AxisPosition.Left, Title = "Relatív páratartalom (%)"
+              Position = AxisPosition.Left, Title = "%"
             }
           },
             };
@@ -88,7 +88,7 @@ namespace OnionSAT
             plotModel2.Series.Add(pressureSeries);
 
             // Állítsuk be a PlotModel-t a PlotView-ban
-            plotView2.Model = plotModel2;
+            paratartalomGrafikon.Model = plotModel2;
 
             humiditySeries = new LineSeries
             {
@@ -104,7 +104,7 @@ namespace OnionSAT
               Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
             },
             new LinearAxis {
-              Position = AxisPosition.Left, Title = "Légnyomás (hPa)"
+              Position = AxisPosition.Left, Title = "hPa"
             }
           },
             };
@@ -113,7 +113,7 @@ namespace OnionSAT
             plotModel3.Series.Add(humiditySeries);
 
             // Állítsuk be a PlotModel-t a PlotView-ban
-            plotView3.Model = plotModel3;
+            legnyomasGrafikon.Model = plotModel3;
 
             accelerationRealSeries = new LineSeries
             {
@@ -150,7 +150,7 @@ namespace OnionSAT
             plotModel4.Series.Add(accelerationRealSeries3);
 
             // Állítsuk be a PlotModel-t a PlotView-ban
-            plotView4.Model = plotModel4;
+            gyorsulasGrafikon.Model = plotModel4;
 
             accelerationSeries = new LineSeries
             {
@@ -187,7 +187,7 @@ namespace OnionSAT
             plotModel5.Series.Add(accelerationSeries3);
 
             // Állítsuk be a PlotModel-t a PlotView-ban
-            plotView5.Model = plotModel5;
+            gyorsulasMertGrafikon.Model = plotModel5;
 
             altitudeSeries = new LineSeries
             {
@@ -212,7 +212,36 @@ namespace OnionSAT
             plotModel6.Series.Add(altitudeSeries);
 
             // Állítsuk be a PlotModel-t a PlotView-ban
-            plotView7.Model = plotModel6;
+            magassagGrafikon.Model = plotModel6;
+
+
+
+
+
+            metanSeries = new LineSeries
+            {
+                Title = "Metán"
+            };
+
+            // Hozz létre egy PlotModel-t
+            metanModel = new PlotModel
+            {
+                Title = "Metán",
+                Axes = {
+            new DateTimeAxis {
+              Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
+            },
+            new LinearAxis {
+              Position = AxisPosition.Left, Title = "ppm"
+            }
+          },
+            };
+
+            // Adjuk hozzá a LineSeries-t a PlotModel-hez
+            metanModel.Series.Add(metanSeries);
+
+            // Állítsuk be a PlotModel-t a PlotView-ban
+            metanGrafikon.Model = metanModel;
         }
 
         public static DateTime JavaTimeStampToDateTime(double javaTimeStamp)
@@ -230,7 +259,7 @@ namespace OnionSAT
             temperatureSeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), homerseklet));
 
             // Diagram frissítése
-            plotView1.InvalidatePlot(true);
+            homersekletGrafikon.InvalidatePlot(true);
         }
 
         private void UpdateHumidityGraph(string Temp, long Timestamp)
@@ -240,7 +269,7 @@ namespace OnionSAT
             humiditySeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), paratartalom));
 
             // Diagram frissítése
-            plotView2.InvalidatePlot(true);
+            paratartalomGrafikon.InvalidatePlot(true);
         }
 
         private void UpdatePressureGraph(string Temp, long Timestamp)
@@ -250,7 +279,7 @@ namespace OnionSAT
             pressureSeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), paratartalom));
 
             // Diagram frissítése
-            plotView3.InvalidatePlot(true);
+            legnyomasGrafikon.InvalidatePlot(true);
         }
 
         private void UpdateAltitudeGraph(string Temp, long Timestamp)
@@ -260,7 +289,7 @@ namespace OnionSAT
             altitudeSeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), magassag));
 
             // Diagram frissítése
-            plotView7.InvalidatePlot(true);
+            magassagGrafikon.InvalidatePlot(true);
         }
 
         private void UpdateAccelRealGraph(string gx, string gy, string gz, long Timestamp)
@@ -274,7 +303,7 @@ namespace OnionSAT
             accelerationRealSeries3.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), z));
 
             // Diagram frissítése
-            plotView4.InvalidatePlot(true);
+            gyorsulasGrafikon.InvalidatePlot(true);
         }
 
         private void UpdateAccelGraph(string gx, string gy, string gz, long Timestamp)
@@ -288,7 +317,7 @@ namespace OnionSAT
             accelerationSeries3.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), z));
 
             // Diagram frissítése
-            plotView5.InvalidatePlot(true);
+            gyorsulasMertGrafikon.InvalidatePlot(true);
         }
 
         GMapOverlay o = new("o");
@@ -936,12 +965,12 @@ namespace OnionSAT
             altitudeSeries.Points.Clear();
             pressureSeries.Points.Clear();
 
-            plotView7.InvalidatePlot(true);
-            plotView5.InvalidatePlot(true);
-            plotView4.InvalidatePlot(true);
-            plotView3.InvalidatePlot(true);
-            plotView2.InvalidatePlot(true);
-            plotView1.InvalidatePlot(true);
+            magassagGrafikon.InvalidatePlot(true);
+            gyorsulasMertGrafikon.InvalidatePlot(true);
+            gyorsulasGrafikon.InvalidatePlot(true);
+            legnyomasGrafikon.InvalidatePlot(true);
+            paratartalomGrafikon.InvalidatePlot(true);
+            homersekletGrafikon.InvalidatePlot(true);
         }
 
         private void HõmérsékletGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
