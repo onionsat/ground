@@ -22,6 +22,7 @@ using System.Diagnostics;
 using System.Timers;
 using System.Threading;
 using Microsoft.Toolkit.Uwp.Notifications;
+using System.Text;
 
 namespace OnionSAT
 {
@@ -506,6 +507,30 @@ namespace OnionSAT
             }
         }
 
+        static string HexToAscii(string hexString)
+        {
+            // Ellenõrizzük, hogy a hexadecimális karakterlánc hossza páros
+            if (hexString.Length % 2 == 0)
+            {
+                // Hexadecimális karaktereket byte-okká alakítjuk
+                byte[] bytes = new byte[hexString.Length / 2];
+                for (int i = 0; i < hexString.Length; i += 2)
+                {
+                    bytes[i / 2] = Convert.ToByte(hexString.Substring(i, 2), 16);
+                }
+
+                // Byte-okat olvasható szöveggé alakítjuk
+                string asciiText = Encoding.ASCII.GetString(bytes);
+
+                return asciiText;
+            } else
+            {
+                return "";
+            }
+
+            
+        }
+
         int receivedpackets = 0;
         int uploadedpackets = 0;
         int lastsend = 0;
@@ -517,9 +542,16 @@ namespace OnionSAT
                 SerialPort comm = (SerialPort)sender;
                 if (comm.IsOpen)
                 {
-                    data = comm.ReadLine().Replace("\r\n", "");
+                    String rawdata = comm.ReadLine();
+                    if (rawdata.Contains("radio_rx"))
+                    {
+                        
+                        data = HexToAscii(rawdata.Replace("radio_rx", "").Replace(" ", "").Replace("\n", "").Replace("\r", ""));
+                    }
+                    
+                    //MessageBox.Show(comm.ReadLine());
 
-                    if (data.Contains('|'))
+                    if (data.Contains('|') && rawdata.Contains("radio_rx"))
                     {
                         var Tstamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
                         BuildFromData(data, Tstamp);
@@ -583,7 +615,7 @@ namespace OnionSAT
             {
                 try
                 {
-                    Port_ErrorReceived(null, null);
+                    //Port_ErrorReceived(null, null);
                     var Tstamp = GetTimestamp(DateTime.Now);
                     if (Errorpath != "")
                     {
@@ -835,7 +867,6 @@ namespace OnionSAT
                 serialPort.Open();
                 serialPort.DataReceived += new SerialDataReceivedEventHandler(Port_DataReceived);
                 serialPort.ErrorReceived += new SerialErrorReceivedEventHandler(Port_ErrorReceived);
-
                 new ToastContentBuilder()
                   .AddText("Kapcsolat")
                   .AddText("A soros kapcsolat sikeresen felépült.")
@@ -844,6 +875,8 @@ namespace OnionSAT
                 timer.Start();
                 globtimer.Start();
                 globstopwatch.Restart();
+
+                serialPort.WriteLine("radio rx 0\r\n");
             }
             catch (Exception ex)
             {
