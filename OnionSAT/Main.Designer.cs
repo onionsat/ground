@@ -81,6 +81,7 @@
             szendioxidGrafikon = new OxyPlot.WindowsForms.PlotView();
             paratartalomGrafikon = new OxyPlot.WindowsForms.PlotView();
             tableLayoutPanel2 = new TableLayoutPanel();
+            loRaBeállításokToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -113,7 +114,7 @@
             // 
             // fájlToolStripMenuItem
             // 
-            fájlToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kapcsolódásToolStripMenuItem, beállításokToolStripMenuItem });
+            fájlToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kapcsolódásToolStripMenuItem, beállításokToolStripMenuItem, loRaBeállításokToolStripMenuItem });
             fájlToolStripMenuItem.Name = "fájlToolStripMenuItem";
             fájlToolStripMenuItem.Size = new Size(70, 22);
             fájlToolStripMenuItem.Text = "Kapcsolat";
@@ -122,7 +123,7 @@
             // 
             kapcsolódásToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kapcsolatLétrehozásaToolStripMenuItem, kapcsolatBontásaToolStripMenuItem });
             kapcsolódásToolStripMenuItem.Name = "kapcsolódásToolStripMenuItem";
-            kapcsolódásToolStripMenuItem.Size = new Size(140, 22);
+            kapcsolódásToolStripMenuItem.Size = new Size(180, 22);
             kapcsolódásToolStripMenuItem.Text = "Kapcsolódás";
             // 
             // kapcsolatLétrehozásaToolStripMenuItem
@@ -142,7 +143,7 @@
             // beállításokToolStripMenuItem
             // 
             beállításokToolStripMenuItem.Name = "beállításokToolStripMenuItem";
-            beállításokToolStripMenuItem.Size = new Size(140, 22);
+            beállításokToolStripMenuItem.Size = new Size(180, 22);
             beállításokToolStripMenuItem.Text = "Beállítások";
             beállításokToolStripMenuItem.Click += BeállításokToolStripMenuItem_Click;
             // 
@@ -643,6 +644,7 @@
             szendioxidGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
             szendioxidGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
             szendioxidGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
+            szendioxidGrafikon.Click += szendioxidGrafikon_Click;
             // 
             // paratartalomGrafikon
             // 
@@ -674,6 +676,13 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 0F));
             tableLayoutPanel2.Size = new Size(1878, 46);
             tableLayoutPanel2.TabIndex = 18;
+            // 
+            // loRaBeállításokToolStripMenuItem
+            // 
+            loRaBeállításokToolStripMenuItem.Name = "loRaBeállításokToolStripMenuItem";
+            loRaBeállításokToolStripMenuItem.Size = new Size(180, 22);
+            loRaBeállításokToolStripMenuItem.Text = "LoRa beállítások";
+            loRaBeállításokToolStripMenuItem.Click += loRaBeállításokToolStripMenuItem_Click;
             // 
             // Main
             // 
@@ -766,5 +775,6 @@
         private OxyPlot.WindowsForms.PlotView magassagGrafikon;
         private OxyPlot.WindowsForms.PlotView homersekletGrafikon;
         private TableLayoutPanel tableLayoutPanel2;
+        private ToolStripMenuItem loRaBeállításokToolStripMenuItem;
     }
 }

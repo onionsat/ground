@@ -37,9 +37,11 @@ namespace OnionSAT
         private LineSeries temperatureSeries, humiditySeries, pressureSeries, accelerationSeries, accelerationRealSeries, accelerationRealSeries2, accelerationRealSeries3, altitudeSeries, accelerationSeries2, accelerationSeries3, metanSeries;
         private static readonly HttpClient client = new();
         PlotModel plotModel, plotModel2, plotModel3, plotModel4, plotModel5, plotModel6, metanModel;
+        public SerialPort serialPort = new("COM1");
 
         public Main()
         {
+
             InitializeComponent();
             temperatureSeries = new LineSeries
             {
@@ -322,7 +324,6 @@ namespace OnionSAT
         }
 
         GMapOverlay o = new("o");
-        SerialPort serialPort = new("COM1");
         System.Timers.Timer timer = new(), globtimer = new(), netchecktimer = new();
         Stopwatch stopWatch = new(), globstopwatch = new();
 
@@ -523,12 +524,13 @@ namespace OnionSAT
                 string asciiText = Encoding.ASCII.GetString(bytes);
 
                 return asciiText;
-            } else
+            }
+            else
             {
                 return "";
             }
 
-            
+
         }
 
         int receivedpackets = 0;
@@ -545,10 +547,10 @@ namespace OnionSAT
                     String rawdata = comm.ReadLine();
                     if (rawdata.Contains("radio_rx"))
                     {
-                        
+
                         data = HexToAscii(rawdata.Replace("radio_rx", "").Replace(" ", "").Replace("\n", "").Replace("\r", ""));
                     }
-                    
+
                     //MessageBox.Show(comm.ReadLine());
 
                     if (data.Contains('|') && rawdata.Contains("radio_rx"))
@@ -1247,6 +1249,145 @@ namespace OnionSAT
             panel2.Width = this.Width;
             pictureBox10.Location = new Point(Convert.ToInt32(this.Width - 320), -75);
             pictureBox12.Location = new Point(Convert.ToInt32(this.Width - 120), 7);
+        }
+
+        private void szendioxidGrafikon_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        int loraloadcounter = 0;
+
+        private void loRaBeállításokToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!serialPort.IsOpen)
+                {
+                    userClosed = false;
+                    string serial = "COM8";
+
+                    var settings = File.ReadLines(path);
+
+                    foreach (var lineRead in settings)
+                    {
+                        if (lineRead.Contains("serial="))
+                        {
+                            serial = lineRead.Replace("serial=", "");
+                        }
+                    }
+
+                    serialPort = new(serial, 115384)
+                    {
+                        DtrEnable = true
+                    };
+
+                    serialPort.Open();
+                    serialPort.DataReceived += new SerialDataReceivedEventHandler(Port_DataReceived_Lora);
+                    serialPort.ErrorReceived += new SerialErrorReceivedEventHandler(Port_ErrorReceived_Lora);
+
+                    loraloadcounter = 0;
+                    serialPort.WriteLine("sys get ver\r\n");
+
+                }
+                else
+                {
+                    MessageBox.Show("Kérlek állítsd le a kapcsolatot a LoRa beállítások szerkesztése elõtt.", "Hiba történt", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Kapcsolódási hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void Port_ErrorReceived_Lora(object sender, SerialErrorReceivedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        lorasettings lorasettings = new();
+        private void Port_DataReceived_Lora(object sender, SerialDataReceivedEventArgs e)
+        {
+            try
+            {
+                SerialPort comm = (SerialPort)sender;
+                if (comm.IsOpen)
+                {
+                    String rawdata = comm.ReadLine().Replace("\r", "").Replace("\n", "");
+
+                    if (rawdata.Contains("invalid_param"))
+                    {
+                    }
+                    else
+                    {
+                        loraloadcounter++;
+                        lorasettings.updateLora(rawdata, loraloadcounter);
+                    }
+
+                    if (loraloadcounter == 0)
+                    {
+                        comm.WriteLine("sys get ver\r\n");
+                    }
+                    if (loraloadcounter == 1)
+                    {
+                        comm.WriteLine("radio get mod\r\n");
+                    }
+                    else if (loraloadcounter == 2)
+                    {
+                        comm.WriteLine("radio get freq\r\n");
+                    }
+                    else if (loraloadcounter == 3)
+                    {
+                        comm.WriteLine("radio get pwr\r\n");
+                    }
+                    else if (loraloadcounter == 4)
+                    {
+                        comm.WriteLine("radio get sf\r\n");
+                    }
+                    else if (loraloadcounter == 5)
+                    {
+                        comm.WriteLine("radio get crc\r\n");
+                    }
+                    else if (loraloadcounter == 6)
+                    {
+                        comm.WriteLine("radio get cr\r\n");
+                    }
+                    else if (loraloadcounter == 7)
+                    {
+                        comm.WriteLine("radio get bw\r\n");
+                    }
+                    else if (loraloadcounter == 8)
+                    {
+                        comm.WriteLine("radio get sync\r\n");
+                    }
+                    else if (loraloadcounter == 9)
+                    {
+                        comm.WriteLine("radio get iqi\r\n");
+                    }
+                    else if (loraloadcounter == 10)
+                    {
+                        comm.Close();
+                        lorasettings.ShowDialog();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    //Port_ErrorReceived(null, null);
+                    var Tstamp = GetTimestamp(DateTime.Now);
+                    if (Errorpath != "")
+                    {
+                        File.AppendAllText(Errorpath, Tstamp + " -> " + ex.ToString() + Environment.NewLine);
+                    }
+                }
+                catch (Exception ex2)
+                {
+                    MessageBox.Show(ex2.ToString(), "Hiba kezelése sikertelen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }
