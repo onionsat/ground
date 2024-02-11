@@ -1277,7 +1277,13 @@ namespace OnionSAT
                         }
                     }
 
-                    serialPort = new(serial, 115384)
+                    if (serialPort != null)
+                    {
+                        serialPort.Close();
+                        serialPort.Dispose();
+                    }
+
+                    serialPort = new SerialPort(serial, 115200)
                     {
                         DtrEnable = true
                     };
@@ -1315,7 +1321,6 @@ namespace OnionSAT
                 if (comm.IsOpen)
                 {
                     String rawdata = comm.ReadLine().Replace("\r", "").Replace("\n", "");
-
                     if (rawdata.Contains("invalid_param"))
                     {
                     }
@@ -1366,6 +1371,10 @@ namespace OnionSAT
                         comm.WriteLine("radio get iqi\r\n");
                     }
                     else if (loraloadcounter == 10)
+                    {
+                        comm.WriteLine("radio get pa\r\n");
+                    }
+                    else if (loraloadcounter == 11)
                     {
                         comm.Close();
                         lorasettings.ShowDialog();
