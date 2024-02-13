@@ -564,8 +564,12 @@ namespace OnionSAT
                             errorcounter = false;
 
                             int now = (int)DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                            if (lastsend == 0)
+                            {
+                                lastsend = (int)DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+                            }
                             int kulonbseg = now - lastsend;
-                            if (kulonbseg >= 0)
+                            if (kulonbseg >= 950)
                             {
                                 lastsend = (int)DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                                 try
@@ -1379,6 +1383,63 @@ namespace OnionSAT
                         comm.Close();
                         lorasettings.ShowDialog();
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    //Port_ErrorReceived(null, null);
+                    var Tstamp = GetTimestamp(DateTime.Now);
+                    if (Errorpath != "")
+                    {
+                        File.AppendAllText(Errorpath, Tstamp + " -> " + ex.ToString() + Environment.NewLine);
+                    }
+                }
+                catch (Exception ex2)
+                {
+                    MessageBox.Show(ex2.ToString(), "Hiba kezelése sikertelen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        async void cloudStationAdatokTörléseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string api_key;
+                string api_endpoint;
+
+                var settings = File.ReadLines(path);
+
+                foreach (var lineRead in settings)
+                {
+                    if (lineRead.Contains("api_key="))
+                    {
+                        api_key = lineRead.Replace("api_key=", "");
+                        Apikey = api_key;
+                    }
+                    else if (lineRead.Contains("api_endpoint="))
+                    {
+                        api_endpoint = lineRead.Replace("api_endpoint=", "");
+                        Apiendpoint = api_endpoint;
+
+                    }
+                }
+
+                var values = new Dictionary<string, string> { { "key", Apikey }, { "method", "truncate" } };
+
+                var content = new FormUrlEncodedContent(values);
+
+                var response = await client.PostAsync(Apiendpoint, content);
+                var responseString = await response.Content.ReadAsStringAsync();
+                if (responseString == "OK")
+                {
+                    MessageBox.Show("Sikeres mûvelet!");
+                }
+                else
+                {
+                    MessageBox.Show("Sikertelen mûvelet!");
                 }
             }
             catch (Exception ex)

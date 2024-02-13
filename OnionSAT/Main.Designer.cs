@@ -35,6 +35,7 @@
             kapcsolatLétrehozásaToolStripMenuItem = new ToolStripMenuItem();
             kapcsolatBontásaToolStripMenuItem = new ToolStripMenuItem();
             beállításokToolStripMenuItem = new ToolStripMenuItem();
+            loRaBeállításokToolStripMenuItem = new ToolStripMenuItem();
             adattárolásToolStripMenuItem = new ToolStripMenuItem();
             újAdatfájlLétrehozásaToolStripMenuItem = new ToolStripMenuItem();
             fájlKiválasztásaToolStripMenuItem = new ToolStripMenuItem();
@@ -81,7 +82,7 @@
             szendioxidGrafikon = new OxyPlot.WindowsForms.PlotView();
             paratartalomGrafikon = new OxyPlot.WindowsForms.PlotView();
             tableLayoutPanel2 = new TableLayoutPanel();
-            loRaBeállításokToolStripMenuItem = new ToolStripMenuItem();
+            cloudStationAdatokTörléseToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -123,7 +124,7 @@
             // 
             kapcsolódásToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kapcsolatLétrehozásaToolStripMenuItem, kapcsolatBontásaToolStripMenuItem });
             kapcsolódásToolStripMenuItem.Name = "kapcsolódásToolStripMenuItem";
-            kapcsolódásToolStripMenuItem.Size = new Size(180, 22);
+            kapcsolódásToolStripMenuItem.Size = new Size(159, 22);
             kapcsolódásToolStripMenuItem.Text = "Kapcsolódás";
             // 
             // kapcsolatLétrehozásaToolStripMenuItem
@@ -143,13 +144,20 @@
             // beállításokToolStripMenuItem
             // 
             beállításokToolStripMenuItem.Name = "beállításokToolStripMenuItem";
-            beállításokToolStripMenuItem.Size = new Size(180, 22);
+            beállításokToolStripMenuItem.Size = new Size(159, 22);
             beállításokToolStripMenuItem.Text = "Beállítások";
             beállításokToolStripMenuItem.Click += BeállításokToolStripMenuItem_Click;
             // 
+            // loRaBeállításokToolStripMenuItem
+            // 
+            loRaBeállításokToolStripMenuItem.Name = "loRaBeállításokToolStripMenuItem";
+            loRaBeállításokToolStripMenuItem.Size = new Size(159, 22);
+            loRaBeállításokToolStripMenuItem.Text = "LoRa beállítások";
+            loRaBeállításokToolStripMenuItem.Click += loRaBeállításokToolStripMenuItem_Click;
+            // 
             // adattárolásToolStripMenuItem
             // 
-            adattárolásToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { újAdatfájlLétrehozásaToolStripMenuItem, fájlKiválasztásaToolStripMenuItem });
+            adattárolásToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { újAdatfájlLétrehozásaToolStripMenuItem, fájlKiválasztásaToolStripMenuItem, cloudStationAdatokTörléseToolStripMenuItem });
             adattárolásToolStripMenuItem.Name = "adattárolásToolStripMenuItem";
             adattárolásToolStripMenuItem.Size = new Size(79, 22);
             adattárolásToolStripMenuItem.Text = "Adattárolás";
@@ -157,14 +165,14 @@
             // újAdatfájlLétrehozásaToolStripMenuItem
             // 
             újAdatfájlLétrehozásaToolStripMenuItem.Name = "újAdatfájlLétrehozásaToolStripMenuItem";
-            újAdatfájlLétrehozásaToolStripMenuItem.Size = new Size(189, 22);
+            újAdatfájlLétrehozásaToolStripMenuItem.Size = new Size(223, 22);
             újAdatfájlLétrehozásaToolStripMenuItem.Text = "Új adatfájl létrehozása";
             újAdatfájlLétrehozásaToolStripMenuItem.Click += ÚjAdatfájlLétrehozásaToolStripMenuItem_Click;
             // 
             // fájlKiválasztásaToolStripMenuItem
             // 
             fájlKiválasztásaToolStripMenuItem.Name = "fájlKiválasztásaToolStripMenuItem";
-            fájlKiválasztásaToolStripMenuItem.Size = new Size(189, 22);
+            fájlKiválasztásaToolStripMenuItem.Size = new Size(223, 22);
             fájlKiválasztásaToolStripMenuItem.Text = "Fájl kiválasztása";
             fájlKiválasztásaToolStripMenuItem.Click += FájlKiválasztásaToolStripMenuItem_Click;
             // 
@@ -677,12 +685,12 @@
             tableLayoutPanel2.Size = new Size(1878, 46);
             tableLayoutPanel2.TabIndex = 18;
             // 
-            // loRaBeállításokToolStripMenuItem
+            // cloudStationAdatokTörléseToolStripMenuItem
             // 
-            loRaBeállításokToolStripMenuItem.Name = "loRaBeállításokToolStripMenuItem";
-            loRaBeállításokToolStripMenuItem.Size = new Size(180, 22);
-            loRaBeállításokToolStripMenuItem.Text = "LoRa beállítások";
-            loRaBeállításokToolStripMenuItem.Click += loRaBeállításokToolStripMenuItem_Click;
+            cloudStationAdatokTörléseToolStripMenuItem.Name = "cloudStationAdatokTörléseToolStripMenuItem";
+            cloudStationAdatokTörléseToolStripMenuItem.Size = new Size(223, 22);
+            cloudStationAdatokTörléseToolStripMenuItem.Text = "Cloud Station adatok törlése";
+            cloudStationAdatokTörléseToolStripMenuItem.Click += cloudStationAdatokTörléseToolStripMenuItem_Click;
             // 
             // Main
             // 
@@ -776,5 +784,6 @@
         private OxyPlot.WindowsForms.PlotView homersekletGrafikon;
         private TableLayoutPanel tableLayoutPanel2;
         private ToolStripMenuItem loRaBeállításokToolStripMenuItem;
+        private ToolStripMenuItem cloudStationAdatokTörléseToolStripMenuItem;
     }
 }
