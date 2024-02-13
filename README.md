@@ -24,4 +24,4 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 	<DebugType>embedded</DebugType>
 	<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
   </PropertyGroup>
-</Project>```
+</Project>
