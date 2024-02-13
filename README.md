@@ -4,7 +4,7 @@ Innen tudod letölteni az EXE fájlt: https://github.com/akameleon/onionsat-grou
 (fut visual studio nélkül is Róbert, tudod, a chromehoz sem kell visual studio.)
 
 
-<?xml version="1.0" encoding="utf-8"?>
+```<?xml version="1.0" encoding="utf-8"?>
 <!--
 https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
@@ -24,4 +24,4 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 	<DebugType>embedded</DebugType>
 	<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
   </PropertyGroup>
-</Project>
+</Project>```
