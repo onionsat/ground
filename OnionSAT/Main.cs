@@ -572,7 +572,7 @@ namespace OnionSAT
                         var Tstamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
                         BuildFromData(data, Tstamp);
                         string[] args = data.Split("|");
-                        if (args.Length == 14)
+                        if (args.Length == 13)
                         {
                             stopWatch.Restart();
                             errorcounter = false;
@@ -745,9 +745,8 @@ namespace OnionSAT
                 string z1 = args[10];
                 UpdateAccelRealGraph(x1, y1, z1, Timestamp);
 
-                string x2 = args[11];
-                string y2 = args[12];
-                string z2 = args[13];
+                string methane = args[11];
+                string co2 = args[12];
                 //UpdateAccelGraph(x2, y2, z2, Timestamp);
             }
         }
