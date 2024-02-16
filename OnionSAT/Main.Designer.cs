@@ -39,6 +39,7 @@
             adattárolásToolStripMenuItem = new ToolStripMenuItem();
             újAdatfájlLétrehozásaToolStripMenuItem = new ToolStripMenuItem();
             fájlKiválasztásaToolStripMenuItem = new ToolStripMenuItem();
+            cloudStationAdatokTörléseToolStripMenuItem = new ToolStripMenuItem();
             exportálásToolStripMenuItem = new ToolStripMenuItem();
             pNGToolStripMenuItem = new ToolStripMenuItem();
             térképToolStripMenuItem = new ToolStripMenuItem();
@@ -47,7 +48,8 @@
             légnyomásGrafikonToolStripMenuItem = new ToolStripMenuItem();
             magasságGrafikonToolStripMenuItem = new ToolStripMenuItem();
             tengelyesGyorsulásmértGrafikonToolStripMenuItem = new ToolStripMenuItem();
-            tengelyesGyorsulásGrafikonToolStripMenuItem = new ToolStripMenuItem();
+            methaneGraphToolStripMenuItem = new ToolStripMenuItem();
+            carbonDioxideGraphToolStripMenuItem = new ToolStripMenuItem();
             információkToolStripMenuItem = new ToolStripMenuItem();
             névjegyToolStripMenuItem = new ToolStripMenuItem();
             pictureBox1 = new PictureBox();
@@ -73,16 +75,14 @@
             pictureBox12 = new PictureBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
-            gyorsulasMertGrafikon = new OxyPlot.WindowsForms.PlotView();
             homersekletGrafikon = new OxyPlot.WindowsForms.PlotView();
             legnyomasGrafikon = new OxyPlot.WindowsForms.PlotView();
-            magassagGrafikon = new OxyPlot.WindowsForms.PlotView();
             metanGrafikon = new OxyPlot.WindowsForms.PlotView();
-            gyorsulasGrafikon = new OxyPlot.WindowsForms.PlotView();
-            szendioxidGrafikon = new OxyPlot.WindowsForms.PlotView();
+            magassagGrafikon = new OxyPlot.WindowsForms.PlotView();
             paratartalomGrafikon = new OxyPlot.WindowsForms.PlotView();
+            szendioxidGrafikon = new OxyPlot.WindowsForms.PlotView();
+            gyorsulasMertGrafikon = new OxyPlot.WindowsForms.PlotView();
             tableLayoutPanel2 = new TableLayoutPanel();
-            cloudStationAdatokTörléseToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -117,140 +117,157 @@
             // 
             fájlToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kapcsolódásToolStripMenuItem, beállításokToolStripMenuItem, loRaBeállításokToolStripMenuItem });
             fájlToolStripMenuItem.Name = "fájlToolStripMenuItem";
-            fájlToolStripMenuItem.Size = new Size(70, 22);
-            fájlToolStripMenuItem.Text = "Kapcsolat";
+            fájlToolStripMenuItem.Size = new Size(81, 22);
+            fájlToolStripMenuItem.Text = "Connection";
             // 
             // kapcsolódásToolStripMenuItem
             // 
             kapcsolódásToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kapcsolatLétrehozásaToolStripMenuItem, kapcsolatBontásaToolStripMenuItem });
             kapcsolódásToolStripMenuItem.Name = "kapcsolódásToolStripMenuItem";
-            kapcsolódásToolStripMenuItem.Size = new Size(159, 22);
-            kapcsolódásToolStripMenuItem.Text = "Kapcsolódás";
+            kapcsolódásToolStripMenuItem.Size = new Size(165, 22);
+            kapcsolódásToolStripMenuItem.Text = "Serial connection";
             // 
             // kapcsolatLétrehozásaToolStripMenuItem
             // 
             kapcsolatLétrehozásaToolStripMenuItem.Name = "kapcsolatLétrehozásaToolStripMenuItem";
-            kapcsolatLétrehozásaToolStripMenuItem.Size = new Size(187, 22);
-            kapcsolatLétrehozásaToolStripMenuItem.Text = "Kapcsolat létrehozása";
+            kapcsolatLétrehozásaToolStripMenuItem.Size = new Size(133, 22);
+            kapcsolatLétrehozásaToolStripMenuItem.Text = "Connect";
             kapcsolatLétrehozásaToolStripMenuItem.Click += KapcsolódásToolStripMenuItem_Click;
             // 
             // kapcsolatBontásaToolStripMenuItem
             // 
             kapcsolatBontásaToolStripMenuItem.Name = "kapcsolatBontásaToolStripMenuItem";
-            kapcsolatBontásaToolStripMenuItem.Size = new Size(187, 22);
-            kapcsolatBontásaToolStripMenuItem.Text = "Kapcsolat bontása";
+            kapcsolatBontásaToolStripMenuItem.Size = new Size(133, 22);
+            kapcsolatBontásaToolStripMenuItem.Text = "Disconnect";
+            kapcsolatBontásaToolStripMenuItem.TextAlign = ContentAlignment.MiddleRight;
             kapcsolatBontásaToolStripMenuItem.Click += KapcsolatBontásaToolStripMenuItem_Click;
             // 
             // beállításokToolStripMenuItem
             // 
             beállításokToolStripMenuItem.Name = "beállításokToolStripMenuItem";
-            beállításokToolStripMenuItem.Size = new Size(159, 22);
-            beállításokToolStripMenuItem.Text = "Beállítások";
+            beállításokToolStripMenuItem.Size = new Size(165, 22);
+            beállításokToolStripMenuItem.Text = "Settings";
             beállításokToolStripMenuItem.Click += BeállításokToolStripMenuItem_Click;
             // 
             // loRaBeállításokToolStripMenuItem
             // 
             loRaBeállításokToolStripMenuItem.Name = "loRaBeállításokToolStripMenuItem";
-            loRaBeállításokToolStripMenuItem.Size = new Size(159, 22);
-            loRaBeállításokToolStripMenuItem.Text = "LoRa beállítások";
+            loRaBeállításokToolStripMenuItem.Size = new Size(165, 22);
+            loRaBeállításokToolStripMenuItem.Text = "LoRa settings";
             loRaBeállításokToolStripMenuItem.Click += loRaBeállításokToolStripMenuItem_Click;
             // 
             // adattárolásToolStripMenuItem
             // 
             adattárolásToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { újAdatfájlLétrehozásaToolStripMenuItem, fájlKiválasztásaToolStripMenuItem, cloudStationAdatokTörléseToolStripMenuItem });
             adattárolásToolStripMenuItem.Name = "adattárolásToolStripMenuItem";
-            adattárolásToolStripMenuItem.Size = new Size(79, 22);
-            adattárolásToolStripMenuItem.Text = "Adattárolás";
+            adattárolásToolStripMenuItem.Size = new Size(67, 22);
+            adattárolásToolStripMenuItem.Text = "Database";
             // 
             // újAdatfájlLétrehozásaToolStripMenuItem
             // 
             újAdatfájlLétrehozásaToolStripMenuItem.Name = "újAdatfájlLétrehozásaToolStripMenuItem";
-            újAdatfájlLétrehozásaToolStripMenuItem.Size = new Size(223, 22);
-            újAdatfájlLétrehozásaToolStripMenuItem.Text = "Új adatfájl létrehozása";
+            újAdatfájlLétrehozásaToolStripMenuItem.Size = new Size(208, 22);
+            újAdatfájlLétrehozásaToolStripMenuItem.Text = "Create new data file";
             újAdatfájlLétrehozásaToolStripMenuItem.Click += ÚjAdatfájlLétrehozásaToolStripMenuItem_Click;
             // 
             // fájlKiválasztásaToolStripMenuItem
             // 
             fájlKiválasztásaToolStripMenuItem.Name = "fájlKiválasztásaToolStripMenuItem";
-            fájlKiválasztásaToolStripMenuItem.Size = new Size(223, 22);
-            fájlKiválasztásaToolStripMenuItem.Text = "Fájl kiválasztása";
+            fájlKiválasztásaToolStripMenuItem.Size = new Size(208, 22);
+            fájlKiválasztásaToolStripMenuItem.Text = "Open data file";
             fájlKiválasztásaToolStripMenuItem.Click += FájlKiválasztásaToolStripMenuItem_Click;
+            // 
+            // cloudStationAdatokTörléseToolStripMenuItem
+            // 
+            cloudStationAdatokTörléseToolStripMenuItem.Name = "cloudStationAdatokTörléseToolStripMenuItem";
+            cloudStationAdatokTörléseToolStripMenuItem.Size = new Size(208, 22);
+            cloudStationAdatokTörléseToolStripMenuItem.Text = "Delete Cloud Station data";
+            cloudStationAdatokTörléseToolStripMenuItem.TextAlign = ContentAlignment.MiddleLeft;
+            cloudStationAdatokTörléseToolStripMenuItem.Click += cloudStationAdatokTörléseToolStripMenuItem_Click;
             // 
             // exportálásToolStripMenuItem
             // 
             exportálásToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { pNGToolStripMenuItem });
             exportálásToolStripMenuItem.Name = "exportálásToolStripMenuItem";
-            exportálásToolStripMenuItem.Size = new Size(73, 22);
-            exportálásToolStripMenuItem.Text = "Exportálás";
+            exportálásToolStripMenuItem.Size = new Size(53, 22);
+            exportálásToolStripMenuItem.Text = "Export";
             // 
             // pNGToolStripMenuItem
             // 
-            pNGToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { térképToolStripMenuItem, hőmérsékletGrafikonToolStripMenuItem, relatívPáratartalomGrafikonToolStripMenuItem, légnyomásGrafikonToolStripMenuItem, magasságGrafikonToolStripMenuItem, tengelyesGyorsulásmértGrafikonToolStripMenuItem, tengelyesGyorsulásGrafikonToolStripMenuItem });
+            pNGToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { térképToolStripMenuItem, hőmérsékletGrafikonToolStripMenuItem, relatívPáratartalomGrafikonToolStripMenuItem, légnyomásGrafikonToolStripMenuItem, magasságGrafikonToolStripMenuItem, tengelyesGyorsulásmértGrafikonToolStripMenuItem, methaneGraphToolStripMenuItem, carbonDioxideGraphToolStripMenuItem });
             pNGToolStripMenuItem.Name = "pNGToolStripMenuItem";
-            pNGToolStripMenuItem.Size = new Size(98, 22);
+            pNGToolStripMenuItem.Size = new Size(180, 22);
             pNGToolStripMenuItem.Text = "PNG";
             // 
             // térképToolStripMenuItem
             // 
             térképToolStripMenuItem.Name = "térképToolStripMenuItem";
-            térképToolStripMenuItem.Size = new Size(271, 22);
-            térképToolStripMenuItem.Text = "Térkép";
+            térképToolStripMenuItem.Size = new Size(206, 22);
+            térképToolStripMenuItem.Text = "Map";
             térképToolStripMenuItem.Click += TérképToolStripMenuItem_Click;
             // 
             // hőmérsékletGrafikonToolStripMenuItem
             // 
             hőmérsékletGrafikonToolStripMenuItem.Name = "hőmérsékletGrafikonToolStripMenuItem";
-            hőmérsékletGrafikonToolStripMenuItem.Size = new Size(271, 22);
-            hőmérsékletGrafikonToolStripMenuItem.Text = "Hőmérséklet grafikon";
+            hőmérsékletGrafikonToolStripMenuItem.Size = new Size(206, 22);
+            hőmérsékletGrafikonToolStripMenuItem.Text = "Temperature graph";
+            hőmérsékletGrafikonToolStripMenuItem.TextAlign = ContentAlignment.TopLeft;
             hőmérsékletGrafikonToolStripMenuItem.Click += HőmérsékletGrafikonToolStripMenuItem_Click;
             // 
             // relatívPáratartalomGrafikonToolStripMenuItem
             // 
             relatívPáratartalomGrafikonToolStripMenuItem.Name = "relatívPáratartalomGrafikonToolStripMenuItem";
-            relatívPáratartalomGrafikonToolStripMenuItem.Size = new Size(271, 22);
-            relatívPáratartalomGrafikonToolStripMenuItem.Text = "Relatív páratartalom grafikon";
+            relatívPáratartalomGrafikonToolStripMenuItem.Size = new Size(206, 22);
+            relatívPáratartalomGrafikonToolStripMenuItem.Text = "Humidity graph";
             relatívPáratartalomGrafikonToolStripMenuItem.Click += RelatívPáratartalomGrafikonToolStripMenuItem_Click;
             // 
             // légnyomásGrafikonToolStripMenuItem
             // 
             légnyomásGrafikonToolStripMenuItem.Name = "légnyomásGrafikonToolStripMenuItem";
-            légnyomásGrafikonToolStripMenuItem.Size = new Size(271, 22);
-            légnyomásGrafikonToolStripMenuItem.Text = "Légnyomás grafikon";
+            légnyomásGrafikonToolStripMenuItem.Size = new Size(206, 22);
+            légnyomásGrafikonToolStripMenuItem.Text = "Pressure graph";
             légnyomásGrafikonToolStripMenuItem.Click += LégnyomásGrafikonToolStripMenuItem_Click;
             // 
             // magasságGrafikonToolStripMenuItem
             // 
             magasságGrafikonToolStripMenuItem.Name = "magasságGrafikonToolStripMenuItem";
-            magasságGrafikonToolStripMenuItem.Size = new Size(271, 22);
-            magasságGrafikonToolStripMenuItem.Text = "Magasság grafikon";
+            magasságGrafikonToolStripMenuItem.Size = new Size(206, 22);
+            magasságGrafikonToolStripMenuItem.Text = "Altitude graph";
             magasságGrafikonToolStripMenuItem.Click += MagasságGrafikonToolStripMenuItem_Click;
             // 
             // tengelyesGyorsulásmértGrafikonToolStripMenuItem
             // 
             tengelyesGyorsulásmértGrafikonToolStripMenuItem.Name = "tengelyesGyorsulásmértGrafikonToolStripMenuItem";
-            tengelyesGyorsulásmértGrafikonToolStripMenuItem.Size = new Size(271, 22);
-            tengelyesGyorsulásmértGrafikonToolStripMenuItem.Text = "3-tengelyes gyorsulás (mért) grafikon";
+            tengelyesGyorsulásmértGrafikonToolStripMenuItem.Size = new Size(206, 22);
+            tengelyesGyorsulásmértGrafikonToolStripMenuItem.Text = "3-axis acceleration graph";
             tengelyesGyorsulásmértGrafikonToolStripMenuItem.Click += TengelyesGyorsulásmértGrafikonToolStripMenuItem_Click;
             // 
-            // tengelyesGyorsulásGrafikonToolStripMenuItem
+            // methaneGraphToolStripMenuItem
             // 
-            tengelyesGyorsulásGrafikonToolStripMenuItem.Name = "tengelyesGyorsulásGrafikonToolStripMenuItem";
-            tengelyesGyorsulásGrafikonToolStripMenuItem.Size = new Size(271, 22);
-            tengelyesGyorsulásGrafikonToolStripMenuItem.Text = "3-tengelyes gyorsulás grafikon";
-            tengelyesGyorsulásGrafikonToolStripMenuItem.Click += TengelyesGyorsulásGrafikonToolStripMenuItem_Click;
+            methaneGraphToolStripMenuItem.Name = "methaneGraphToolStripMenuItem";
+            methaneGraphToolStripMenuItem.Size = new Size(206, 22);
+            methaneGraphToolStripMenuItem.Text = "Methane graph";
+            methaneGraphToolStripMenuItem.Click += methaneGraphToolStripMenuItem_Click;
+            // 
+            // carbonDioxideGraphToolStripMenuItem
+            // 
+            carbonDioxideGraphToolStripMenuItem.Name = "carbonDioxideGraphToolStripMenuItem";
+            carbonDioxideGraphToolStripMenuItem.Size = new Size(206, 22);
+            carbonDioxideGraphToolStripMenuItem.Text = "Carbon dioxide graph";
+            carbonDioxideGraphToolStripMenuItem.Click += carbonDioxideGraphToolStripMenuItem_Click;
             // 
             // információkToolStripMenuItem
             // 
             információkToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { névjegyToolStripMenuItem });
             információkToolStripMenuItem.Name = "információkToolStripMenuItem";
-            információkToolStripMenuItem.Size = new Size(83, 22);
-            információkToolStripMenuItem.Text = "Információk";
+            információkToolStripMenuItem.Size = new Size(82, 22);
+            információkToolStripMenuItem.Text = "Information";
             // 
             // névjegyToolStripMenuItem
             // 
             névjegyToolStripMenuItem.Name = "névjegyToolStripMenuItem";
-            névjegyToolStripMenuItem.Size = new Size(117, 22);
-            névjegyToolStripMenuItem.Text = "Névjegy";
+            névjegyToolStripMenuItem.Size = new Size(107, 22);
+            névjegyToolStripMenuItem.Text = "About";
             névjegyToolStripMenuItem.Click += NévjegyToolStripMenuItem_Click;
             // 
             // pictureBox1
@@ -300,9 +317,9 @@
             label8.ForeColor = Color.White;
             label8.Location = new Point(791, 28);
             label8.Name = "label8";
-            label8.Size = new Size(131, 15);
+            label8.Size = new Size(130, 15);
             label8.TabIndex = 25;
-            label8.Text = "Nincs internetkapcsolat";
+            label8.Text = "No internet connection";
             // 
             // pictureBox11
             // 
@@ -322,9 +339,9 @@
             label7.ForeColor = Color.White;
             label7.Location = new Point(791, 5);
             label7.Name = "label7";
-            label7.Size = new Size(141, 15);
+            label7.Size = new Size(119, 15);
             label7.TabIndex = 24;
-            label7.Text = "Nincs kiválasztott adatfájl";
+            label7.Text = "No database selected";
             // 
             // pictureBox9
             // 
@@ -344,9 +361,9 @@
             label6.ForeColor = Color.White;
             label6.Location = new Point(597, 27);
             label6.Name = "label6";
-            label6.Size = new Size(115, 15);
+            label6.Size = new Size(103, 15);
             label6.TabIndex = 22;
-            label6.Text = "0 beérkezett csomag";
+            label6.Text = "0 received packets";
             // 
             // label5
             // 
@@ -355,9 +372,9 @@
             label5.ForeColor = Color.White;
             label5.Location = new Point(597, 5);
             label5.Name = "label5";
-            label5.Size = new Size(107, 15);
+            label5.Size = new Size(109, 15);
             label5.TabIndex = 17;
-            label5.Text = "0 feltöltött csomag";
+            label5.Text = "0 uploaded packets";
             // 
             // pictureBox8
             // 
@@ -388,9 +405,9 @@
             label4.ForeColor = Color.White;
             label4.Location = new Point(260, 26);
             label4.Name = "label4";
-            label4.Size = new Size(58, 15);
+            label4.Size = new Size(56, 15);
             label4.TabIndex = 17;
-            label4.Text = "0 műhold";
+            label4.Text = "0 satellite";
             // 
             // label3
             // 
@@ -398,9 +415,9 @@
             label3.ForeColor = Color.Transparent;
             label3.Location = new Point(432, 27);
             label3.Name = "label3";
-            label3.Size = new Size(95, 15);
+            label3.Size = new Size(108, 15);
             label3.TabIndex = 17;
-            label3.Text = "0 kiesett csomag";
+            label3.Text = "0 dropped package";
             // 
             // pictureBox6
             // 
@@ -452,9 +469,9 @@
             label2.ForeColor = Color.White;
             label2.Location = new Point(260, 4);
             label2.Name = "label2";
-            label2.Size = new Size(90, 15);
+            label2.Size = new Size(86, 15);
             label2.TabIndex = 16;
-            label2.Text = "Nincs kapcsolat";
+            label2.Text = "No connection";
             // 
             // label1
             // 
@@ -509,14 +526,13 @@
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.34F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.33F));
             tableLayoutPanel1.Controls.Add(gMapControl1, 1, 0);
-            tableLayoutPanel1.Controls.Add(gyorsulasMertGrafikon, 1, 1);
             tableLayoutPanel1.Controls.Add(homersekletGrafikon, 0, 0);
             tableLayoutPanel1.Controls.Add(legnyomasGrafikon, 0, 1);
-            tableLayoutPanel1.Controls.Add(magassagGrafikon, 0, 2);
-            tableLayoutPanel1.Controls.Add(metanGrafikon, 2, 1);
-            tableLayoutPanel1.Controls.Add(gyorsulasGrafikon, 1, 2);
-            tableLayoutPanel1.Controls.Add(szendioxidGrafikon, 2, 2);
-            tableLayoutPanel1.Controls.Add(paratartalomGrafikon, 2, 0);
+            tableLayoutPanel1.Controls.Add(metanGrafikon, 2, 2);
+            tableLayoutPanel1.Controls.Add(magassagGrafikon, 1, 2);
+            tableLayoutPanel1.Controls.Add(paratartalomGrafikon, 0, 2);
+            tableLayoutPanel1.Controls.Add(szendioxidGrafikon, 2, 1);
+            tableLayoutPanel1.Controls.Add(gyorsulasMertGrafikon, 2, 0);
             tableLayoutPanel1.Location = new Point(0, 27);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
@@ -547,26 +563,13 @@
             gMapControl1.PolygonsEnabled = true;
             gMapControl1.RetryLoadTile = 0;
             gMapControl1.RoutesEnabled = true;
+            tableLayoutPanel1.SetRowSpan(gMapControl1, 2);
             gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             gMapControl1.SelectedAreaFillColor = Color.FromArgb(33, 65, 105, 225);
             gMapControl1.ShowTileGridLines = false;
-            gMapControl1.Size = new Size(415, 197);
+            gMapControl1.Size = new Size(415, 400);
             gMapControl1.TabIndex = 0;
             gMapControl1.Zoom = 0D;
-            // 
-            // gyorsulasMertGrafikon
-            // 
-            gyorsulasMertGrafikon.BackColor = Color.White;
-            gyorsulasMertGrafikon.Dock = DockStyle.Fill;
-            gyorsulasMertGrafikon.Location = new Point(424, 206);
-            gyorsulasMertGrafikon.Name = "gyorsulasMertGrafikon";
-            gyorsulasMertGrafikon.PanCursor = Cursors.Hand;
-            gyorsulasMertGrafikon.Size = new Size(415, 197);
-            gyorsulasMertGrafikon.TabIndex = 11;
-            gyorsulasMertGrafikon.Text = "plotView5";
-            gyorsulasMertGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
-            gyorsulasMertGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
-            gyorsulasMertGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
             // homersekletGrafikon
             // 
@@ -597,25 +600,11 @@
             legnyomasGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
             legnyomasGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
-            // magassagGrafikon
-            // 
-            magassagGrafikon.BackColor = Color.White;
-            magassagGrafikon.Dock = DockStyle.Fill;
-            magassagGrafikon.Location = new Point(3, 409);
-            magassagGrafikon.Name = "magassagGrafikon";
-            magassagGrafikon.PanCursor = Cursors.Hand;
-            magassagGrafikon.Size = new Size(415, 197);
-            magassagGrafikon.TabIndex = 10;
-            magassagGrafikon.Text = "plotView4";
-            magassagGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
-            magassagGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
-            magassagGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
-            // 
             // metanGrafikon
             // 
             metanGrafikon.BackColor = Color.White;
             metanGrafikon.Dock = DockStyle.Fill;
-            metanGrafikon.Location = new Point(845, 206);
+            metanGrafikon.Location = new Point(845, 409);
             metanGrafikon.Name = "metanGrafikon";
             metanGrafikon.PanCursor = Cursors.Hand;
             metanGrafikon.Size = new Size(416, 197);
@@ -625,48 +614,62 @@
             metanGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
             metanGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
-            // gyorsulasGrafikon
+            // magassagGrafikon
             // 
-            gyorsulasGrafikon.BackColor = Color.White;
-            gyorsulasGrafikon.Dock = DockStyle.Fill;
-            gyorsulasGrafikon.Location = new Point(424, 409);
-            gyorsulasGrafikon.Name = "gyorsulasGrafikon";
-            gyorsulasGrafikon.PanCursor = Cursors.Hand;
-            gyorsulasGrafikon.Size = new Size(415, 197);
-            gyorsulasGrafikon.TabIndex = 15;
-            gyorsulasGrafikon.Text = "plotView7";
-            gyorsulasGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
-            gyorsulasGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
-            gyorsulasGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
+            magassagGrafikon.BackColor = Color.White;
+            magassagGrafikon.Dock = DockStyle.Fill;
+            magassagGrafikon.Location = new Point(424, 409);
+            magassagGrafikon.Name = "magassagGrafikon";
+            magassagGrafikon.PanCursor = Cursors.Hand;
+            magassagGrafikon.Size = new Size(415, 197);
+            magassagGrafikon.TabIndex = 10;
+            magassagGrafikon.Text = "plotView4";
+            magassagGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
+            magassagGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
+            magassagGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
+            // 
+            // paratartalomGrafikon
+            // 
+            paratartalomGrafikon.BackColor = Color.White;
+            paratartalomGrafikon.Dock = DockStyle.Fill;
+            paratartalomGrafikon.Location = new Point(3, 409);
+            paratartalomGrafikon.Name = "paratartalomGrafikon";
+            paratartalomGrafikon.PanCursor = Cursors.Hand;
+            paratartalomGrafikon.Size = new Size(415, 197);
+            paratartalomGrafikon.TabIndex = 8;
+            paratartalomGrafikon.Text = "plotView2";
+            paratartalomGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
+            paratartalomGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
+            paratartalomGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
             // szendioxidGrafikon
             // 
             szendioxidGrafikon.BackColor = Color.White;
             szendioxidGrafikon.Dock = DockStyle.Fill;
-            szendioxidGrafikon.Location = new Point(845, 409);
+            szendioxidGrafikon.Location = new Point(845, 206);
             szendioxidGrafikon.Name = "szendioxidGrafikon";
             szendioxidGrafikon.PanCursor = Cursors.Hand;
             szendioxidGrafikon.Size = new Size(416, 197);
-            szendioxidGrafikon.TabIndex = 12;
+            szendioxidGrafikon.TabIndex = 11;
             szendioxidGrafikon.Text = "plotView6";
             szendioxidGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
             szendioxidGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
             szendioxidGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             szendioxidGrafikon.Click += szendioxidGrafikon_Click;
             // 
-            // paratartalomGrafikon
+            // gyorsulasMertGrafikon
             // 
-            paratartalomGrafikon.BackColor = Color.White;
-            paratartalomGrafikon.Dock = DockStyle.Fill;
-            paratartalomGrafikon.Location = new Point(845, 3);
-            paratartalomGrafikon.Name = "paratartalomGrafikon";
-            paratartalomGrafikon.PanCursor = Cursors.Hand;
-            paratartalomGrafikon.Size = new Size(416, 197);
-            paratartalomGrafikon.TabIndex = 8;
-            paratartalomGrafikon.Text = "plotView2";
-            paratartalomGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
-            paratartalomGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
-            paratartalomGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
+            gyorsulasMertGrafikon.BackColor = Color.White;
+            gyorsulasMertGrafikon.Dock = DockStyle.Fill;
+            gyorsulasMertGrafikon.Location = new Point(845, 3);
+            gyorsulasMertGrafikon.Name = "gyorsulasMertGrafikon";
+            gyorsulasMertGrafikon.PanCursor = Cursors.Hand;
+            gyorsulasMertGrafikon.Size = new Size(416, 197);
+            gyorsulasMertGrafikon.TabIndex = 11;
+            gyorsulasMertGrafikon.Text = "plotView5";
+            gyorsulasMertGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
+            gyorsulasMertGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
+            gyorsulasMertGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
             // tableLayoutPanel2
             // 
@@ -684,13 +687,6 @@
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 0F));
             tableLayoutPanel2.Size = new Size(1878, 46);
             tableLayoutPanel2.TabIndex = 18;
-            // 
-            // cloudStationAdatokTörléseToolStripMenuItem
-            // 
-            cloudStationAdatokTörléseToolStripMenuItem.Name = "cloudStationAdatokTörléseToolStripMenuItem";
-            cloudStationAdatokTörléseToolStripMenuItem.Size = new Size(223, 22);
-            cloudStationAdatokTörléseToolStripMenuItem.Text = "Cloud Station adatok törlése";
-            cloudStationAdatokTörléseToolStripMenuItem.Click += cloudStationAdatokTörléseToolStripMenuItem_Click;
             // 
             // Main
             // 
@@ -785,5 +781,7 @@
         private TableLayoutPanel tableLayoutPanel2;
         private ToolStripMenuItem loRaBeállításokToolStripMenuItem;
         private ToolStripMenuItem cloudStationAdatokTörléseToolStripMenuItem;
+        private ToolStripMenuItem methaneGraphToolStripMenuItem;
+        private ToolStripMenuItem carbonDioxideGraphToolStripMenuItem;
     }
 }

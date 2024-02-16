@@ -34,9 +34,9 @@ namespace OnionSAT
         String Filepath = "";
         static readonly String Errorpath = Path.Combine(specificFolder, "error.txt");
         String Apikey = "", Apiendpoint = "";
-        private LineSeries temperatureSeries, humiditySeries, pressureSeries, accelerationSeries, accelerationRealSeries, accelerationRealSeries2, accelerationRealSeries3, altitudeSeries, accelerationSeries2, accelerationSeries3, metanSeries;
+        private LineSeries temperatureSeries, humiditySeries, pressureSeries, accelerationSeries, accelerationRealSeries, accelerationRealSeries2, accelerationRealSeries3, altitudeSeries, accelerationSeries2, accelerationSeries3, metanSeries, co2Series;
         private static readonly HttpClient client = new();
-        PlotModel plotModel, plotModel2, plotModel3, plotModel4, plotModel5, plotModel6, metanModel;
+        PlotModel plotModel, plotModel2, plotModel3, plotModel4, plotModel5, plotModel6, metanModel, co2Model;
         public SerialPort serialPort = new("COM1");
 
         public Main()
@@ -45,16 +45,16 @@ namespace OnionSAT
             InitializeComponent();
             temperatureSeries = new LineSeries
             {
-                Title = "Hõmérséklet"
+                Title = "Temperature"
             };
 
             // Hozz létre egy PlotModel-t
             plotModel = new PlotModel
             {
-                Title = "Hõmérséklet",
+                Title = "Temperature",
                 Axes = {
             new DateTimeAxis {
-              Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
+              Position = AxisPosition.Bottom, Title = "Time", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
             },
             new LinearAxis {
               Position = AxisPosition.Left, Title = "°C"
@@ -70,16 +70,16 @@ namespace OnionSAT
 
             pressureSeries = new LineSeries
             {
-                Title = "Relatív páratartalom"
+                Title = "Humidity"
             };
 
             // Hozz létre egy PlotModel-t
             plotModel2 = new PlotModel
             {
-                Title = "Páratartalom",
+                Title = "Humidity",
                 Axes = {
             new DateTimeAxis {
-              Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
+              Position = AxisPosition.Bottom, Title = "Time", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
             },
             new LinearAxis {
               Position = AxisPosition.Left, Title = "%"
@@ -95,16 +95,16 @@ namespace OnionSAT
 
             humiditySeries = new LineSeries
             {
-                Title = "Légnyomás"
+                Title = "Pressure"
             };
 
             // Hozz létre egy PlotModel-t
             plotModel3 = new PlotModel
             {
-                Title = "Légnyomás",
+                Title = "Pressure",
                 Axes = {
             new DateTimeAxis {
-              Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
+              Position = AxisPosition.Bottom, Title = "Time", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
             },
             new LinearAxis {
               Position = AxisPosition.Left, Title = "hPa"
@@ -120,26 +120,26 @@ namespace OnionSAT
 
             accelerationRealSeries = new LineSeries
             {
-                Title = "X-tengely"
+                Title = "X-axis"
             };
 
             accelerationRealSeries2 = new LineSeries
             {
-                Title = "Y-tengely"
+                Title = "Y-axis"
             };
 
             accelerationRealSeries3 = new LineSeries
             {
-                Title = "Z-tengely"
+                Title = "Z-axis"
             };
 
             // Hozz létre egy PlotModel-t
             plotModel4 = new PlotModel
             {
-                Title = "3-tengelyes gyorsulás (mért)",
+                Title = "3-axis acceleration",
                 Axes = {
             new DateTimeAxis {
-              Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
+              Position = AxisPosition.Bottom, Title = "Time", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
             },
             new LinearAxis {
               Position = AxisPosition.Left, Title = "m/s^2"
@@ -153,57 +153,57 @@ namespace OnionSAT
             plotModel4.Series.Add(accelerationRealSeries3);
 
             // Állítsuk be a PlotModel-t a PlotView-ban
-            gyorsulasGrafikon.Model = plotModel4;
+            gyorsulasMertGrafikon.Model = plotModel4;
 
-            accelerationSeries = new LineSeries
-            {
-                Title = "X-tengely"
-            };
+            /* accelerationSeries = new LineSeries
+             {
+                 Title = "X-tengely"
+             };
 
-            accelerationSeries2 = new LineSeries
-            {
-                Title = "Y-tengely"
-            };
+             accelerationSeries2 = new LineSeries
+             {
+                 Title = "Y-tengely"
+             };
 
-            accelerationSeries3 = new LineSeries
-            {
-                Title = "Z-tengely"
-            };
+             accelerationSeries3 = new LineSeries
+             {
+                 Title = "Z-tengely"
+             };
 
-            // Hozz létre egy PlotModel-t
-            plotModel5 = new PlotModel
-            {
-                Title = "3-tengelyes gyorsulás",
-                Axes = {
-            new DateTimeAxis {
-              Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
-            },
-            new LinearAxis {
-              Position = AxisPosition.Left, Title = "m/s^2"
-            }
-          },
-            };
+             // Hozz létre egy PlotModel-t
+             plotModel5 = new PlotModel
+             {
+                 Title = "3-tengelyes gyorsulás",
+                 Axes = {
+             new DateTimeAxis {
+               Position = AxisPosition.Bottom, Title = "Time", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
+             },
+             new LinearAxis {
+               Position = AxisPosition.Left, Title = "m/s^2"
+             }
+           },
+             };
 
-            // Adjuk hozzá a LineSeries-t a PlotModel-hez
-            plotModel5.Series.Add(accelerationSeries);
-            plotModel5.Series.Add(accelerationSeries2);
-            plotModel5.Series.Add(accelerationSeries3);
+             // Adjuk hozzá a LineSeries-t a PlotModel-hez
+             plotModel5.Series.Add(accelerationSeries);
+             plotModel5.Series.Add(accelerationSeries2);
+             plotModel5.Series.Add(accelerationSeries3);
 
-            // Állítsuk be a PlotModel-t a PlotView-ban
-            gyorsulasMertGrafikon.Model = plotModel5;
+             // Állítsuk be a PlotModel-t a PlotView-ban
+             gyorsulasMertGrafikon.Model = plotModel5; */
 
             altitudeSeries = new LineSeries
             {
-                Title = "Magasság"
+                Title = "Altitude"
             };
 
             // Hozz létre egy PlotModel-t
             plotModel6 = new PlotModel
             {
-                Title = "Magasság",
+                Title = "Altitude",
                 Axes = {
             new DateTimeAxis {
-              Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
+              Position = AxisPosition.Bottom, Title = "Time", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
             },
             new LinearAxis {
               Position = AxisPosition.Left, Title = "m"
@@ -223,16 +223,16 @@ namespace OnionSAT
 
             metanSeries = new LineSeries
             {
-                Title = "Metán"
+                Title = "Methane"
             };
 
             // Hozz létre egy PlotModel-t
             metanModel = new PlotModel
             {
-                Title = "Metán",
+                Title = "Methane",
                 Axes = {
             new DateTimeAxis {
-              Position = AxisPosition.Bottom, Title = "Idõ", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
+              Position = AxisPosition.Bottom, Title = "Time", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
             },
             new LinearAxis {
               Position = AxisPosition.Left, Title = "ppm"
@@ -245,6 +245,34 @@ namespace OnionSAT
 
             // Állítsuk be a PlotModel-t a PlotView-ban
             metanGrafikon.Model = metanModel;
+
+
+
+
+            co2Series = new LineSeries
+            {
+                Title = "Carbon dioxide"
+            };
+
+            // Hozz létre egy PlotModel-t
+            co2Model = new PlotModel
+            {
+                Title = "Carbon dioxide",
+                Axes = {
+            new DateTimeAxis {
+              Position = AxisPosition.Bottom, Title = "Time", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
+            },
+            new LinearAxis {
+              Position = AxisPosition.Left, Title = "ppm"
+            }
+          },
+            };
+
+            // Adjuk hozzá a LineSeries-t a PlotModel-hez
+            co2Model.Series.Add(co2Series);
+
+            // Állítsuk be a PlotModel-t a PlotView-ban
+            szendioxidGrafikon.Model = co2Model;
         }
 
         public static DateTime JavaTimeStampToDateTime(double javaTimeStamp)
@@ -306,20 +334,6 @@ namespace OnionSAT
             accelerationRealSeries3.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), z));
 
             // Diagram frissítése
-            gyorsulasGrafikon.InvalidatePlot(true);
-        }
-
-        private void UpdateAccelGraph(string gx, string gy, string gz, long Timestamp)
-        {
-            float x = float.Parse(gx, CultureInfo.InvariantCulture.NumberFormat);
-            float y = float.Parse(gy, CultureInfo.InvariantCulture.NumberFormat);
-            float z = float.Parse(gz, CultureInfo.InvariantCulture.NumberFormat);
-            // Hozzáadás az élõ adatokhoz
-            accelerationSeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), x));
-            accelerationSeries2.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), y));
-            accelerationSeries3.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), z));
-
-            // Diagram frissítése
             gyorsulasMertGrafikon.InvalidatePlot(true);
         }
 
@@ -379,8 +393,8 @@ namespace OnionSAT
                         if (label8.Text != responseString)
                         {
                             new ToastContentBuilder()
-                                    .AddText("Internetkapcsolat")
-                                    .AddText("Az internetkapcsolat létrejött a(z) " + responseString + " hálózatán.")
+                                    .AddText("Internet connection")
+                                    .AddText("Internet connection established on the \"" + responseString + "\" network.")
                                     .Show();
                         }
                         label8.Text = responseString;
@@ -396,11 +410,11 @@ namespace OnionSAT
                         if (label8.Text != "Nincs internetkapcsolat")
                         {
                             new ToastContentBuilder()
-                                .AddText("Internetkapcsolat")
-                                .AddText("Az internetkapcsolat megszakadt.")
+                                .AddText("Internet connection")
+                                .AddText("The Internet connection has been lost.")
                                 .Show();
                         }
-                        label8.Text = "Nincs internetkapcsolat";
+                        label8.Text = "No internet connection";
                     }));
 
 
@@ -413,7 +427,7 @@ namespace OnionSAT
                 }
                 catch (Exception ex2)
                 {
-                    MessageBox.Show(ex2.ToString(), "Hiba kezelése sikertelen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex2.ToString(), "Error handling failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -460,7 +474,7 @@ namespace OnionSAT
                 }
                 catch (Exception ex2)
                 {
-                    MessageBox.Show(ex2.ToString(), "Hiba kezelése sikertelen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex2.ToString(), "Error handling failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -503,7 +517,7 @@ namespace OnionSAT
                 }
 
                 // Format and display the TimeSpan value.
-                label2.Text = $"Van kapcsolat ({kitoltoora}{ts.Hours}:{kitoltoperc}{ts.Minutes}:{kitoltomasodperc}{ts.Seconds})";
+                label2.Text = $"Connected ({kitoltoora}{ts.Hours}:{kitoltoperc}{ts.Minutes}:{kitoltomasodperc}{ts.Seconds})";
             }));
             }
         }
@@ -597,7 +611,7 @@ namespace OnionSAT
                                     }
                                     catch (Exception ex2)
                                     {
-                                        MessageBox.Show(ex2.ToString(), "Hiba kezelése sikertelen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        MessageBox.Show(ex2.ToString(), "Error handling failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
                                 }
                             }
@@ -605,8 +619,8 @@ namespace OnionSAT
                             receivedpackets++;
                             BeginInvoke(new Action(() =>
                             {
-                                label6.Text = receivedpackets.ToString() + " beérkezett csomag";
-                                label5.Text = uploadedpackets.ToString() + " feltöltött csomag";
+                                label6.Text = receivedpackets.ToString() + " received packets";
+                                label5.Text = uploadedpackets.ToString() + " uploaded packets";
                             }));
 
                             if (Filepath != "")
@@ -630,7 +644,7 @@ namespace OnionSAT
                 }
                 catch (Exception ex2)
                 {
-                    MessageBox.Show(ex2.ToString(), "Hiba kezelése sikertelen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex2.ToString(), "Error handling failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -646,11 +660,11 @@ namespace OnionSAT
                 CloseGUIUpdate();
                 if (e == null)
                 {
-                    MessageBox.Show("Valószínûleg az eszköz ki lett húzva.", "Soros kapcsolat hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("The device has probably been disconnected.", "Serial connection error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
-                    MessageBox.Show(e.ToString(), "Soros kapcsolat hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(e.ToString(), "Serial connection error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -665,7 +679,7 @@ namespace OnionSAT
                 }
                 catch (Exception ex2)
                 {
-                    MessageBox.Show(ex2.ToString(), "Hiba kezelése sikertelen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex2.ToString(), "Error handling failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -680,7 +694,7 @@ namespace OnionSAT
                 globstopwatch.Stop();
                 BeginInvoke(new Action(() =>
                 {
-                    label2.Text = "Nincs kapcsolat";
+                    label2.Text = "No connection";
                 }));
             }
             catch (Exception ex)
@@ -695,7 +709,7 @@ namespace OnionSAT
                 }
                 catch (Exception ex2)
                 {
-                    MessageBox.Show(ex2.ToString(), "Hiba kezelése sikertelen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex2.ToString(), "Error handling failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -708,7 +722,7 @@ namespace OnionSAT
                 BeginInvoke(new Action(() =>
                 {
                     string satelites = args[1];
-                    label4.Text = satelites + " mûhold";
+                    label4.Text = satelites + " satellite";
                 }));
 
                 string tempreture = args[4];
@@ -734,7 +748,7 @@ namespace OnionSAT
                 string x2 = args[11];
                 string y2 = args[12];
                 string z2 = args[13];
-                UpdateAccelGraph(x2, y2, z2, Timestamp);
+                //UpdateAccelGraph(x2, y2, z2, Timestamp);
             }
         }
 
@@ -819,7 +833,7 @@ namespace OnionSAT
                             }
                             catch (Exception ex2)
                             {
-                                MessageBox.Show(ex2.ToString(), "Hiba kezelése sikertelen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show(ex2.ToString(), "Error handling failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
@@ -874,8 +888,8 @@ namespace OnionSAT
                 serialPort.DataReceived += new SerialDataReceivedEventHandler(Port_DataReceived);
                 serialPort.ErrorReceived += new SerialErrorReceivedEventHandler(Port_ErrorReceived);
                 new ToastContentBuilder()
-                  .AddText("Kapcsolat")
-                  .AddText("A soros kapcsolat sikeresen felépült.")
+                  .AddText("Connection")
+                  .AddText("The serial connection was successfully established.")
                   .Show();
 
                 timer.Start();
@@ -899,13 +913,13 @@ namespace OnionSAT
                 serialPort.Close();
 
                 new ToastContentBuilder()
-                  .AddText("Kapcsolat")
-                  .AddText("A soros kapcsolat bontva lett.")
+                  .AddText("Connection")
+                  .AddText("The serial connection has been terminated.")
                   .Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Kapcsolat bontási hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "Connection breakdown error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -915,7 +929,7 @@ namespace OnionSAT
             {
                 OpenFileDialog ofd = new()
                 {
-                    Filter = "Szöveges állomány (*.txt)|*.TXT"
+                    Filter = "Text file (*.txt)|*.TXT"
                 };
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
@@ -947,7 +961,7 @@ namespace OnionSAT
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Fájl kiválasztási hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "File selection error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -972,17 +986,17 @@ namespace OnionSAT
                     Filepath = datafile;
                     label7.Text = Path.GetFileName(datafile);
 
-                    MessageBox.Show("Sikeres adatfájl létrehozás!");
+                    MessageBox.Show("Successful data file creation!");
 
                 }
                 else
                 {
-                    MessageBox.Show("Sikertelen adatfájl létrehozás!");
+                    MessageBox.Show("Unsuccessful data file creation!");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Fájl létrehozási hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "File creation error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -997,16 +1011,12 @@ namespace OnionSAT
             accelerationRealSeries.Points.Clear();
             accelerationRealSeries3.Points.Clear();
             accelerationRealSeries2.Points.Clear();
-            accelerationSeries.Points.Clear();
-            accelerationSeries3.Points.Clear();
-            accelerationSeries2.Points.Clear();
             humiditySeries.Points.Clear();
             altitudeSeries.Points.Clear();
             pressureSeries.Points.Clear();
 
             magassagGrafikon.InvalidatePlot(true);
             gyorsulasMertGrafikon.InvalidatePlot(true);
-            gyorsulasGrafikon.InvalidatePlot(true);
             legnyomasGrafikon.InvalidatePlot(true);
             paratartalomGrafikon.InvalidatePlot(true);
             homersekletGrafikon.InvalidatePlot(true);
@@ -1023,24 +1033,24 @@ namespace OnionSAT
                 Directory.CreateDirectory(specificFolder);
                 string folder = Path.Join(specificFolder, "exports");
                 Directory.CreateDirectory(folder);
-                string folder2 = Path.Join(folder, "homerseklet");
+                string folder2 = Path.Join(folder, "temperature");
                 Directory.CreateDirectory(folder2);
                 string datafile = Path.Join(folder2, timeStamp + ".png");
                 var pngExporter = new PngExporter
                 {
-                    Width = 5000,
-                    Height = 3000
+                    Width = 1600,
+                    Height = 700
                 };
                 pngExporter.ExportToFile(plotModel, datafile);
 
                 new ToastContentBuilder()
-                  .AddText("Sikeres exportálás!")
-                  .AddText("A kép sikeresen exportálásra került.")
+                  .AddText("Successful exportation!")
+                  .AddText("The image has been successfully exported.")
                   .Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Hiba történt az exportálás közben.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "An error occurred during export.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1055,24 +1065,24 @@ namespace OnionSAT
                 Directory.CreateDirectory(specificFolder);
                 string folder = Path.Join(specificFolder, "exports");
                 Directory.CreateDirectory(folder);
-                string folder2 = Path.Join(folder, "paratartalom");
+                string folder2 = Path.Join(folder, "humidity");
                 Directory.CreateDirectory(folder2);
                 string datafile = Path.Join(folder2, timeStamp + ".png");
                 var pngExporter = new PngExporter
                 {
-                    Width = 5000,
-                    Height = 3000
+                    Width = 1600,
+                    Height = 700
                 };
                 pngExporter.ExportToFile(plotModel2, datafile);
 
                 new ToastContentBuilder()
-                  .AddText("Sikeres exportálás!")
-                  .AddText("A kép sikeresen exportálásra került.")
+                  .AddText("Successful exportation!")
+                  .AddText("The image has been successfully exported.")
                   .Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Hiba történt az exportálás közben.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "An error occurred during export.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1087,24 +1097,24 @@ namespace OnionSAT
                 Directory.CreateDirectory(specificFolder);
                 string folder = Path.Join(specificFolder, "exports");
                 Directory.CreateDirectory(folder);
-                string folder2 = Path.Join(folder, "legnyomas");
+                string folder2 = Path.Join(folder, "pressure");
                 Directory.CreateDirectory(folder2);
                 string datafile = Path.Join(folder2, timeStamp + ".png");
                 var pngExporter = new PngExporter
                 {
-                    Width = 5000,
-                    Height = 3000
+                    Width = 1600,
+                    Height = 700
                 };
                 pngExporter.ExportToFile(plotModel3, datafile);
 
                 new ToastContentBuilder()
-                  .AddText("Sikeres exportálás!")
-                  .AddText("A kép sikeresen exportálásra került.")
+                  .AddText("Successful exportation!")
+                  .AddText("The image has been successfully exported.")
                   .Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Hiba történt az exportálás közben.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "An error occurred during export.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1119,24 +1129,24 @@ namespace OnionSAT
                 Directory.CreateDirectory(specificFolder);
                 string folder = Path.Join(specificFolder, "exports");
                 Directory.CreateDirectory(folder);
-                string folder2 = Path.Join(folder, "magassag");
+                string folder2 = Path.Join(folder, "altitude");
                 Directory.CreateDirectory(folder2);
                 string datafile = Path.Join(folder2, timeStamp + ".png");
                 var pngExporter = new PngExporter
                 {
-                    Width = 5000,
-                    Height = 3000
+                    Width = 1600,
+                    Height = 700
                 };
                 pngExporter.ExportToFile(plotModel6, datafile);
 
                 new ToastContentBuilder()
-                  .AddText("Sikeres exportálás!")
-                  .AddText("A kép sikeresen exportálásra került.")
+                  .AddText("Successful exportation!")
+                  .AddText("The image has been successfully exported.")
                   .Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Hiba történt az exportálás közben.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "An error occurred during export.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1150,54 +1160,24 @@ namespace OnionSAT
                 Directory.CreateDirectory(specificFolder);
                 string folder = Path.Join(specificFolder, "exports");
                 Directory.CreateDirectory(folder);
-                string folder2 = Path.Join(folder, "gyorsulas_mert");
+                string folder2 = Path.Join(folder, "acceleration");
                 Directory.CreateDirectory(folder2);
                 string datafile = Path.Join(folder2, timeStamp + ".png");
                 var pngExporter = new PngExporter
                 {
-                    Width = 5000,
-                    Height = 3000
+                    Width = 1600,
+                    Height = 700
                 };
                 pngExporter.ExportToFile(plotModel4, datafile);
 
                 new ToastContentBuilder()
-                  .AddText("Sikeres exportálás!")
-                  .AddText("A kép sikeresen exportálásra került.")
+                  .AddText("Successful exportation!")
+                  .AddText("The image has been successfully exported.")
                   .Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Hiba történt az exportálás közben.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void TengelyesGyorsulásGrafikonToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                String timeStamp = GetTimestamp(DateTime.Now);
-
-                Directory.CreateDirectory(specificFolder);
-                string folder = Path.Join(specificFolder, "exports");
-                Directory.CreateDirectory(folder);
-                string folder2 = Path.Join(folder, "gyorsulas");
-                Directory.CreateDirectory(folder2);
-                string datafile = Path.Join(folder2, timeStamp + ".png");
-                var pngExporter = new PngExporter
-                {
-                    Width = 5000,
-                    Height = 3000
-                };
-                pngExporter.ExportToFile(plotModel5, datafile);
-
-                new ToastContentBuilder()
-                  .AddText("Sikeres exportálás!")
-                  .AddText("A kép sikeresen exportálásra került.")
-                  .Show();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Hiba történt az exportálás közben.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "An error occurred during export.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1211,7 +1191,7 @@ namespace OnionSAT
                 Directory.CreateDirectory(specificFolder);
                 string folder = Path.Join(specificFolder, "exports");
                 Directory.CreateDirectory(folder);
-                string folder2 = Path.Join(folder, "terkep");
+                string folder2 = Path.Join(folder, "map");
                 Directory.CreateDirectory(folder2);
                 string datafile = Path.Join(folder2, timeStamp + ".png");
 
@@ -1220,13 +1200,13 @@ namespace OnionSAT
                 tmpImage.Save(datafile);
 
                 new ToastContentBuilder()
-                  .AddText("Sikeres exportálás!")
-                  .AddText("A kép sikeresen exportálásra került.")
+                  .AddText("Successful exportation!")
+                  .AddText("The image has been successfully exported.")
                   .Show();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString(), "Hiba történt az exportálás közben.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.ToString(), "An error occurred during export.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1236,6 +1216,7 @@ namespace OnionSAT
             {
                 if (serialPort.IsOpen)
                 {
+                    serialPort.WriteLine("radio rxstop\r\n");
                     serialPort.Close();
                 }
             }));
@@ -1283,6 +1264,7 @@ namespace OnionSAT
 
                     if (serialPort != null)
                     {
+                        serialPort.WriteLine("radio rxstop\r\n");
                         serialPort.Close();
                         serialPort.Dispose();
                     }
@@ -1302,7 +1284,7 @@ namespace OnionSAT
                 }
                 else
                 {
-                    MessageBox.Show("Kérlek állítsd le a kapcsolatot a LoRa beállítások szerkesztése elõtt.", "Hiba történt", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Please disconnect before editing the LoRa settings.", "An error ocurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
@@ -1398,7 +1380,7 @@ namespace OnionSAT
                 }
                 catch (Exception ex2)
                 {
-                    MessageBox.Show(ex2.ToString(), "Hiba kezelése sikertelen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex2.ToString(), "Error handling failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -1455,8 +1437,70 @@ namespace OnionSAT
                 }
                 catch (Exception ex2)
                 {
-                    MessageBox.Show(ex2.ToString(), "Hiba kezelése sikertelen", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex2.ToString(), "Error handling failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        private void methaneGraphToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                String timeStamp = GetTimestamp(DateTime.Now);
+
+                Directory.CreateDirectory(specificFolder);
+                string folder = Path.Join(specificFolder, "exports");
+                Directory.CreateDirectory(folder);
+                string folder2 = Path.Join(folder, "methane");
+                Directory.CreateDirectory(folder2);
+                string datafile = Path.Join(folder2, timeStamp + ".png");
+                var pngExporter = new PngExporter
+                {
+                    Width = 1600,
+                    Height = 700
+                };
+                pngExporter.ExportToFile(metanModel, datafile);
+
+                new ToastContentBuilder()
+                  .AddText("Successful exportation!")
+                  .AddText("The image has been successfully exported.")
+                  .Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "An error occurred during export.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void carbonDioxideGraphToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                String timeStamp = GetTimestamp(DateTime.Now);
+
+                Directory.CreateDirectory(specificFolder);
+                string folder = Path.Join(specificFolder, "exports");
+                Directory.CreateDirectory(folder);
+                string folder2 = Path.Join(folder, "co2");
+                Directory.CreateDirectory(folder2);
+                string datafile = Path.Join(folder2, timeStamp + ".png");
+                var pngExporter = new PngExporter
+                {
+                    Width = 1600,
+                    Height = 700
+                };
+                pngExporter.ExportToFile(co2Model, datafile);
+
+                new ToastContentBuilder()
+                  .AddText("Successful exportation!")
+                  .AddText("The image has been successfully exported.")
+                  .Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "An error occurred during export.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
