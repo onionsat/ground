@@ -244,7 +244,6 @@ namespace OnionSAT
             metanModel.Series.Add(metanSeries);
 
             // Állítsuk be a PlotModel-t a PlotView-ban
-            metanGrafikon.Model = metanModel;
 
 
 
@@ -272,7 +271,6 @@ namespace OnionSAT
             co2Model.Series.Add(co2Series);
 
             // Állítsuk be a PlotModel-t a PlotView-ban
-            szendioxidGrafikon.Model = co2Model;
         }
 
         public static DateTime JavaTimeStampToDateTime(double javaTimeStamp)
@@ -572,7 +570,7 @@ namespace OnionSAT
                         var Tstamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
                         BuildFromData(data, Tstamp);
                         string[] args = data.Split("|");
-                        if (args.Length == 13)
+                        if (args.Length == 11)
                         {
                             stopWatch.Restart();
                             errorcounter = false;
@@ -585,6 +583,7 @@ namespace OnionSAT
                             int kulonbseg = now - lastsend;
                             if (kulonbseg >= 950)
                             {
+
                                 lastsend = (int)DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
                                 try
                                 {
@@ -594,6 +593,7 @@ namespace OnionSAT
 
                                     var response = await client.PostAsync(Apiendpoint, content);
                                     var responseString = await response.Content.ReadAsStringAsync();
+
                                     if (responseString == "OK")
                                     {
                                         uploadedpackets++;
@@ -717,7 +717,7 @@ namespace OnionSAT
         private void BuildFromData(string data, long Timestamp)
         {
             string[] args = data.Split("|");
-            if (args.Length == 14)
+            if (args.Length == 11)
             {
                 BeginInvoke(new Action(() =>
                 {
@@ -745,8 +745,8 @@ namespace OnionSAT
                 string z1 = args[10];
                 UpdateAccelRealGraph(x1, y1, z1, Timestamp);
 
-                string methane = args[11];
-                string co2 = args[12];
+                //string methane = args[11];
+                //string co2 = args[12];
                 //UpdateAccelGraph(x2, y2, z2, Timestamp);
             }
         }
@@ -1263,7 +1263,6 @@ namespace OnionSAT
 
                     if (serialPort != null)
                     {
-                        serialPort.WriteLine("radio rxstop\r\n");
                         serialPort.Close();
                         serialPort.Dispose();
                     }

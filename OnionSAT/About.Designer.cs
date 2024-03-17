@@ -70,11 +70,11 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(125, 433);
+            label3.Location = new Point(135, 433);
             label3.Name = "label3";
-            label3.Size = new Size(191, 15);
+            label3.Size = new Size(171, 15);
             label3.TabIndex = 3;
-            label3.Text = "Készült a 2024-es Cansat versenyre.";
+            label3.Text = "Made for CanSat Hungary 2024";
             // 
             // label4
             // 
@@ -102,7 +102,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "About";
             SizeGripStyle = SizeGripStyle.Hide;
-            Text = "Névjegy";
+            Text = "About";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

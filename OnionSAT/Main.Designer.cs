@@ -77,10 +77,8 @@
             gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
             homersekletGrafikon = new OxyPlot.WindowsForms.PlotView();
             legnyomasGrafikon = new OxyPlot.WindowsForms.PlotView();
-            metanGrafikon = new OxyPlot.WindowsForms.PlotView();
             magassagGrafikon = new OxyPlot.WindowsForms.PlotView();
             paratartalomGrafikon = new OxyPlot.WindowsForms.PlotView();
-            szendioxidGrafikon = new OxyPlot.WindowsForms.PlotView();
             gyorsulasMertGrafikon = new OxyPlot.WindowsForms.PlotView();
             tableLayoutPanel2 = new TableLayoutPanel();
             menuStrip1.SuspendLayout();
@@ -196,7 +194,7 @@
             // 
             pNGToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { térképToolStripMenuItem, hőmérsékletGrafikonToolStripMenuItem, relatívPáratartalomGrafikonToolStripMenuItem, légnyomásGrafikonToolStripMenuItem, magasságGrafikonToolStripMenuItem, tengelyesGyorsulásmértGrafikonToolStripMenuItem, methaneGraphToolStripMenuItem, carbonDioxideGraphToolStripMenuItem });
             pNGToolStripMenuItem.Name = "pNGToolStripMenuItem";
-            pNGToolStripMenuItem.Size = new Size(180, 22);
+            pNGToolStripMenuItem.Size = new Size(98, 22);
             pNGToolStripMenuItem.Text = "PNG";
             // 
             // térképToolStripMenuItem
@@ -528,11 +526,9 @@
             tableLayoutPanel1.Controls.Add(gMapControl1, 1, 0);
             tableLayoutPanel1.Controls.Add(homersekletGrafikon, 0, 0);
             tableLayoutPanel1.Controls.Add(legnyomasGrafikon, 0, 1);
-            tableLayoutPanel1.Controls.Add(metanGrafikon, 2, 2);
             tableLayoutPanel1.Controls.Add(magassagGrafikon, 1, 2);
             tableLayoutPanel1.Controls.Add(paratartalomGrafikon, 0, 2);
-            tableLayoutPanel1.Controls.Add(szendioxidGrafikon, 2, 1);
-            tableLayoutPanel1.Controls.Add(gyorsulasMertGrafikon, 2, 0);
+            tableLayoutPanel1.Controls.Add(gyorsulasMertGrafikon, 2, 2);
             tableLayoutPanel1.Location = new Point(0, 27);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 3;
@@ -547,6 +543,7 @@
             // 
             gMapControl1.Bearing = 0F;
             gMapControl1.CanDragMap = true;
+            tableLayoutPanel1.SetColumnSpan(gMapControl1, 2);
             gMapControl1.Dock = DockStyle.Fill;
             gMapControl1.EmptyTileColor = Color.Navy;
             gMapControl1.GrayScaleMode = false;
@@ -567,7 +564,7 @@
             gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             gMapControl1.SelectedAreaFillColor = Color.FromArgb(33, 65, 105, 225);
             gMapControl1.ShowTileGridLines = false;
-            gMapControl1.Size = new Size(415, 400);
+            gMapControl1.Size = new Size(837, 400);
             gMapControl1.TabIndex = 0;
             gMapControl1.Zoom = 0D;
             // 
@@ -600,20 +597,6 @@
             legnyomasGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
             legnyomasGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
-            // metanGrafikon
-            // 
-            metanGrafikon.BackColor = Color.White;
-            metanGrafikon.Dock = DockStyle.Fill;
-            metanGrafikon.Location = new Point(845, 409);
-            metanGrafikon.Name = "metanGrafikon";
-            metanGrafikon.PanCursor = Cursors.Hand;
-            metanGrafikon.Size = new Size(416, 197);
-            metanGrafikon.TabIndex = 16;
-            metanGrafikon.Text = "plotView8";
-            metanGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
-            metanGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
-            metanGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
-            // 
             // magassagGrafikon
             // 
             magassagGrafikon.BackColor = Color.White;
@@ -642,26 +625,11 @@
             paratartalomGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
             paratartalomGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
-            // szendioxidGrafikon
-            // 
-            szendioxidGrafikon.BackColor = Color.White;
-            szendioxidGrafikon.Dock = DockStyle.Fill;
-            szendioxidGrafikon.Location = new Point(845, 206);
-            szendioxidGrafikon.Name = "szendioxidGrafikon";
-            szendioxidGrafikon.PanCursor = Cursors.Hand;
-            szendioxidGrafikon.Size = new Size(416, 197);
-            szendioxidGrafikon.TabIndex = 11;
-            szendioxidGrafikon.Text = "plotView6";
-            szendioxidGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
-            szendioxidGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
-            szendioxidGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
-            szendioxidGrafikon.Click += szendioxidGrafikon_Click;
-            // 
             // gyorsulasMertGrafikon
             // 
             gyorsulasMertGrafikon.BackColor = Color.White;
             gyorsulasMertGrafikon.Dock = DockStyle.Fill;
-            gyorsulasMertGrafikon.Location = new Point(845, 3);
+            gyorsulasMertGrafikon.Location = new Point(845, 409);
             gyorsulasMertGrafikon.Name = "gyorsulasMertGrafikon";
             gyorsulasMertGrafikon.PanCursor = Cursors.Hand;
             gyorsulasMertGrafikon.Size = new Size(416, 197);
@@ -774,8 +742,6 @@
         private OxyPlot.WindowsForms.PlotView legnyomasGrafikon;
         private OxyPlot.WindowsForms.PlotView gyorsulasMertGrafikon;
         private OxyPlot.WindowsForms.PlotView gyorsulasGrafikon;
-        private OxyPlot.WindowsForms.PlotView szendioxidGrafikon;
-        private OxyPlot.WindowsForms.PlotView metanGrafikon;
         private OxyPlot.WindowsForms.PlotView magassagGrafikon;
         private OxyPlot.WindowsForms.PlotView homersekletGrafikon;
         private TableLayoutPanel tableLayoutPanel2;
