@@ -23,6 +23,7 @@ using System.Timers;
 using System.Threading;
 using Microsoft.Toolkit.Uwp.Notifications;
 using System.Text;
+using Windows.Devices.Radios;
 
 namespace OnionSAT
 {
@@ -37,7 +38,9 @@ namespace OnionSAT
         private LineSeries temperatureSeries, humiditySeries, pressureSeries, accelerationSeries, accelerationRealSeries, accelerationRealSeries2, accelerationRealSeries3, altitudeSeries, accelerationSeries2, accelerationSeries3, metanSeries, co2Series;
         private static readonly HttpClient client = new();
         PlotModel plotModel, plotModel2, plotModel3, plotModel4, plotModel5, plotModel6, metanModel, co2Model;
+        static readonly string csatpath = Path.Combine(specificFolder, "settings.csat");
         public SerialPort serialPort = new("COM1");
+        String lora_mod, lora_freq, lora_pwr, lora_sf, lora_crc, lora_cr, lora_bw, lora_sync, lora_pa;
 
         public Main()
         {
@@ -372,6 +375,30 @@ namespace OnionSAT
             panel2.Width = this.Width;
             pictureBox10.Location = new Point(Convert.ToInt32(this.Width - 320), -75);
             pictureBox12.Location = new Point(Convert.ToInt32(this.Width - 120), 7);
+
+
+
+            if (!File.Exists(path))
+            {
+                Directory.CreateDirectory(specificFolder);
+
+                using (StreamWriter sw = File.CreateText(path))
+                {
+                    sw.Write("serial=COM1\napi_endpoint=\napi_key=");
+                    sw.Close();
+                }
+            }
+
+            if (!File.Exists(csatpath))
+            {
+                Directory.CreateDirectory(specificFolder);
+
+                using (StreamWriter sw = File.CreateText(csatpath))
+                {
+                    sw.Write("lora_mod=lora\nlora_freq=868100000\nlora_pwr=1\nlora_sf=sf7\nlora_crc=on\nlora_cr=3/4\nlora_bw=125\nlora_sync=34\nlora_pa=on");
+                    sw.Close();
+                }
+            }
         }
 
         int errors = 0;
@@ -557,15 +584,170 @@ namespace OnionSAT
                 if (comm.IsOpen)
                 {
                     String rawdata = comm.ReadLine();
-                    if (rawdata.Contains("radio_rx"))
+                    if (rawdata.Contains("radio_rx") && lorasetup > 99)
                     {
 
                         data = HexToAscii(rawdata.Replace("radio_rx", "").Replace(" ", "").Replace("\n", "").Replace("\r", ""));
                     }
 
+                    //String lora_mod, lora_freq, lora_pwr, lora_sf, lora_crc, lora_cr, lora_bw, lora_sync, lora_pa;
+
+
+                    if (rawdata.Contains("Last reset") && lorasetup == 0)
+                    {
+                        lorasetup = 2;
+                        comm.Write("radio set freq " + lora_freq + "\r\n");
+                        return;
+                    }
+
+                    /*if (lorasetup == 1)
+                    {
+                        if (rawdata.Contains("ok"))
+                        {
+                            lorasetup = 2;
+                            comm.Write("radio set freq " + lora_freq + "\r\n");
+                        } else
+                        {
+                            MessageBox.Show("DEBUG -> error level 1  radio set mod " + lora_mod + "\r\n");
+                            comm.Write("radio set mod " + lora_mod + "\r\n");
+                        }
+
+                    } else-*/ if (lorasetup == 2)
+                    {
+                        if (rawdata.Contains("ok"))
+                        {
+                            lorasetup = 3;
+                            comm.Write("radio set pa " + lora_pa + "\r\n");
+                            return;
+                        }
+                        else
+                        {
+                            comm.Write("radio set freq " + lora_freq + "\r\n");
+                            return;
+                        }
+
+                    }
+                    else if (lorasetup == 3)
+                    {
+                        if (rawdata.Contains("ok"))
+                        {
+                            lorasetup = 4;
+                            comm.Write("radio set pwr " + lora_pwr + "\r\n");
+                            return;
+                        }
+                        else
+                        {
+                            comm.Write("radio set pa " + lora_pa + "\r\n");
+                            return;
+                        }
+
+                    }
+                    else if (lorasetup == 4)
+                    {
+                        if (rawdata.Contains("ok"))
+                        {
+                            lorasetup = 5;
+                            comm.Write("radio set sf " + lora_sf + "\r\n");
+                            return;
+                        }
+                        else
+                        {
+                            comm.Write("radio set pwr " + lora_pwr + "\r\n");
+                            return;
+                        }
+
+                    }
+                    else if (lorasetup == 5)
+                    {
+                        if (rawdata.Contains("ok"))
+                        {
+                            lorasetup = 6;
+                            comm.Write("radio set crc " + lora_crc + "\r\n");
+                            return;
+                        }
+                        else
+                        {
+                            comm.Write("radio set sf " + lora_sf + "\r\n");
+                            return;
+                        }
+
+                    }
+                    else if (lorasetup == 6)
+                    {
+                        if (rawdata.Contains("ok"))
+                        {
+                            lorasetup = 8;
+                            comm.Write("radio set bw " + lora_bw + "\r\n");
+                            return;
+                        }
+                        else
+                        {
+                            comm.Write("radio set crc " + lora_crc + "\r\n");
+                            return;
+                        }
+
+                    }
+                    else if (lorasetup == 7)
+                    {
+                        if (rawdata.Contains("ok"))
+                        {
+                            lorasetup = 8;
+                            comm.Write("radio set bw " + lora_bw + "\r\n");
+                            return;
+                        }
+                        else
+                        {
+                            comm.Write("radio set cr " + lora_cr + "\r\n");
+                            return;
+                        }
+
+                    }
+
+                    else if (lorasetup == 8)
+                    {
+                        if (rawdata.Contains("ok"))
+                        {
+                            lorasetup = 9;
+                            comm.Write("radio set sync " + lora_sync + "\r\n");
+                            return;
+                        }
+                        else
+                        {
+                            comm.Write("radio set bw " + lora_bw + "\r\n");
+                            return;
+                        }
+
+                    }
+                    else if (lorasetup == 9)
+                    {
+                        if (rawdata.Contains("ok"))
+                        {
+                            comm.Write("radio rx 0\r\n");
+                            lorasetup = 100;
+                            timer.Start();
+                            globtimer.Start();
+                            globstopwatch.Restart();
+                            new ToastContentBuilder()
+                 .AddText("Connection")
+                 .AddText("The serial connection was successfully established.")
+                 .Show();
+                            return;
+                        }
+                        else
+                        {
+                            comm.Write("radio set sync " + lora_sync + "\r\n");
+                            return;
+                        }
+
+                    }
+
+
+
+
+
                     //MessageBox.Show(comm.ReadLine());
 
-                    if (data.Contains('|') && rawdata.Contains("radio_rx"))
+                    if (data.Contains('|') && rawdata.Contains("radio_rx") && lorasetup > 99)
                     {
                         var Tstamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
                         BuildFromData(data, Tstamp);
@@ -847,7 +1029,7 @@ namespace OnionSAT
             Settings s2 = new();
             s2.ShowDialog();
         }
-
+        int lorasetup = 0;
         private void KapcsolódásToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -886,16 +1068,56 @@ namespace OnionSAT
                 serialPort.Open();
                 serialPort.DataReceived += new SerialDataReceivedEventHandler(Port_DataReceived);
                 serialPort.ErrorReceived += new SerialErrorReceivedEventHandler(Port_ErrorReceived);
-                new ToastContentBuilder()
-                  .AddText("Connection")
-                  .AddText("The serial connection was successfully established.")
-                  .Show();
+               
 
-                timer.Start();
-                globtimer.Start();
-                globstopwatch.Restart();
 
-                serialPort.WriteLine("radio rx 0\r\n");
+
+                var cansettings = File.ReadLines(csatpath);
+
+
+                foreach (var lineRead in cansettings)
+                {
+                    if (lineRead.Contains("lora_mod="))
+                    {
+                        lora_mod = lineRead.Replace("lora_mod=", "").Replace(" ", "").Replace("\n", "").Replace("\r", "");
+                    }
+                    else if (lineRead.Contains("lora_freq="))
+                    {
+                        lora_freq = lineRead.Replace("lora_freq=", "").Replace(" ", "").Replace("\n", "").Replace("\r", "");
+                    }
+                    else if (lineRead.Contains("lora_pwr="))
+                    {
+                        lora_pwr = lineRead.Replace("lora_pwr=", "").Replace(" ", "").Replace("\n", "").Replace("\r", "");
+                    }
+                    else if (lineRead.Contains("lora_sf="))
+                    {
+                        lora_sf = lineRead.Replace("lora_sf=", "").Replace(" ", "").Replace("\n", "").Replace("\r", "");
+                    }
+                    else if (lineRead.Contains("lora_crc="))
+                    {
+                        lora_crc = lineRead.Replace("lora_crc=", "").Replace(" ", "").Replace("\n", "").Replace("\r", "");
+                    }
+                    else if (lineRead.Contains("lora_cr="))
+                    {
+                        lora_cr = lineRead.Replace("lora_cr=", "").Replace(" ", "").Replace("\n", "").Replace("\r", "");
+                    }
+                    else if (lineRead.Contains("lora_bw="))
+                    {
+                        lora_bw = lineRead.Replace("lora_bw=", "").Replace(" ", "").Replace("\n", "").Replace("\r", "");
+                    }
+                    else if (lineRead.Contains("lora_sync="))
+                    {
+                        lora_sync = lineRead.Replace("lora_sync=", "").Replace(" ", "").Replace("\n", "").Replace("\r", "");
+                    }
+                    else if (lineRead.Contains("lora_pa="))
+                    {
+                        lora_pa = lineRead.Replace("lora_pa=", "").Replace(" ", "").Replace("\n", "").Replace("\r", "");
+                    }
+                }
+
+                lorasetup = 0;
+                serialPort.Write("sys reset\r\n");
+                
             }
             catch (Exception ex)
             {
@@ -909,7 +1131,10 @@ namespace OnionSAT
             {
                 CloseGUIUpdate();
                 userClosed = true;
+                serialPort.Write("radio rxstop\r\n");
+                serialPort.Write("sys reset\r\n");
                 serialPort.Close();
+                lorasetup = 0;
 
                 new ToastContentBuilder()
                   .AddText("Connection")
@@ -1215,7 +1440,8 @@ namespace OnionSAT
             {
                 if (serialPort.IsOpen)
                 {
-                    serialPort.WriteLine("radio rxstop\r\n");
+                    serialPort.Write("radio rxstop\r\n");
+                    serialPort.Write("sys reset\r\n");
                     serialPort.Close();
                 }
             }));
@@ -1235,153 +1461,16 @@ namespace OnionSAT
             pictureBox12.Location = new Point(Convert.ToInt32(this.Width - 120), 7);
         }
 
-        private void szendioxidGrafikon_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        int loraloadcounter = 0;
 
         private void loRaBeállításokToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                if (!serialPort.IsOpen)
-                {
-                    userClosed = false;
-                    string serial = "COM8";
-
-                    var settings = File.ReadLines(path);
-
-                    foreach (var lineRead in settings)
-                    {
-                        if (lineRead.Contains("serial="))
-                        {
-                            serial = lineRead.Replace("serial=", "");
-                        }
-                    }
-
-                    if (serialPort != null)
-                    {
-                        serialPort.Close();
-                        serialPort.Dispose();
-                    }
-
-                    serialPort = new SerialPort(serial, 115200)
-                    {
-                        DtrEnable = true
-                    };
-
-                    serialPort.Open();
-                    serialPort.DataReceived += new SerialDataReceivedEventHandler(Port_DataReceived_Lora);
-                    serialPort.ErrorReceived += new SerialErrorReceivedEventHandler(Port_ErrorReceived_Lora);
-
-                    loraloadcounter = 0;
-                    serialPort.WriteLine("sys get ver\r\n");
-
-                }
-                else
-                {
-                    MessageBox.Show("Please disconnect before editing the LoRa settings.", "An error ocurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Kapcsolódási hiba", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            lorasettings lorasettings = new lorasettings();
+            lorasettings.ShowDialog();
         }
 
-        private void Port_ErrorReceived_Lora(object sender, SerialErrorReceivedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
 
-        lorasettings lorasettings = new();
-        private void Port_DataReceived_Lora(object sender, SerialDataReceivedEventArgs e)
-        {
-            try
-            {
-                SerialPort comm = (SerialPort)sender;
-                if (comm.IsOpen)
-                {
-                    String rawdata = comm.ReadLine().Replace("\r", "").Replace("\n", "");
-                    if (rawdata.Contains("invalid_param"))
-                    {
-                    }
-                    else
-                    {
-                        loraloadcounter++;
-                        lorasettings.updateLora(rawdata, loraloadcounter);
-                    }
-
-                    if (loraloadcounter == 0)
-                    {
-                        comm.WriteLine("sys get ver\r\n");
-                    }
-                    if (loraloadcounter == 1)
-                    {
-                        comm.WriteLine("radio get mod\r\n");
-                    }
-                    else if (loraloadcounter == 2)
-                    {
-                        comm.WriteLine("radio get freq\r\n");
-                    }
-                    else if (loraloadcounter == 3)
-                    {
-                        comm.WriteLine("radio get pwr\r\n");
-                    }
-                    else if (loraloadcounter == 4)
-                    {
-                        comm.WriteLine("radio get sf\r\n");
-                    }
-                    else if (loraloadcounter == 5)
-                    {
-                        comm.WriteLine("radio get crc\r\n");
-                    }
-                    else if (loraloadcounter == 6)
-                    {
-                        comm.WriteLine("radio get cr\r\n");
-                    }
-                    else if (loraloadcounter == 7)
-                    {
-                        comm.WriteLine("radio get bw\r\n");
-                    }
-                    else if (loraloadcounter == 8)
-                    {
-                        comm.WriteLine("radio get sync\r\n");
-                    }
-                    else if (loraloadcounter == 9)
-                    {
-                        comm.WriteLine("radio get iqi\r\n");
-                    }
-                    else if (loraloadcounter == 10)
-                    {
-                        comm.WriteLine("radio get pa\r\n");
-                    }
-                    else if (loraloadcounter == 11)
-                    {
-                        comm.Close();
-                        lorasettings.ShowDialog();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                try
-                {
-                    //Port_ErrorReceived(null, null);
-                    var Tstamp = GetTimestamp(DateTime.Now);
-                    if (Errorpath != "")
-                    {
-                        File.AppendAllText(Errorpath, Tstamp + " -> " + ex.ToString() + Environment.NewLine);
-                    }
-                }
-                catch (Exception ex2)
-                {
-                    MessageBox.Show(ex2.ToString(), "Error handling failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
+        
 
         async void cloudStationAdatokTörléseToolStripMenuItem_Click(object sender, EventArgs e)
         {

@@ -228,6 +228,11 @@ namespace OnionSAT
 
         private void button3_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void lorasettings_Load(object sender, EventArgs e)
+        {
             var settings = File.ReadLines(csatpath);
 
             foreach (var lineRead in settings)
