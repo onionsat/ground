@@ -612,7 +612,8 @@ namespace OnionSAT
                             comm.Write("radio set mod " + lora_mod + "\r\n");
                         }
 
-                    } else-*/ if (lorasetup == 2)
+                    } else-*/
+                    if (lorasetup == 2)
                     {
                         if (rawdata.Contains("ok"))
                         {
@@ -1068,7 +1069,7 @@ namespace OnionSAT
                 serialPort.Open();
                 serialPort.DataReceived += new SerialDataReceivedEventHandler(Port_DataReceived);
                 serialPort.ErrorReceived += new SerialErrorReceivedEventHandler(Port_ErrorReceived);
-               
+
 
 
 
@@ -1117,7 +1118,7 @@ namespace OnionSAT
 
                 lorasetup = 0;
                 serialPort.Write("sys reset\r\n");
-                
+
             }
             catch (Exception ex)
             {
@@ -1470,7 +1471,7 @@ namespace OnionSAT
         }
 
 
-        
+
 
         async void cloudStationAdatokTörléseToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1589,6 +1590,12 @@ namespace OnionSAT
             {
                 MessageBox.Show(ex.ToString(), "An error occurred during export.", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void updateMapDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UpdateMapData UpdateMapData = new UpdateMapData();
+            UpdateMapData.ShowDialog();
         }
     }
 }

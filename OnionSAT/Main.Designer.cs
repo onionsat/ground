@@ -48,8 +48,6 @@
             légnyomásGrafikonToolStripMenuItem = new ToolStripMenuItem();
             magasságGrafikonToolStripMenuItem = new ToolStripMenuItem();
             tengelyesGyorsulásmértGrafikonToolStripMenuItem = new ToolStripMenuItem();
-            methaneGraphToolStripMenuItem = new ToolStripMenuItem();
-            carbonDioxideGraphToolStripMenuItem = new ToolStripMenuItem();
             információkToolStripMenuItem = new ToolStripMenuItem();
             névjegyToolStripMenuItem = new ToolStripMenuItem();
             pictureBox1 = new PictureBox();
@@ -81,6 +79,7 @@
             paratartalomGrafikon = new OxyPlot.WindowsForms.PlotView();
             gyorsulasMertGrafikon = new OxyPlot.WindowsForms.PlotView();
             tableLayoutPanel2 = new TableLayoutPanel();
+            updateMapDataToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
@@ -122,7 +121,7 @@
             // 
             kapcsolódásToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kapcsolatLétrehozásaToolStripMenuItem, kapcsolatBontásaToolStripMenuItem });
             kapcsolódásToolStripMenuItem.Name = "kapcsolódásToolStripMenuItem";
-            kapcsolódásToolStripMenuItem.Size = new Size(165, 22);
+            kapcsolódásToolStripMenuItem.Size = new Size(180, 22);
             kapcsolódásToolStripMenuItem.Text = "Serial connection";
             // 
             // kapcsolatLétrehozásaToolStripMenuItem
@@ -143,14 +142,14 @@
             // beállításokToolStripMenuItem
             // 
             beállításokToolStripMenuItem.Name = "beállításokToolStripMenuItem";
-            beállításokToolStripMenuItem.Size = new Size(165, 22);
+            beállításokToolStripMenuItem.Size = new Size(180, 22);
             beállításokToolStripMenuItem.Text = "Settings";
             beállításokToolStripMenuItem.Click += BeállításokToolStripMenuItem_Click;
             // 
             // loRaBeállításokToolStripMenuItem
             // 
             loRaBeállításokToolStripMenuItem.Name = "loRaBeállításokToolStripMenuItem";
-            loRaBeállításokToolStripMenuItem.Size = new Size(165, 22);
+            loRaBeállításokToolStripMenuItem.Size = new Size(180, 22);
             loRaBeállításokToolStripMenuItem.Text = "LoRa settings";
             loRaBeállításokToolStripMenuItem.Click += loRaBeállításokToolStripMenuItem_Click;
             // 
@@ -192,9 +191,9 @@
             // 
             // pNGToolStripMenuItem
             // 
-            pNGToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { térképToolStripMenuItem, hőmérsékletGrafikonToolStripMenuItem, relatívPáratartalomGrafikonToolStripMenuItem, légnyomásGrafikonToolStripMenuItem, magasságGrafikonToolStripMenuItem, tengelyesGyorsulásmértGrafikonToolStripMenuItem, methaneGraphToolStripMenuItem, carbonDioxideGraphToolStripMenuItem });
+            pNGToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { térképToolStripMenuItem, hőmérsékletGrafikonToolStripMenuItem, relatívPáratartalomGrafikonToolStripMenuItem, légnyomásGrafikonToolStripMenuItem, magasságGrafikonToolStripMenuItem, tengelyesGyorsulásmértGrafikonToolStripMenuItem });
             pNGToolStripMenuItem.Name = "pNGToolStripMenuItem";
-            pNGToolStripMenuItem.Size = new Size(98, 22);
+            pNGToolStripMenuItem.Size = new Size(180, 22);
             pNGToolStripMenuItem.Text = "PNG";
             // 
             // térképToolStripMenuItem
@@ -240,23 +239,9 @@
             tengelyesGyorsulásmértGrafikonToolStripMenuItem.Text = "3-axis acceleration graph";
             tengelyesGyorsulásmértGrafikonToolStripMenuItem.Click += TengelyesGyorsulásmértGrafikonToolStripMenuItem_Click;
             // 
-            // methaneGraphToolStripMenuItem
-            // 
-            methaneGraphToolStripMenuItem.Name = "methaneGraphToolStripMenuItem";
-            methaneGraphToolStripMenuItem.Size = new Size(206, 22);
-            methaneGraphToolStripMenuItem.Text = "Methane graph";
-            methaneGraphToolStripMenuItem.Click += methaneGraphToolStripMenuItem_Click;
-            // 
-            // carbonDioxideGraphToolStripMenuItem
-            // 
-            carbonDioxideGraphToolStripMenuItem.Name = "carbonDioxideGraphToolStripMenuItem";
-            carbonDioxideGraphToolStripMenuItem.Size = new Size(206, 22);
-            carbonDioxideGraphToolStripMenuItem.Text = "Carbon dioxide graph";
-            carbonDioxideGraphToolStripMenuItem.Click += carbonDioxideGraphToolStripMenuItem_Click;
-            // 
             // információkToolStripMenuItem
             // 
-            információkToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { névjegyToolStripMenuItem });
+            információkToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { updateMapDataToolStripMenuItem, névjegyToolStripMenuItem });
             információkToolStripMenuItem.Name = "információkToolStripMenuItem";
             információkToolStripMenuItem.Size = new Size(82, 22);
             információkToolStripMenuItem.Text = "Information";
@@ -264,7 +249,7 @@
             // névjegyToolStripMenuItem
             // 
             névjegyToolStripMenuItem.Name = "névjegyToolStripMenuItem";
-            névjegyToolStripMenuItem.Size = new Size(107, 22);
+            névjegyToolStripMenuItem.Size = new Size(180, 22);
             névjegyToolStripMenuItem.Text = "About";
             névjegyToolStripMenuItem.Click += NévjegyToolStripMenuItem_Click;
             // 
@@ -656,6 +641,13 @@
             tableLayoutPanel2.Size = new Size(1878, 46);
             tableLayoutPanel2.TabIndex = 18;
             // 
+            // updateMapDataToolStripMenuItem
+            // 
+            updateMapDataToolStripMenuItem.Name = "updateMapDataToolStripMenuItem";
+            updateMapDataToolStripMenuItem.Size = new Size(180, 22);
+            updateMapDataToolStripMenuItem.Text = "Update map data";
+            updateMapDataToolStripMenuItem.Click += updateMapDataToolStripMenuItem_Click;
+            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -747,7 +739,6 @@
         private TableLayoutPanel tableLayoutPanel2;
         private ToolStripMenuItem loRaBeállításokToolStripMenuItem;
         private ToolStripMenuItem cloudStationAdatokTörléseToolStripMenuItem;
-        private ToolStripMenuItem methaneGraphToolStripMenuItem;
-        private ToolStripMenuItem carbonDioxideGraphToolStripMenuItem;
+        private ToolStripMenuItem updateMapDataToolStripMenuItem;
     }
 }
