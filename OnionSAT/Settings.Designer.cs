@@ -41,7 +41,7 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(5, 26);
+            comboBox1.Location = new Point(8, 26);
             comboBox1.Margin = new Padding(2);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(274, 23);
@@ -54,7 +54,7 @@
             button1.Name = "button1";
             button1.Size = new Size(78, 25);
             button1.TabIndex = 1;
-            button1.Text = "Mentés";
+            button1.Text = "Save";
             button1.UseVisualStyleBackColor = true;
             button1.Click += Button1_Click;
             // 
@@ -82,7 +82,7 @@
             label1.Name = "label1";
             label1.Size = new Size(148, 15);
             label1.TabIndex = 4;
-            label1.Text = "Serial kommunikációs port";
+            label1.Text = "Serial port";
             // 
             // label2
             // 
@@ -92,7 +92,7 @@
             label2.Name = "label2";
             label2.Size = new Size(72, 15);
             label2.TabIndex = 5;
-            label2.Text = "API végpont";
+            label2.Text = "API endpoint";
             // 
             // label3
             // 
@@ -102,7 +102,7 @@
             label3.Name = "label3";
             label3.Size = new Size(55, 15);
             label3.TabIndex = 6;
-            label3.Text = "API kulcs";
+            label3.Text = "API key";
             // 
             // Settings
             // 
@@ -116,11 +116,14 @@
             Controls.Add(textBox1);
             Controls.Add(button1);
             Controls.Add(comboBox1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(2);
             Name = "Settings";
             StartPosition = FormStartPosition.Manual;
-            Text = "Beállítások";
+            Text = "Settings";
             ResumeLayout(false);
             PerformLayout();
         }

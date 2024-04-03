@@ -43,7 +43,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(12, 52);
+            button1.Location = new Point(287, 53);
             button1.Name = "button1";
             button1.Size = new Size(125, 36);
             button1.TabIndex = 3;
@@ -53,7 +53,7 @@
             // 
             // button2
             // 
-            button2.Location = new Point(287, 51);
+            button2.Location = new Point(12, 52);
             button2.Name = "button2";
             button2.Size = new Size(125, 37);
             button2.TabIndex = 8;
@@ -69,9 +69,13 @@
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(progressBar1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "UpdateMapData";
-            Text = "UpdateMapData";
+            Text = "Update map data";
+            FormClosing += UpdateMapData_FormClosing;
             ResumeLayout(false);
         }
 

@@ -432,11 +432,11 @@ namespace OnionSAT
                 {
                     BeginInvoke(new Action(() =>
                     {
-                        if (label8.Text != "Nincs internetkapcsolat")
+                        if (label8.Text != "No internet connection")
                         {
                             new ToastContentBuilder()
                                 .AddText("Internet connection")
-                                .AddText("The Internet connection has been lost.")
+                                .AddText("The internet connection has been lost.")
                                 .Show();
                         }
                         label8.Text = "No internet connection";
@@ -1505,15 +1505,16 @@ namespace OnionSAT
                 var responseString = await response.Content.ReadAsStringAsync();
                 if (responseString == "OK")
                 {
-                    MessageBox.Show("Sikeres mûvelet!");
+                    MessageBox.Show("Sucessful data deletion.");
                 }
                 else
                 {
-                    MessageBox.Show("Sikertelen mûvelet!");
+                    MessageBox.Show("An unexpected error ocurred. (500)");
                 }
             }
             catch (Exception ex)
             {
+                MessageBox.Show("Can't connect to the server.");
                 try
                 {
                     //Port_ErrorReceived(null, null);
@@ -1594,8 +1595,13 @@ namespace OnionSAT
 
         private void updateMapDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            string path2 = Path.Combine(specificFolder, "map");
+            string path3 = Path.Combine(path2, "def_map");
+            gMapControl1.CacheLocation = path3;
             UpdateMapData UpdateMapData = new UpdateMapData();
             UpdateMapData.ShowDialog();
+            gMapControl1.CacheLocation = path2;
         }
+
     }
 }

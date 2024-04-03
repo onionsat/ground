@@ -71,7 +71,7 @@ namespace OnionSAT
                 sw.Close();
             }
 
-            MessageBox.Show("Sikeres mentés!");
+            MessageBox.Show("Successful save.");
             this.Close();
         }
     }

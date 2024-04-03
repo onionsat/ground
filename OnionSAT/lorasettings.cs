@@ -30,50 +30,6 @@ namespace OnionSAT
             InitializeComponent();
         }
 
-        public void updateLora(string newText, int loraloadcounter)
-        {
-            if (loraloadcounter == 1)
-            {
-                label1.Text = newText;
-            }
-            else if (loraloadcounter == 2)
-            {
-                textBox1.Text = newText;
-            }
-            else if (loraloadcounter == 3)
-            {
-                textBox2.Text = newText;
-            }
-            else if (loraloadcounter == 4)
-            {
-                textBox3.Text = newText;
-            }
-            else if (loraloadcounter == 5)
-            {
-                textBox4.Text = newText;
-            }
-            else if (loraloadcounter == 6)
-            {
-                textBox5.Text = newText;
-            }
-            else if (loraloadcounter == 7)
-            {
-                textBox6.Text = newText;
-            }
-            else if (loraloadcounter == 8)
-            {
-                textBox7.Text = newText;
-            }
-            else if (loraloadcounter == 9)
-            {
-                textBox8.Text = newText;
-            }
-            else if (loraloadcounter == 10)
-            {
-                textBox9.Text = newText;
-            }
-        }
-
         private void lorasettings_FormClosing(object sender, FormClosingEventArgs e)
         {
         }
@@ -217,18 +173,37 @@ namespace OnionSAT
 
         private void button2_Click(object sender, EventArgs e)
         {
-            using (StreamWriter sw = File.CreateText(csatpath))
+            try
+            {
+                using (StreamWriter sw = File.CreateText(csatpath))
             {
                 sw.Write("lora_mod=" + textBox1.Text + "\nlora_freq=" + textBox2.Text + "\nlora_pwr=" + textBox3.Text + "\nlora_sf=" + textBox4.Text + "\nlora_crc=" + textBox5.Text + "\nlora_cr=" + textBox6.Text + "\nlora_bw=" + textBox7.Text + "\nlora_sync=" + textBox8.Text + "\nlora_pa=" + textBox9.Text + "");
                 sw.Close();
             }
 
-            MessageBox.Show("Sikeres mentés!");
+            MessageBox.Show("Succesful save.");
+            this.Close();
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    var Tstamp = GetTimestamp(DateTime.Now);
+                    if (Errorpath != "")
+                    {
+                        File.AppendAllText(Errorpath, Tstamp + " -> " + ex.ToString() + Environment.NewLine);
+                    }
+                }
+                catch (Exception ex2)
+                {
+                    MessageBox.Show(ex2.ToString(), "Error handling failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        public static String GetTimestamp(DateTime value)
         {
-
+            return value.ToString("yyyy-MM-dd HH-mm-ss.ffff");
         }
 
         private void lorasettings_Load(object sender, EventArgs e)
