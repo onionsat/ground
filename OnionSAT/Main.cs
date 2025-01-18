@@ -446,7 +446,7 @@ namespace OnionSAT
 
                 using (StreamWriter sw = File.CreateText(csatpath))
                 {
-                    sw.Write("lora_mod=lora\nlora_freq=868100000\nlora_pwr=1\nlora_sf=sf7\nlora_crc=on\nlora_cr=3/4\nlora_bw=125\nlora_sync=34\nlora_pa=on");
+                    sw.Write("lora_mod=lora\nlora_freq=864875000\nlora_pwr=14\nlora_sf=sf9\nlora_crc=on\nlora_cr=3/4\nlora_bw=250\nlora_sync=35\nlora_pa=off");
                     sw.Close();
                 }
             }
