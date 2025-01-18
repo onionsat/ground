@@ -49,8 +49,8 @@
             magasságGrafikonToolStripMenuItem = new ToolStripMenuItem();
             tengelyesGyorsulásmértGrafikonToolStripMenuItem = new ToolStripMenuItem();
             információkToolStripMenuItem = new ToolStripMenuItem();
+            updateMapDataToolStripMenuItem = new ToolStripMenuItem();
             névjegyToolStripMenuItem = new ToolStripMenuItem();
-            pictureBox1 = new PictureBox();
             panel2 = new Panel();
             label8 = new Label();
             pictureBox11 = new PictureBox();
@@ -68,20 +68,15 @@
             pictureBox3 = new PictureBox();
             label2 = new Label();
             label1 = new Label();
-            pictureBox2 = new PictureBox();
-            pictureBox10 = new PictureBox();
-            pictureBox12 = new PictureBox();
             tableLayoutPanel1 = new TableLayoutPanel();
             gMapControl1 = new GMap.NET.WindowsForms.GMapControl();
             homersekletGrafikon = new OxyPlot.WindowsForms.PlotView();
             legnyomasGrafikon = new OxyPlot.WindowsForms.PlotView();
-            magassagGrafikon = new OxyPlot.WindowsForms.PlotView();
+            giroszGrafikon = new OxyPlot.WindowsForms.PlotView();
             paratartalomGrafikon = new OxyPlot.WindowsForms.PlotView();
             gyorsulasMertGrafikon = new OxyPlot.WindowsForms.PlotView();
             tableLayoutPanel2 = new TableLayoutPanel();
-            updateMapDataToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox11).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox9).BeginInit();
@@ -91,9 +86,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox10).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox12).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
@@ -121,7 +113,7 @@
             // 
             kapcsolódásToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { kapcsolatLétrehozásaToolStripMenuItem, kapcsolatBontásaToolStripMenuItem });
             kapcsolódásToolStripMenuItem.Name = "kapcsolódásToolStripMenuItem";
-            kapcsolódásToolStripMenuItem.Size = new Size(180, 22);
+            kapcsolódásToolStripMenuItem.Size = new Size(165, 22);
             kapcsolódásToolStripMenuItem.Text = "Serial connection";
             // 
             // kapcsolatLétrehozásaToolStripMenuItem
@@ -142,14 +134,14 @@
             // beállításokToolStripMenuItem
             // 
             beállításokToolStripMenuItem.Name = "beállításokToolStripMenuItem";
-            beállításokToolStripMenuItem.Size = new Size(180, 22);
+            beállításokToolStripMenuItem.Size = new Size(165, 22);
             beállításokToolStripMenuItem.Text = "Settings";
             beállításokToolStripMenuItem.Click += BeállításokToolStripMenuItem_Click;
             // 
             // loRaBeállításokToolStripMenuItem
             // 
             loRaBeállításokToolStripMenuItem.Name = "loRaBeállításokToolStripMenuItem";
-            loRaBeállításokToolStripMenuItem.Size = new Size(180, 22);
+            loRaBeállításokToolStripMenuItem.Size = new Size(165, 22);
             loRaBeállításokToolStripMenuItem.Text = "LoRa settings";
             loRaBeállításokToolStripMenuItem.Click += loRaBeállításokToolStripMenuItem_Click;
             // 
@@ -193,7 +185,7 @@
             // 
             pNGToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { térképToolStripMenuItem, hőmérsékletGrafikonToolStripMenuItem, relatívPáratartalomGrafikonToolStripMenuItem, légnyomásGrafikonToolStripMenuItem, magasságGrafikonToolStripMenuItem, tengelyesGyorsulásmértGrafikonToolStripMenuItem });
             pNGToolStripMenuItem.Name = "pNGToolStripMenuItem";
-            pNGToolStripMenuItem.Size = new Size(180, 22);
+            pNGToolStripMenuItem.Size = new Size(98, 22);
             pNGToolStripMenuItem.Text = "PNG";
             // 
             // térképToolStripMenuItem
@@ -246,22 +238,19 @@
             információkToolStripMenuItem.Size = new Size(82, 22);
             információkToolStripMenuItem.Text = "Information";
             // 
+            // updateMapDataToolStripMenuItem
+            // 
+            updateMapDataToolStripMenuItem.Name = "updateMapDataToolStripMenuItem";
+            updateMapDataToolStripMenuItem.Size = new Size(165, 22);
+            updateMapDataToolStripMenuItem.Text = "Update map data";
+            updateMapDataToolStripMenuItem.Click += updateMapDataToolStripMenuItem_Click;
+            // 
             // névjegyToolStripMenuItem
             // 
             névjegyToolStripMenuItem.Name = "névjegyToolStripMenuItem";
-            névjegyToolStripMenuItem.Size = new Size(180, 22);
+            névjegyToolStripMenuItem.Size = new Size(165, 22);
             névjegyToolStripMenuItem.Text = "About";
             névjegyToolStripMenuItem.Click += NévjegyToolStripMenuItem_Click;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.rackforest_logo01;
-            pictureBox1.Location = new Point(16, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(138, 48);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 13;
-            pictureBox1.TabStop = false;
             // 
             // panel2
             // 
@@ -282,10 +271,6 @@
             panel2.Controls.Add(pictureBox3);
             panel2.Controls.Add(label2);
             panel2.Controls.Add(label1);
-            panel2.Controls.Add(pictureBox2);
-            panel2.Controls.Add(pictureBox1);
-            panel2.Controls.Add(pictureBox10);
-            panel2.Controls.Add(pictureBox12);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 0);
             panel2.Margin = new Padding(0);
@@ -298,7 +283,7 @@
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
             label8.ForeColor = Color.White;
-            label8.Location = new Point(791, 28);
+            label8.Location = new Point(559, 28);
             label8.Name = "label8";
             label8.Size = new Size(130, 15);
             label8.TabIndex = 25;
@@ -308,7 +293,7 @@
             // 
             pictureBox11.BackColor = Color.Transparent;
             pictureBox11.Image = Properties.Resources.ethernet;
-            pictureBox11.Location = new Point(769, 27);
+            pictureBox11.Location = new Point(537, 27);
             pictureBox11.Name = "pictureBox11";
             pictureBox11.Size = new Size(16, 16);
             pictureBox11.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -320,7 +305,7 @@
             label7.AutoSize = true;
             label7.BackColor = Color.Transparent;
             label7.ForeColor = Color.White;
-            label7.Location = new Point(791, 5);
+            label7.Location = new Point(559, 5);
             label7.Name = "label7";
             label7.Size = new Size(119, 15);
             label7.TabIndex = 24;
@@ -330,7 +315,7 @@
             // 
             pictureBox9.BackColor = Color.Transparent;
             pictureBox9.Image = Properties.Resources.mappafa;
-            pictureBox9.Location = new Point(769, 5);
+            pictureBox9.Location = new Point(537, 5);
             pictureBox9.Name = "pictureBox9";
             pictureBox9.Size = new Size(16, 16);
             pictureBox9.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -342,7 +327,7 @@
             label6.AutoSize = true;
             label6.BackColor = Color.Transparent;
             label6.ForeColor = Color.White;
-            label6.Location = new Point(597, 27);
+            label6.Location = new Point(365, 27);
             label6.Name = "label6";
             label6.Size = new Size(103, 15);
             label6.TabIndex = 22;
@@ -353,7 +338,7 @@
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
             label5.ForeColor = Color.White;
-            label5.Location = new Point(597, 5);
+            label5.Location = new Point(365, 5);
             label5.Name = "label5";
             label5.Size = new Size(109, 15);
             label5.TabIndex = 17;
@@ -363,7 +348,7 @@
             // 
             pictureBox8.BackColor = Color.Transparent;
             pictureBox8.Image = Properties.Resources.wifi;
-            pictureBox8.Location = new Point(571, 4);
+            pictureBox8.Location = new Point(339, 4);
             pictureBox8.Name = "pictureBox8";
             pictureBox8.Size = new Size(20, 16);
             pictureBox8.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -374,7 +359,7 @@
             // 
             pictureBox7.BackColor = Color.Transparent;
             pictureBox7.Image = Properties.Resources.adatbazis;
-            pictureBox7.Location = new Point(573, 26);
+            pictureBox7.Location = new Point(341, 26);
             pictureBox7.Name = "pictureBox7";
             pictureBox7.Size = new Size(16, 16);
             pictureBox7.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -386,7 +371,7 @@
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
             label4.ForeColor = Color.White;
-            label4.Location = new Point(260, 26);
+            label4.Location = new Point(28, 26);
             label4.Name = "label4";
             label4.Size = new Size(56, 15);
             label4.TabIndex = 17;
@@ -396,7 +381,7 @@
             // 
             label3.AutoSize = true;
             label3.ForeColor = Color.Transparent;
-            label3.Location = new Point(432, 27);
+            label3.Location = new Point(200, 27);
             label3.Name = "label3";
             label3.Size = new Size(108, 15);
             label3.TabIndex = 17;
@@ -406,7 +391,7 @@
             // 
             pictureBox6.BackColor = Color.Transparent;
             pictureBox6.Image = Properties.Resources.chart_magnify;
-            pictureBox6.Location = new Point(410, 4);
+            pictureBox6.Location = new Point(178, 4);
             pictureBox6.Name = "pictureBox6";
             pictureBox6.Size = new Size(16, 16);
             pictureBox6.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -417,7 +402,7 @@
             // 
             pictureBox5.BackColor = Color.Transparent;
             pictureBox5.Image = Properties.Resources.felkialtojel;
-            pictureBox5.Location = new Point(410, 26);
+            pictureBox5.Location = new Point(178, 26);
             pictureBox5.Name = "pictureBox5";
             pictureBox5.Size = new Size(16, 16);
             pictureBox5.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -428,7 +413,7 @@
             // 
             pictureBox4.BackColor = Color.Transparent;
             pictureBox4.Image = Properties.Resources.serial;
-            pictureBox4.Location = new Point(238, 4);
+            pictureBox4.Location = new Point(6, 4);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(20, 16);
             pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -439,7 +424,7 @@
             // 
             pictureBox3.BackColor = Color.Transparent;
             pictureBox3.Image = Properties.Resources.muhold;
-            pictureBox3.Location = new Point(238, 26);
+            pictureBox3.Location = new Point(6, 26);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(16, 16);
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -450,7 +435,7 @@
             // 
             label2.AutoSize = true;
             label2.ForeColor = Color.White;
-            label2.Location = new Point(260, 4);
+            label2.Location = new Point(28, 4);
             label2.Name = "label2";
             label2.Size = new Size(86, 15);
             label2.TabIndex = 16;
@@ -460,45 +445,11 @@
             // 
             label1.AutoSize = true;
             label1.ForeColor = Color.White;
-            label1.Location = new Point(432, 5);
+            label1.Location = new Point(200, 5);
             label1.Name = "label1";
             label1.Size = new Size(32, 15);
             label1.TabIndex = 15;
             label1.Text = "0 ms";
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.BackColor = Color.Transparent;
-            pictureBox2.Image = Properties.Resources.bdg;
-            pictureBox2.Location = new Point(166, -3);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(61, 62);
-            pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox2.TabIndex = 14;
-            pictureBox2.TabStop = false;
-            // 
-            // pictureBox10
-            // 
-            pictureBox10.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            pictureBox10.BackColor = Color.Transparent;
-            pictureBox10.Image = Properties.Resources.pnlkft_verylight;
-            pictureBox10.Location = new Point(959, -75);
-            pictureBox10.Name = "pictureBox10";
-            pictureBox10.Size = new Size(200, 200);
-            pictureBox10.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox10.TabIndex = 17;
-            pictureBox10.TabStop = false;
-            // 
-            // pictureBox12
-            // 
-            pictureBox12.BackColor = Color.Transparent;
-            pictureBox12.Image = Properties.Resources.chipcad;
-            pictureBox12.Location = new Point(1165, 7);
-            pictureBox12.Name = "pictureBox12";
-            pictureBox12.Size = new Size(96, 34);
-            pictureBox12.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox12.TabIndex = 26;
-            pictureBox12.TabStop = false;
             // 
             // tableLayoutPanel1
             // 
@@ -511,7 +462,7 @@
             tableLayoutPanel1.Controls.Add(gMapControl1, 1, 0);
             tableLayoutPanel1.Controls.Add(homersekletGrafikon, 0, 0);
             tableLayoutPanel1.Controls.Add(legnyomasGrafikon, 0, 1);
-            tableLayoutPanel1.Controls.Add(magassagGrafikon, 1, 2);
+            tableLayoutPanel1.Controls.Add(giroszGrafikon, 1, 2);
             tableLayoutPanel1.Controls.Add(paratartalomGrafikon, 0, 2);
             tableLayoutPanel1.Controls.Add(gyorsulasMertGrafikon, 2, 2);
             tableLayoutPanel1.Location = new Point(0, 27);
@@ -582,19 +533,19 @@
             legnyomasGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
             legnyomasGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
-            // magassagGrafikon
+            // giroszGrafikon
             // 
-            magassagGrafikon.BackColor = Color.White;
-            magassagGrafikon.Dock = DockStyle.Fill;
-            magassagGrafikon.Location = new Point(424, 409);
-            magassagGrafikon.Name = "magassagGrafikon";
-            magassagGrafikon.PanCursor = Cursors.Hand;
-            magassagGrafikon.Size = new Size(415, 197);
-            magassagGrafikon.TabIndex = 10;
-            magassagGrafikon.Text = "plotView4";
-            magassagGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
-            magassagGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
-            magassagGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
+            giroszGrafikon.BackColor = Color.White;
+            giroszGrafikon.Dock = DockStyle.Fill;
+            giroszGrafikon.Location = new Point(424, 409);
+            giroszGrafikon.Name = "giroszGrafikon";
+            giroszGrafikon.PanCursor = Cursors.Hand;
+            giroszGrafikon.Size = new Size(415, 197);
+            giroszGrafikon.TabIndex = 10;
+            giroszGrafikon.Text = "plotView4";
+            giroszGrafikon.ZoomHorizontalCursor = Cursors.SizeWE;
+            giroszGrafikon.ZoomRectangleCursor = Cursors.SizeNWSE;
+            giroszGrafikon.ZoomVerticalCursor = Cursors.SizeNS;
             // 
             // paratartalomGrafikon
             // 
@@ -641,13 +592,6 @@
             tableLayoutPanel2.Size = new Size(1878, 46);
             tableLayoutPanel2.TabIndex = 18;
             // 
-            // updateMapDataToolStripMenuItem
-            // 
-            updateMapDataToolStripMenuItem.Name = "updateMapDataToolStripMenuItem";
-            updateMapDataToolStripMenuItem.Size = new Size(180, 22);
-            updateMapDataToolStripMenuItem.Text = "Update map data";
-            updateMapDataToolStripMenuItem.Click += updateMapDataToolStripMenuItem_Click;
-            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -666,7 +610,6 @@
             Resize += Main_Resize;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox11).EndInit();
@@ -677,9 +620,6 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox10).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox12).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             ResumeLayout(false);
@@ -734,7 +674,7 @@
         private OxyPlot.WindowsForms.PlotView legnyomasGrafikon;
         private OxyPlot.WindowsForms.PlotView gyorsulasMertGrafikon;
         private OxyPlot.WindowsForms.PlotView gyorsulasGrafikon;
-        private OxyPlot.WindowsForms.PlotView magassagGrafikon;
+        private OxyPlot.WindowsForms.PlotView giroszGrafikon;
         private OxyPlot.WindowsForms.PlotView homersekletGrafikon;
         private TableLayoutPanel tableLayoutPanel2;
         private ToolStripMenuItem loRaBeállításokToolStripMenuItem;

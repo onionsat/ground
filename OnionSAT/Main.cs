@@ -35,7 +35,7 @@ namespace OnionSAT
         String Filepath = "";
         static readonly String Errorpath = Path.Combine(specificFolder, "error.txt");
         String Apikey = "", Apiendpoint = "";
-        private LineSeries temperatureSeries, humiditySeries, pressureSeries, accelerationSeries, accelerationRealSeries, accelerationRealSeries2, accelerationRealSeries3, altitudeSeries, accelerationSeries2, accelerationSeries3, metanSeries, co2Series;
+        private LineSeries temperatureSeries, temperatureSeries2, temperatureSeries3, humiditySeries, humiditySeries2, humiditySeries3, pressureSeries, pressureSeries2, pressureSeries3, accelerationSeries, accelerationRealSeries, accelerationRealSeries2, accelerationRealSeries3, gyroSeries, gyroSeries2, gyroSeries3, accelerationSeries2, accelerationSeries3, metanSeries, co2Series;
         private static readonly HttpClient client = new();
         PlotModel plotModel, plotModel2, plotModel3, plotModel4, plotModel5, plotModel6, metanModel, co2Model;
         static readonly string csatpath = Path.Combine(specificFolder, "settings.csat");
@@ -46,10 +46,6 @@ namespace OnionSAT
         {
 
             InitializeComponent();
-            temperatureSeries = new LineSeries
-            {
-                Title = "Temperature"
-            };
 
             // Hozz létre egy PlotModel-t
             plotModel = new PlotModel
@@ -57,23 +53,47 @@ namespace OnionSAT
                 Title = "Temperature",
                 Axes = {
             new DateTimeAxis {
-              Position = AxisPosition.Bottom, Title = "Time", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
+                Position = AxisPosition.Bottom, Title = "Time", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
             },
             new LinearAxis {
-              Position = AxisPosition.Left, Title = "°C"
+                Position = AxisPosition.Left, Title = "°C"
             }
-          },
+        },
             };
 
-            // Adjuk hozzá a LineSeries-t a PlotModel-hez
+            // Hozz létre és adj hozzá minden LineSeries-t a PlotModel-hez
+            temperatureSeries = new LineSeries
+            {
+                Title = "BME2801"
+            };
             plotModel.Series.Add(temperatureSeries);
+
+            temperatureSeries2 = new LineSeries
+            {
+                Title = "BME2802"
+            };
+            plotModel.Series.Add(temperatureSeries2);
+
+            temperatureSeries3 = new LineSeries
+            {
+                Title = "BME680"
+            };
+            plotModel.Series.Add(temperatureSeries3);
 
             // Állítsuk be a PlotModel-t a PlotView-ban
             homersekletGrafikon.Model = plotModel;
 
             pressureSeries = new LineSeries
             {
-                Title = "Humidity"
+                Title = "BME2801"
+            };
+            pressureSeries2 = new LineSeries
+            {
+                Title = "BME2802"
+            };
+            pressureSeries3 = new LineSeries
+            {
+                Title = "BME680"
             };
 
             // Hozz létre egy PlotModel-t
@@ -92,13 +112,23 @@ namespace OnionSAT
 
             // Adjuk hozzá a LineSeries-t a PlotModel-hez
             plotModel2.Series.Add(pressureSeries);
+            plotModel2.Series.Add(pressureSeries2);
+            plotModel2.Series.Add(pressureSeries3);
 
             // Állítsuk be a PlotModel-t a PlotView-ban
             paratartalomGrafikon.Model = plotModel2;
 
             humiditySeries = new LineSeries
             {
-                Title = "Pressure"
+                Title = "BME2801"
+            };
+            humiditySeries2 = new LineSeries
+            {
+                Title = "BME2802"
+            };
+            humiditySeries3 = new LineSeries
+            {
+                Title = "BME680"
             };
 
             // Hozz létre egy PlotModel-t
@@ -117,6 +147,8 @@ namespace OnionSAT
 
             // Adjuk hozzá a LineSeries-t a PlotModel-hez
             plotModel3.Series.Add(humiditySeries);
+            plotModel3.Series.Add(humiditySeries2);
+            plotModel3.Series.Add(humiditySeries3);
 
             // Állítsuk be a PlotModel-t a PlotView-ban
             legnyomasGrafikon.Model = plotModel3;
@@ -195,30 +227,42 @@ namespace OnionSAT
              // Állítsuk be a PlotModel-t a PlotView-ban
              gyorsulasMertGrafikon.Model = plotModel5; */
 
-            altitudeSeries = new LineSeries
+            gyroSeries = new LineSeries
             {
-                Title = "Altitude"
+                Title = "X"
             };
+            gyroSeries2 = new LineSeries
+            {
+                Title = "Y"
+            };
+
+            gyroSeries3 = new LineSeries
+            {
+                Title = "Z"
+            };
+
 
             // Hozz létre egy PlotModel-t
             plotModel6 = new PlotModel
             {
-                Title = "Altitude",
+                Title = "Gyroscope",
                 Axes = {
             new DateTimeAxis {
               Position = AxisPosition.Bottom, Title = "Time", StringFormat = "HH:mm:ss", MajorGridlineStyle = LineStyle.Solid, MinorGridlineStyle = LineStyle.Dot
             },
             new LinearAxis {
-              Position = AxisPosition.Left, Title = "m"
+              Position = AxisPosition.Left, Title = "rad/s"
             }
           },
             };
 
             // Adjuk hozzá a LineSeries-t a PlotModel-hez
-            plotModel6.Series.Add(altitudeSeries);
+            plotModel6.Series.Add(gyroSeries);
+            plotModel6.Series.Add(gyroSeries2);
+            plotModel6.Series.Add(gyroSeries3);
 
             // Állítsuk be a PlotModel-t a PlotView-ban
-            magassagGrafikon.Model = plotModel6;
+            giroszGrafikon.Model = plotModel6;
 
 
 
@@ -284,51 +328,59 @@ namespace OnionSAT
             return dateTime;
         }
 
-        private void UpdateTempGraph(string Temp, long Timestamp)
+        private void UpdateTempGraph(float Temp1, float Temp2, float Temp3, long Timestamp)
         {
-            float homerseklet = float.Parse(Temp, CultureInfo.InvariantCulture.NumberFormat);
+
             // Hozzáadás az élõ adatokhoz
-            temperatureSeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), homerseklet));
+            temperatureSeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), Temp1));
+            temperatureSeries2.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), Temp2));
+            temperatureSeries3.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), Temp3));
 
             // Diagram frissítése
             homersekletGrafikon.InvalidatePlot(true);
+            return;
+
         }
 
-        private void UpdateHumidityGraph(string Temp, long Timestamp)
+        private void UpdateHumidityGraph(float Temp1, float Temp2, float Temp3, long Timestamp)
         {
-            float paratartalom = float.Parse(Temp, CultureInfo.InvariantCulture.NumberFormat);
             // Hozzáadás az élõ adatokhoz
-            humiditySeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), paratartalom));
+            humiditySeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), Temp1));
+            humiditySeries2.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), Temp2));
+            humiditySeries3.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), Temp3));
 
             // Diagram frissítése
             paratartalomGrafikon.InvalidatePlot(true);
+            return;
+
         }
 
-        private void UpdatePressureGraph(string Temp, long Timestamp)
+        private void UpdatePressureGraph(float Temp1, float Temp2, float Temp3, long Timestamp)
         {
-            float paratartalom = float.Parse(Temp, CultureInfo.InvariantCulture.NumberFormat);
             // Hozzáadás az élõ adatokhoz
-            pressureSeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), paratartalom));
+            pressureSeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), Temp1));
+            pressureSeries2.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), Temp2));
+            pressureSeries3.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), Temp3));
 
             // Diagram frissítése
             legnyomasGrafikon.InvalidatePlot(true);
+            return;
+
         }
 
-        private void UpdateAltitudeGraph(string Temp, long Timestamp)
+        private void UpdateGyroGraph(float Temp1, float Temp2, float Temp3, long Timestamp)
         {
-            float magassag = float.Parse(Temp, CultureInfo.InvariantCulture.NumberFormat);
             // Hozzáadás az élõ adatokhoz
-            altitudeSeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), magassag));
+            gyroSeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), Temp1));
+            gyroSeries2.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), Temp2));
+            gyroSeries3.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), Temp3));
 
             // Diagram frissítése
-            magassagGrafikon.InvalidatePlot(true);
+            giroszGrafikon.InvalidatePlot(true);
         }
 
-        private void UpdateAccelRealGraph(string gx, string gy, string gz, long Timestamp)
+        private void UpdateAccelRealGraph(float x, float y, float z, long Timestamp)
         {
-            float x = float.Parse(gx, CultureInfo.InvariantCulture.NumberFormat);
-            float y = float.Parse(gy, CultureInfo.InvariantCulture.NumberFormat);
-            float z = float.Parse(gz, CultureInfo.InvariantCulture.NumberFormat);
             // Hozzáadás az élõ adatokhoz
             accelerationRealSeries.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), x));
             accelerationRealSeries2.Points.Add(new OxyPlot.DataPoint(DateTimeAxis.ToDouble(JavaTimeStampToDateTime(Timestamp)), y));
@@ -336,6 +388,7 @@ namespace OnionSAT
 
             // Diagram frissítése
             gyorsulasMertGrafikon.InvalidatePlot(true);
+            return;
         }
 
         GMapOverlay o = new("o");
@@ -373,8 +426,6 @@ namespace OnionSAT
             netchecktimer.Elapsed += NetworkCheck;
 
             panel2.Width = this.Width;
-            pictureBox10.Location = new Point(Convert.ToInt32(this.Width - 320), -75);
-            pictureBox12.Location = new Point(Convert.ToInt32(this.Width - 120), 7);
 
 
 
@@ -587,172 +638,176 @@ namespace OnionSAT
                     if (rawdata.Contains("radio_rx") && lorasetup > 99)
                     {
 
-                        data = HexToAscii(rawdata.Replace("radio_rx", "").Replace(" ", "").Replace("\n", "").Replace("\r", ""));
+                        data = rawdata.Replace("radio_rx", "").Replace(" ", "").Replace("\n", "").Replace("\r", "").Replace("f", "").Replace("b", ".").Replace("e", "-");
+
                     }
 
                     //String lora_mod, lora_freq, lora_pwr, lora_sf, lora_crc, lora_cr, lora_bw, lora_sync, lora_pa;
 
+                    /*
+                                        if (rawdata.Contains("Last reset") && lorasetup == 0)
+                                        {
+                                            lorasetup = 2;
+                                            comm.Write("radio set freq " + lora_freq + "\r\n");
+                                            return;
+                                        }
 
-                    if (rawdata.Contains("Last reset") && lorasetup == 0)
+                                        if (lorasetup == 1)
+                                        {
+                                            if (rawdata.Contains("ok"))
+                                            {
+                                                lorasetup = 2;
+                                                comm.Write("radio set freq " + lora_freq + "\r\n");
+                                            } else
+                                            {
+                                                MessageBox.Show("DEBUG -> error level 1  radio set mod " + lora_mod + "\r\n");
+                                                comm.Write("radio set mod " + lora_mod + "\r\n");
+                                            }
+
+                                        } else
+                                        if (lorasetup == 2)
+                                        {
+                                            if (rawdata.Contains("ok"))
+                                            {
+                                                lorasetup = 3;
+                                                comm.Write("radio set pa " + lora_pa + "\r\n");
+                                                return;
+                                            }
+                                            else
+                                            {
+                                                comm.Write("radio set freq " + lora_freq + "\r\n");
+                                                return;
+                                            }
+
+                                        }
+                                        else if (lorasetup == 3)
+                                        {
+                                            if (rawdata.Contains("ok"))
+                                            {
+                                                lorasetup = 4;
+                                                comm.Write("radio set pwr " + lora_pwr + "\r\n");
+                                                return;
+                                            }
+                                            else
+                                            {
+                                                comm.Write("radio set pa " + lora_pa + "\r\n");
+                                                return;
+                                            }
+
+                                        }
+                                        else if (lorasetup == 4)
+                                        {
+                                            if (rawdata.Contains("ok"))
+                                            {
+                                                lorasetup = 5;
+                                                comm.Write("radio set sf " + lora_sf + "\r\n");
+                                                return;
+                                            }
+                                            else
+                                            {
+                                                comm.Write("radio set pwr " + lora_pwr + "\r\n");
+                                                return;
+                                            }
+
+                                        }
+                                        else if (lorasetup == 5)
+                                        {
+                                            if (rawdata.Contains("ok"))
+                                            {
+                                                lorasetup = 6;
+                                                comm.Write("radio set crc " + lora_crc + "\r\n");
+                                                return;
+                                            }
+                                            else
+                                            {
+                                                comm.Write("radio set sf " + lora_sf + "\r\n");
+                                                return;
+                                            }
+
+                                        }
+                                        else if (lorasetup == 6)
+                                        {
+                                            if (rawdata.Contains("ok"))
+                                            {
+                                                lorasetup = 8;
+                                                comm.Write("radio set bw " + lora_bw + "\r\n");
+                                                return;
+                                            }
+                                            else
+                                            {
+                                                comm.Write("radio set crc " + lora_crc + "\r\n");
+                                                return;
+                                            }
+
+                                        }
+                                        else if (lorasetup == 7)
+                                        {
+                                            if (rawdata.Contains("ok"))
+                                            {
+                                                lorasetup = 8;
+                                                comm.Write("radio set bw " + lora_bw + "\r\n");
+                                                return;
+                                            }
+                                            else
+                                            {
+                                                comm.Write("radio set cr " + lora_cr + "\r\n");
+                                                return;
+                                            }
+
+                                        }
+
+                                        else if (lorasetup == 8)
+                                        {
+                                            if (rawdata.Contains("ok"))
+                                            {
+                                                lorasetup = 9;
+                                                comm.Write("radio set sync " + lora_sync + "\r\n");
+                                                return;
+                                            }
+                                            else
+                                            {
+                                                comm.Write("radio set bw " + lora_bw + "\r\n");
+                                                return;
+                                            }
+
+                                        }
+                                        else if (lorasetup == 9)
+                                        {
+                                            if (rawdata.Contains("ok"))
+                                            { */
+                    /*comm.Write("radio rx 0\r\n");*/
+                    if (lorasetup == 100)
                     {
-                        lorasetup = 2;
-                        comm.Write("radio set freq " + lora_freq + "\r\n");
+                        lorasetup = 1000;
+                        timer.Start();
+                        globtimer.Start();
+                        globstopwatch.Restart();
+                        new ToastContentBuilder()
+             .AddText("Connection")
+             .AddText("The serial connection was successfully established.")
+             .Show();
                         return;
                     }
-
-                    /*if (lorasetup == 1)
-                    {
-                        if (rawdata.Contains("ok"))
-                        {
-                            lorasetup = 2;
-                            comm.Write("radio set freq " + lora_freq + "\r\n");
-                        } else
-                        {
-                            MessageBox.Show("DEBUG -> error level 1  radio set mod " + lora_mod + "\r\n");
-                            comm.Write("radio set mod " + lora_mod + "\r\n");
-                        }
-
-                    } else-*/
-                    if (lorasetup == 2)
-                    {
-                        if (rawdata.Contains("ok"))
-                        {
-                            lorasetup = 3;
-                            comm.Write("radio set pa " + lora_pa + "\r\n");
-                            return;
-                        }
-                        else
-                        {
-                            comm.Write("radio set freq " + lora_freq + "\r\n");
-                            return;
-                        }
-
-                    }
-                    else if (lorasetup == 3)
-                    {
-                        if (rawdata.Contains("ok"))
-                        {
-                            lorasetup = 4;
-                            comm.Write("radio set pwr " + lora_pwr + "\r\n");
-                            return;
-                        }
-                        else
-                        {
-                            comm.Write("radio set pa " + lora_pa + "\r\n");
-                            return;
-                        }
-
-                    }
-                    else if (lorasetup == 4)
-                    {
-                        if (rawdata.Contains("ok"))
-                        {
-                            lorasetup = 5;
-                            comm.Write("radio set sf " + lora_sf + "\r\n");
-                            return;
-                        }
-                        else
-                        {
-                            comm.Write("radio set pwr " + lora_pwr + "\r\n");
-                            return;
-                        }
-
-                    }
-                    else if (lorasetup == 5)
-                    {
-                        if (rawdata.Contains("ok"))
-                        {
-                            lorasetup = 6;
-                            comm.Write("radio set crc " + lora_crc + "\r\n");
-                            return;
-                        }
-                        else
-                        {
-                            comm.Write("radio set sf " + lora_sf + "\r\n");
-                            return;
-                        }
-
-                    }
-                    else if (lorasetup == 6)
-                    {
-                        if (rawdata.Contains("ok"))
-                        {
-                            lorasetup = 8;
-                            comm.Write("radio set bw " + lora_bw + "\r\n");
-                            return;
-                        }
-                        else
-                        {
-                            comm.Write("radio set crc " + lora_crc + "\r\n");
-                            return;
-                        }
-
-                    }
-                    else if (lorasetup == 7)
-                    {
-                        if (rawdata.Contains("ok"))
-                        {
-                            lorasetup = 8;
-                            comm.Write("radio set bw " + lora_bw + "\r\n");
-                            return;
-                        }
-                        else
-                        {
-                            comm.Write("radio set cr " + lora_cr + "\r\n");
-                            return;
-                        }
-
-                    }
-
-                    else if (lorasetup == 8)
-                    {
-                        if (rawdata.Contains("ok"))
-                        {
-                            lorasetup = 9;
-                            comm.Write("radio set sync " + lora_sync + "\r\n");
-                            return;
-                        }
-                        else
-                        {
-                            comm.Write("radio set bw " + lora_bw + "\r\n");
-                            return;
-                        }
-
-                    }
-                    else if (lorasetup == 9)
-                    {
-                        if (rawdata.Contains("ok"))
-                        {
-                            comm.Write("radio rx 0\r\n");
-                            lorasetup = 100;
-                            timer.Start();
-                            globtimer.Start();
-                            globstopwatch.Restart();
-                            new ToastContentBuilder()
-                 .AddText("Connection")
-                 .AddText("The serial connection was successfully established.")
-                 .Show();
-                            return;
-                        }
+                            
+                        /*}
                         else
                         {
                             comm.Write("radio set sync " + lora_sync + "\r\n");
                             return;
                         }
 
-                    }
+                    }*/
 
 
 
 
 
-                    //MessageBox.Show(comm.ReadLine());
 
-                    if (data.Contains('|') && rawdata.Contains("radio_rx") && lorasetup > 99)
+                    if (data.Contains('a') && rawdata.Contains("radio_rx") && lorasetup > 99)
                     {
                         var Tstamp = new DateTimeOffset(DateTime.UtcNow).ToUnixTimeMilliseconds();
                         BuildFromData(data, Tstamp);
-                        string[] args = data.Split("|");
+                        string[] args = data.Split("a");
                         if (args.Length == 11)
                         {
                             stopWatch.Restart();
@@ -899,61 +954,75 @@ namespace OnionSAT
 
         private void BuildFromData(string data, long Timestamp)
         {
-            string[] args = data.Split("|");
-            if (args.Length == 11)
-            {
+            string[] args = data.Split("a");
+            //if (args.Length == 11)
+            //{
+                string timestamp = args[0];
+                string lat = args[1];
+                string lon = args[2];
+
                 BeginInvoke(new Action(() =>
                 {
-                    string satelites = args[1];
+                    string satelites = args[3];
                     label4.Text = satelites + " satellite";
                 }));
 
-                string tempreture = args[4];
-                UpdateTempGraph(tempreture, Timestamp);
+                float tempreture = float.Parse(args[4])/100;
+            float tempreture2 = float.Parse(args[7]) / 100;
+            float tempreture3 = float.Parse(args[10]) / 100;
 
-                string coordinates = args[0];
-                UpdateMap(coordinates);
+            UpdateTempGraph(tempreture, tempreture2, tempreture3, Timestamp);
 
-                string humidity = args[6];
-                UpdateHumidityGraph(humidity, Timestamp);
+            
 
-                string pressure = args[5];
-                UpdatePressureGraph(pressure, Timestamp);
+            float hum1 = float.Parse(args[5]) / 100;
+            float hum2 = float.Parse(args[8]) / 100;
+            float hum3 = float.Parse(args[11]) / 100;
+            
+            UpdateHumidityGraph(hum1,hum2,hum3, Timestamp);
 
-                string altitude = args[7];
-                UpdateAltitudeGraph(altitude, Timestamp);
+            float pres1 = float.Parse(args[6]) / 100;
+            float pres2 = float.Parse(args[9]) / 100;
+            float pres3 = float.Parse(args[12]) / 100;
+            
+            UpdatePressureGraph(pres1,pres2,pres3, Timestamp);
 
-                string x1 = args[8];
-                string y1 = args[9];
-                string z1 = args[10];
-                UpdateAccelRealGraph(x1, y1, z1, Timestamp);
+            float accel1 = float.Parse(args[14]) / 100;
+            float accel2 = float.Parse(args[15]) / 100;
+            float accel3 = float.Parse(args[16]) / 100;
+            UpdateAccelRealGraph(accel1, accel2, accel3, Timestamp);
 
-                //string methane = args[11];
-                //string co2 = args[12];
-                //UpdateAccelGraph(x2, y2, z2, Timestamp);
-            }
+            float gyro1 = float.Parse(args[17]) / 100;
+            float gyro2 = float.Parse(args[18]) / 100;
+            float gyro3 = float.Parse(args[19]) / 100;
+
+            UpdateGyroGraph(gyro1, gyro2, gyro3, Timestamp);
+
+
+
+
+            //string methane = args[11];
+            //string co2 = args[12];
+            //                UpdateMap(lat, lon);
+
+            //UpdateAccelGraph(x2, y2, z2, Timestamp);
+            //}
         }
 
         double lat_last;
         double lon_last;
 
-        private void UpdateMap(string coordinates)
+        private void UpdateMap(string lat_str, string lon_str)
         {
             if (gMapControl1.InvokeRequired)
             {
-                MethodInvoker AssignMethodToControl = new(() => UpdateMap(coordinates));
+                MethodInvoker AssignMethodToControl = new(() => UpdateMap(lat_str, lon_str));
                 gMapControl1.BeginInvoke(AssignMethodToControl);
             }
             else
             {
 
                 bool first = false;
-
-                string[] args = coordinates.Split(", ");
-                if (args.Length == 2)
-                {
-                    string lat_str = args[0];
-                    string lon_str = args[1];
 
                     if (!lat_str.Contains("0.00000") && lat_str.Contains('.') && !lon_str.Contains("0.00000") && lon_str.Contains('.'))
                     {
@@ -1021,7 +1090,7 @@ namespace OnionSAT
                     }
 
                 }
-            }
+            
 
         }
 
@@ -1030,7 +1099,7 @@ namespace OnionSAT
             Settings s2 = new();
             s2.ShowDialog();
         }
-        int lorasetup = 0;
+        int lorasetup = 100;
         private void KapcsolódásToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -1073,7 +1142,7 @@ namespace OnionSAT
 
 
 
-                var cansettings = File.ReadLines(csatpath);
+                /*var cansettings = File.ReadLines(csatpath);
 
 
                 foreach (var lineRead in cansettings)
@@ -1117,7 +1186,7 @@ namespace OnionSAT
                 }
 
                 lorasetup = 0;
-                serialPort.Write("sys reset\r\n");
+                serialPort.Write("sys reset\r\n");*/
 
             }
             catch (Exception ex)
@@ -1233,14 +1302,24 @@ namespace OnionSAT
         private void DeleteGraphs()
         {
             temperatureSeries.Points.Clear();
+            temperatureSeries2.Points.Clear();
+            temperatureSeries3.Points.Clear();
             accelerationRealSeries.Points.Clear();
             accelerationRealSeries3.Points.Clear();
             accelerationRealSeries2.Points.Clear();
             humiditySeries.Points.Clear();
-            altitudeSeries.Points.Clear();
-            pressureSeries.Points.Clear();
+            humiditySeries2.Points.Clear();
+            humiditySeries3.Points.Clear();
 
-            magassagGrafikon.InvalidatePlot(true);
+            gyroSeries.Points.Clear();
+            gyroSeries2.Points.Clear();
+            gyroSeries3.Points.Clear();
+
+            pressureSeries.Points.Clear();
+            pressureSeries2.Points.Clear();
+            pressureSeries3.Points.Clear();
+
+            giroszGrafikon.InvalidatePlot(true);
             gyorsulasMertGrafikon.InvalidatePlot(true);
             legnyomasGrafikon.InvalidatePlot(true);
             paratartalomGrafikon.InvalidatePlot(true);
@@ -1458,8 +1537,7 @@ namespace OnionSAT
         {
             tableLayoutPanel2.Width = this.Width;
             panel2.Width = this.Width;
-            pictureBox10.Location = new Point(Convert.ToInt32(this.Width - 320), -75);
-            pictureBox12.Location = new Point(Convert.ToInt32(this.Width - 120), 7);
+
         }
 
 
